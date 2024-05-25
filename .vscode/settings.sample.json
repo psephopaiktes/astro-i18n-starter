@@ -1,0 +1,12 @@
+{
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  }
+}

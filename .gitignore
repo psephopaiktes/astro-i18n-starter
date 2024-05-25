@@ -1,3 +1,6 @@
+# VS Code Settings
+.vscode/settings.json
+
 # build output
 dist/
 # generated types
