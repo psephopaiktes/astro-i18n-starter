@@ -1,7 +1,10 @@
 {
   "name": "astro-i18n-starter",
-  "type": "module",
   "version": "0.0.1",
+  "private": false,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
