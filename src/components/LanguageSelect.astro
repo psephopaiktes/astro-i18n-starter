@@ -1,0 +1,22 @@
+---
+import { getLocalePaths } from "@/i18n";
+---
+
+<select id="languageSelect">
+  {
+    getLocalePaths(Astro.url).map(({ path, lang, label }) => (
+      <option
+        label={label}
+        value={path}
+        selected={lang === Astro.currentLocale}
+      />
+    ))
+  }
+</select>
+
+<script is:inline>
+  const select = document.getElementById("languageSelect");
+  select?.addEventListener("change", (event) => {
+    location.href = event.target?.value;
+  });
+</script>

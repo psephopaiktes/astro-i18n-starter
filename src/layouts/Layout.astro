@@ -1,13 +1,26 @@
 ---
 import Footer from "@/components/Footer.astro";
-import { LANGS, SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
-import { type Lang } from "@/i18n";
-import { getAbsoluteLocaleUrl } from "astro:i18n";
+import Header from "@/components/Header.astro";
+import { getLocalePaths, type Lang, type Multilingual } from "@/i18n";
 
-// import type { CollectionEntry } from 'astro:content';
-// type Props = CollectionEntry<'blog'>['data'];
+interface Props {
+  title?: Multilingual;
+  description?: Multilingual;
+}
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+const {
+  title = {
+    en: "Astro i18n Starter",
+    ja: "Astro i18n スターター",
+    "zh-CN": "Astro i18n 入门",
+  },
+  description = {
+    en: "A starter template for Astro with i18n support.",
+    ja: "i18n 対応の Astro スターターテンプレート。",
+    "zh-CN": "具有 i18n 支持的 Astro 入门模板。",
+  },
+} = Astro.props;
+
 const locale = Astro.currentLocale as Lang;
 ---
 
@@ -16,19 +29,16 @@ const locale = Astro.currentLocale as Lang;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title[locale]}</title>
+    <meta name="description" content={description[locale]} />
     {
-      Object.keys(LANGS).map((lang) => (
+      getLocalePaths(Astro.url).map((props) => (
         <link
           rel="alternate"
-          hreflang={lang}
-          href={getAbsoluteLocaleUrl(
-            lang,
-            Astro.url.pathname.replace(/\/[^\/]+\//, "/")
-          )}
+          hreflang={props.lang}
+          href={Astro.site?.origin + props.path}
         />
       ))
     }
-    <meta name="description" content={description[locale]} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
@@ -37,8 +47,8 @@ const locale = Astro.currentLocale as Lang;
   </head>
 
   <body>
+    <Header />
     <slot />
-
     <Footer />
   </body>
 </html>
