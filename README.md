@@ -20,7 +20,8 @@ example.comは指定したデフォルトにリダイレクトされます
 > langコードについてはこちらをご確認ください。
 > [lang - HTML: HyperText Markup Language | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang)
 
-### 2. [./src/i18n.ts](./src/i18n.ts) にLangugeリストと、各言語での基本的なサイトタイトルなどを設定します
+### 2. [./src/locales.json](./src/locales.json) にLocaleの設定をします
+https://starlight.astro.build/ja/reference/configuration/#locales に準拠
 
 
 ## ページコンテンツの作成

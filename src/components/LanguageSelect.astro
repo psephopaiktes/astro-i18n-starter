@@ -1,12 +1,12 @@
 ---
-import { getLocalePaths } from "@/i18n";
+import { getLocalePaths, LOCALES } from "@/i18n";
 ---
 
 <select id="languageSelect">
   {
-    getLocalePaths(Astro.url).map(({ path, lang, label }) => (
+    getLocalePaths(Astro.url).map(({ path, lang }) => (
       <option
-        label={label}
+        label={LOCALES[lang].label}
         value={path}
         selected={lang === Astro.currentLocale}
       />

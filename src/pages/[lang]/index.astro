@@ -1,23 +1,26 @@
 ---
-import { LANGS, useTranslations, type Lang } from "@/i18n";
+import { LOCALES, useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 const t = useTranslations(Astro.currentLocale as Lang);
 
 export const getStaticPaths = () =>
-  Object.keys(LANGS).map((lang) => ({
+  Object.keys(LOCALES).map((lang) => ({
     params: { lang },
   }));
 
-const title = { ja: "こんにちは", en: "Hello", "zh-CN": "Niihao" };
+const title = { ja: "こんにちは", en: "Hello", "zh-cn": "你好", ar: "مرحبا" };
 ---
 
-<Layout title={title}>
+<Layout {title}>
+  <h1>{t(title)}</h1>
   <p>
     {
       t({
         ja: "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。 またそのなかでいっしょになったたくさんのひとたち、ファゼーロとロザーロ、羊飼のミーロや、顔の赤いこどもたち、地主のテーモ、山猫博士のボーガント・デストゥパーゴなど、いまこの暗い巨きな石の建物のなかで考えていると、みんなむかし風のなつかしい青い幻燈のように思われます。では、わたくしはいつかの小さなみだしをつけながら、しずかにあの年のイーハトーヴォの五月から十月までを書きつけましょう",
         en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "zh-CN": "Niihao",
+        "zh-cn":
+          "你好，我是一个中国人。我喜欢吃饭，我喜欢睡觉，我喜欢打游戏。我喜欢看电影，我喜欢听音乐，我喜欢看书。我喜欢旅行，我喜欢运动，我喜欢学习。我喜欢工作，我喜欢生活，我喜欢自由。我喜欢和朋友一起，我喜欢和家人一起，我喜欢和爱人一起。我喜欢和陌生人一起，我喜欢和动物一起，我喜欢和植物一起。我喜欢和大自然一起，我喜欢和宇宙一起，我喜欢和上帝一起。我喜欢和自己一起，我喜欢和别人一起，我喜欢和一切一起。",
+        ar: "مرحبا، أنا شخص عربي. أنا أحب الأكل، أحب النوم، أحب اللعب. أحب مشاهدة الأفلام، أحب الاستماع إلى الموسيقى، أحب قراءة الكتب. أحب السفر، أحب ممارسة الرياضة، أحب التعلم. أحب العمل، أحب الحياة، أحب الحرية. أحب القيام بالأشياء مع الأصدقاء، أحب القيام بالأشياء مع العائلة، أحب القيام بالأشياء مع الحبيب. أحب القيام بالأشياء مع الغرباء، أحب القيام بالأشياء مع الحيوانات، أحب القيام بالأشياء مع النباتات. أحب القيام بالأشياء مع الطبيعة، أحب القيام بالأشياء مع الكون، أحب القيام بالأشياء مع الله. أحب القيام بالأشياء مع نفسي، أحب القيام بالأشياء مع الآخرين، أحب القيام بالأشياء مع كل شيء.",
       })
     }
   </p>

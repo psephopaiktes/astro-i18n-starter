@@ -1,7 +1,7 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import { getLocalePaths, type Lang, type Multilingual } from "@/i18n";
+import { LOCALES, getLocalePaths, type Lang, type Multilingual } from "@/i18n";
 
 interface Props {
   title?: Multilingual;
@@ -12,19 +12,21 @@ const {
   title = {
     en: "Astro i18n Starter",
     ja: "Astro i18n スターター",
-    "zh-CN": "Astro i18n 入门",
+    "zh-cn": "Astro i18n 入门",
+    ar: "Astro i18n البداية",
   },
   description = {
     en: "A starter template for Astro with i18n support.",
     ja: "i18n 対応の Astro スターターテンプレート。",
-    "zh-CN": "具有 i18n 支持的 Astro 入门模板。",
+    "zh-cn": "具有 i18n 支持的 Astro 入门模板。",
+    ar: "قالب بداية لـ Astro مع دعم i18n.",
   },
 } = Astro.props;
 
 const locale = Astro.currentLocale as Lang;
 ---
 
-<html lang={locale}>
+<html lang={LOCALES[locale].lang || locale} dir={LOCALES[locale].dir || null}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,7 +36,7 @@ const locale = Astro.currentLocale as Lang;
       getLocalePaths(Astro.url).map((props) => (
         <link
           rel="alternate"
-          hreflang={props.lang}
+          hreflang={LOCALES[props.lang].lang || props.lang}
           href={Astro.site?.origin + props.path}
         />
       ))
