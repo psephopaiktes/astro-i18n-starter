@@ -1,0 +1,17 @@
+---
+import { LANGS } from "@/consts";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/Layout.astro";
+const t = useTranslations(Astro.currentLocale as Lang);
+
+export const getStaticPaths = () =>
+  Object.keys(LANGS).map((lang) => ({
+    params: { lang },
+  }));
+
+const title = { ja: "aこんにちは", en: "aHello", "zh-CN": "aNiihao" };
+---
+
+<Layout title={title}>
+  <p>{t({ ja: "あばうと", en: "About", "zh-CN": "Niihao" })}</p>
+</Layout>

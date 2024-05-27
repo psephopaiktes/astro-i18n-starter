@@ -1,16 +1,44 @@
 ---
+import Footer from "@/components/Footer.astro";
+import { LANGS, SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import { type Lang } from "@/i18n";
+import { getAbsoluteLocaleUrl } from "astro:i18n";
+
 // import type { CollectionEntry } from 'astro:content';
 // type Props = CollectionEntry<'blog'>['data'];
+
+const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+const locale = Astro.currentLocale as Lang;
 ---
 
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>title</title>
+    <title>{title[locale]}</title>
+    {
+      Object.keys(LANGS).map((lang) => (
+        <link
+          rel="alternate"
+          hreflang={lang}
+          href={getAbsoluteLocaleUrl(
+            lang,
+            Astro.url.pathname.replace(/\/[^\/]+\//, "/")
+          )}
+        />
+      ))
+    }
+    <meta name="description" content={description[locale]} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
-    <header></header>
-    <main></main>
+    <slot />
+
+    <Footer />
   </body>
 </html>

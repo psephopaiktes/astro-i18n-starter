@@ -1,15 +1,10 @@
-export function useTranslations(lang) {
-  return function t(multilingual) {
+import { LANGS } from "@/consts";
+
+export type Lang = keyof typeof LANGS;
+export type Multilingual = Record<Lang, string>;
+
+export function useTranslations(lang: Lang) {
+  return function t(multilingual: Multilingual) {
     return multilingual[lang];
   };
-}
-
-export function generateLocalePaths(url) {
-  const pathnames = url.pathname.split('/');
-  const localePaths = {};
-  Object.keys(LANGS).forEach((lang) => {
-    pathnames[1] = lang;
-    localePaths[lang] = pathnames.join('/').replace(/\/$/, '');
-  });
-  return localePaths;
 }

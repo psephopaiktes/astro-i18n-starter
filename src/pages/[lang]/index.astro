@@ -1,3 +1,26 @@
 ---
+import { LANGS } from "@/consts";
+import { useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
+const t = useTranslations(Astro.currentLocale as Lang);
+
+export const getStaticPaths = () =>
+  Object.keys(LANGS).map((lang) => ({
+    params: { lang },
+  }));
+
+const title = { ja: "こんにちは", en: "Hello", "zh-CN": "Niihao" };
 ---
+
+<Layout title={title}>
+  <p>
+    {
+      t({
+        ja: "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。 またそのなかでいっしょになったたくさんのひとたち、ファゼーロとロザーロ、羊飼のミーロや、顔の赤いこどもたち、地主のテーモ、山猫博士のボーガント・デストゥパーゴなど、いまこの暗い巨きな石の建物のなかで考えていると、みんなむかし風のなつかしい青い幻燈のように思われます。では、わたくしはいつかの小さなみだしをつけながら、しずかにあの年のイーハトーヴォの五月から十月までを書きつけましょう",
+        en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "zh-CN": "Niihao",
+      })
+    }
+  </p>
+  <!-- 使い方についてはAboutを御覧ください。みたいなの。getRelateteLocaleUrl(Astor.currentLocal, 'about')みたいので -->
+</Layout>
