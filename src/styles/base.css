@@ -1,13 +1,19 @@
+:lang(en) {
+  /* write style for specific lang */
+}
+
 :root {
   @media (prefers-color-scheme: dark) {
-    --color-theme: #f52;
-    --color-base: #141e2b;
-    --color-main: #eee;
+    --color-theme: #ef4d1a;
+    --color-accent: #943e0d;
+    --color-base: #342c28;
+    --color-main: #faf9f6;
   }
   @media (prefers-color-scheme: light) {
-    --color-theme: #f52;
-    --color-base: #eee;
-    --color-main: #322;
+    --color-theme: #ef4d1a;
+    --color-accent: #ffcc21;
+    --color-base: #faf9f6;
+    --color-main: #342c28;
   }
 
   --sp-l: 64px;
@@ -19,11 +25,15 @@
     --sp-s: 8px;
   }
 
+  --english-font: "Noto Sans", "Robot", "Futura Now Text", "Futura",
+    "Avenir Next", "Avenir", "Century Gothic", "SF Pro Text", "Helvetica Neue",
+    "Helvetica", "Arial", -apple-system, BlinkMacSystemFont, sans-serif;
+
   accent-color: var(--color-theme);
   color: var(--color-main);
   background-color: var(--color-base);
   background-image: radial-gradient(
-    color-mix(in srgb, var(--color-main) 20%, transparent) 1px,
+    color-mix(in srgb, var(--color-main) 10%, transparent) 1px,
     var(--color-base) 1px
   );
   background-size: 16px 16px;
@@ -33,24 +43,6 @@ body {
   line-height: 1.6;
   font-weight: 500;
   font-size: 16px;
-  font-family:
-    "Futura",
-    "Avenir Next",
-    "Avenir",
-    "Century Gothic",
-    "var(--font-tazugane)",
-    "Hiragino Sans",
-    "Hiragino Kaku Gothic ProN",
-    "Noto Sans JP",
-    "Noto Sans CJK JP",
-    "BIZ UDPGothic",
-    Meiryo,
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
-  font-feature-settings: "pkna" 1;
-  font-kerning: normal;
-  letter-spacing: 0.02em;
   @media (width < 480px) {
     font-size: 14px;
   }
@@ -86,7 +78,7 @@ path {
 }
 
 [class^="material-icons"] {
-  vertical-align: -0.25em;
+  vertical-align: -0.2em;
   font-size: 1.4em;
   line-height: 1;
 }

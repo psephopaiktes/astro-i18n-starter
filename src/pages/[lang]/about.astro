@@ -1,12 +1,8 @@
 ---
-import { LOCALES, useTranslations, type Lang } from "@/i18n";
+import { localeParams, useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 const t = useTranslations(Astro.currentLocale as Lang);
-
-export const getStaticPaths = () =>
-  Object.keys(LOCALES).map((lang) => ({
-    params: { lang },
-  }));
+export const getStaticPaths = () => localeParams;
 
 const title = {
   ja: "このサイトについて",

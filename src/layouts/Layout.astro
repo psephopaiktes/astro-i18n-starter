@@ -1,7 +1,9 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import { SITE_TITLE } from "@/consts";
 import { LOCALES, getLocalePaths, type Lang, type Multilingual } from "@/i18n";
+import "@/styles/global.css";
 
 interface Props {
   title?: Multilingual;
@@ -41,16 +43,67 @@ const locale = Astro.currentLocale as Lang;
         />
       ))
     }
+
+    <!-- icon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" sizes="192x192" href="/android-chrome.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#ef4d1a" />
+
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title[locale]} />
+    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:description" content={description[locale]} />
+    <meta property="og:image" content={Astro.site + "ogp.png"} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content={LOCALES[locale].lang || locale} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@psephopaiktes" />
+
+    <!-- External Resource -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;900&display=swap"
+      rel="stylesheet"
+    />
+    {
+      locale === "ja" ? (
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap"
+          rel="stylesheet"
+        />
+        <style>body{ font-family: "Noto Sans JP", sans-serif; }</style>
+      ) : locale === "zh-cn" ? (
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600&display=swap"
+          rel="stylesheet"
+        />
+        <style>body{ font-family: "Noto Sans SC", sans-serif; }</style>
+      ) : locale === "ar" ? (
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600&display=swap"
+          rel="stylesheet"
+        />
+        <style>body{ font-family: "Noto Sans Arabic", sans-serif; }</style>
+      ) : (
+        <style>body{ font-family: "Noto Sans", sans-serif; }</style>
+      )
+    }
   </head>
 
   <body>
     <Header />
-    <slot />
+
+    <main class="l-main l-content">
+      <slot />
+    </main>
+
     <Footer />
   </body>
 </html>

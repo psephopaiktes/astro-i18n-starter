@@ -1,25 +1,14 @@
-.l-body {
-  display: flex;
-  justify-content: center;
-}
-
-.l-nav {
-  width: 320px;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  z-index: 0;
-}
-
 .l-main {
-  flex: 1;
-  z-index: 1;
+  margin-block-start: var(--sp-l);
 }
 
 .l-content {
-  margin-inline: 64px;
+  max-inline-size: 960px;
+  padding-inline: 24px;
+  margin-inline: auto;
 }
 
 .l-footer {
-  margin-top: var(--sp-l);
+  position: sticky;
+  top: 100vh;
 }

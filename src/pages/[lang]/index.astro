@@ -1,4 +1,5 @@
 ---
+import { SITE_TITLE } from "@/consts";
 import { LOCALES, useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 const t = useTranslations(Astro.currentLocale as Lang);
@@ -7,12 +8,10 @@ export const getStaticPaths = () =>
   Object.keys(LOCALES).map((lang) => ({
     params: { lang },
   }));
-
-const title = { ja: "こんにちは", en: "Hello", "zh-cn": "你好", ar: "مرحبا" };
 ---
 
-<Layout {title}>
-  <h1>{t(title)}</h1>
+<Layout>
+  <h1>{SITE_TITLE}</h1>
   <p>
     {
       t({

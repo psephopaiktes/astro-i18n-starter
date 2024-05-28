@@ -2,17 +2,21 @@
 import { getLocalePaths, LOCALES } from "@/i18n";
 ---
 
-<select id="languageSelect">
-  {
-    getLocalePaths(Astro.url).map(({ path, lang }) => (
-      <option
-        label={LOCALES[lang].label}
-        value={path}
-        selected={lang === Astro.currentLocale}
-      />
-    ))
-  }
-</select>
+<label for="languageSelect">
+  <span class="material-icons-sharp">translate</span>
+  <select id="languageSelect">
+    {
+      getLocalePaths(Astro.url).map(({ path, lang }) => (
+        <option
+          label={LOCALES[lang].label}
+          value={path}
+          selected={lang === Astro.currentLocale}
+        />
+      ))
+    }
+  </select>
+  <span class="material-icons-sharp">expand_more</span>
+</label>
 
 <script is:inline>
   const select = document.getElementById("languageSelect");
@@ -20,3 +24,36 @@ import { getLocalePaths, LOCALES } from "@/i18n";
     location.href = event.target?.value;
   });
 </script>
+
+<style>
+  label {
+    position: relative;
+    width: 240px;
+    .material-icons-sharp {
+      pointer-events: none;
+      position: absolute;
+      &:first-child {
+        font-size: 24px;
+        inset: 8px;
+        opacity: 0.4;
+      }
+      &:last-child {
+        font-size: 28px;
+        inset: 6px 6px 6px auto;
+        color: var(--color-theme);
+      }
+    }
+  }
+  select {
+    width: 100%;
+    height: 40px;
+    padding-inline: 38px;
+    cursor: pointer;
+    appearance: none;
+    border-radius: 6px;
+    font-family: "Noto Sans";
+    color: var(--color-main);
+    background-color: var(--color-base);
+    border: 2px solid var(--color-theme);
+  }
+</style>

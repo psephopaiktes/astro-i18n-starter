@@ -1,16 +1,18 @@
 ---
-const url = Astro.url;
-import { generateLocalePaths, useTranslations } from "@/i18n";
-
-const t = useTranslations(Astro.currentLocale);
-const lang = Astro.currentLocale == "ja" ? "en" : "ja";
-const LocalePaths = generateLocalePaths(Astro.url);
+import { getLocalePaths, LOCALES } from "@/i18n";
 ---
 
-<a href={LocalePaths[lang]}>
-  <span class="material-icons-sharp"> translate </span>
-  {t({ ja: "English", en: "日本語" })}
-</a>
+<ul>
+  {
+    getLocalePaths(Astro.url).map(({ path, lang }) =>
+      lang === Astro.currentLocale ? null : (
+        <li>
+          <a href={path}>{LOCALES[lang].label}</a>
+        </li>
+      )
+    )
+  }
+</ul>
 
 <style>
   a {

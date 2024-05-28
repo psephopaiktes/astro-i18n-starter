@@ -1,11 +1,10 @@
-type LocaleConfig = {
-  label: string;
-  lang?: string;
-  dir?: "ltr" | "rtl";
-};
-type Locales = Record<string, LocaleConfig>;
 import USER_LOCALES_LIST from "./locales.json";
-export const LOCALES = USER_LOCALES_LIST as Locales;
+type LocaleConfig = {
+  readonly label: string;
+  readonly lang?: string;
+  readonly dir?: "ltr" | "rtl";
+};
+export const LOCALES = USER_LOCALES_LIST as Record<string, LocaleConfig>;
 
 export type Lang = keyof typeof LOCALES;
 export type Multilingual = Record<Lang, string>;
@@ -13,7 +12,6 @@ export type Multilingual = Record<Lang, string>;
 ////////////////////////////////////////////////////////////////////////////////
 // Helper to get the translation function
 ////////////////////////////////////////////////////////////////////////////////
-
 export function useTranslations(lang: Lang) {
   return function t(multilingual: Multilingual) {
     return multilingual[lang];
@@ -21,9 +19,8 @@ export function useTranslations(lang: Lang) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Helper to get path list for all locales
+// Helper to get corresponding path list for all locales
 ////////////////////////////////////////////////////////////////////////////////
-
 type LocalePath = {
   lang: Lang;
   path: string;
@@ -38,3 +35,10 @@ export function getLocalePaths(url: URL): LocalePath[] {
     };
   });
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// Helper to get locale parms for Astro's `getStaticPaths` function
+////////////////////////////////////////////////////////////////////////////////
+export const localeParams = Object.keys(LOCALES).map((lang) => ({
+  params: { lang },
+}));

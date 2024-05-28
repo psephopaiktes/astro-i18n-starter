@@ -5,64 +5,99 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 const t = useTranslations(Astro.currentLocale as Lang);
 
 const locale = Astro.currentLocale as Lang;
+const currentPath = Astro.url.pathname;
 ---
 
-<nav class="l-nav">
+<header>
   <h1>
-    <a href={getRelativeLocaleUrl(locale, "/")}> i18n Starter </a>
+    <a href={getRelativeLocaleUrl(locale, "/")}>
+      <img width="460" height="160" src="/astro-logo.svg" alt="Astro" />
+      i18n Starter
+    </a>
   </h1>
 
-  <ul>
-    <li>
-      <a href={getRelativeLocaleUrl(locale, "/about")}>
-        {t({ ja: "概要", en: "ABOUT", "zh-cn": "关于", ar: "حول" })}
-      </a>
-    </li>
-  </ul>
+  <nav class="l-content">
+    <ul>
+      <li>
+        <a
+          href={getRelativeLocaleUrl(locale, "/about")}
+          class={getRelativeLocaleUrl(locale, "/about") === currentPath
+            ? "active"
+            : ""}
+        >
+          {t({ ja: "概要", en: "ABOUT", "zh-cn": "关于", ar: "حول" })}
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://github.com/psephopaiktes/astro-i18n-starter"
+          target="_blank"
+        >
+          GitHub
+          <span class="material-icons-sharp">open_in_new</span>
+        </a>
+      </li>
+    </ul>
 
-  <LanguageSelect />
-</nav>
+    <LanguageSelect />
+  </nav>
+</header>
 
 <style>
-  nav {
-    background-color: var(--color-base);
+  * {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  header {
     display: grid;
-    place-content: center;
-    border-right: solid 2px var(--color-main);
+    place-items: center;
+    gap: var(--sp-s);
   }
 
   h1 {
-    font-size: 32px;
-    margin-top: calc(-1 * var(--sp-l));
+    margin-block-start: var(--sp-l);
+    margin-inline-start: -0.5em;
+    font-size: 40px;
+    font-family: var(--english-font);
+    font-weight: 900;
+    vertical-align: middle;
+    a {
+      display: flex;
+      align-items: center;
+    }
     img {
-      width: 4.2em;
-      aspect-ratio: 2;
-    }
-    p {
-      line-height: 1;
-    }
-    .line1 {
-      margin: 0.6em 0 0;
-    }
-    .line2 {
-      margin: 0.2em 0 0;
-      font-size: 0.95em;
+      width: 6em;
+      position: relative;
+      inset: 0.1em;
     }
   }
 
+  nav {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-m);
+  }
   ul {
-    margin-top: var(--sp-l);
-    font-size: 1.2rem;
-    li {
-      margin-top: var(--sp-s);
-    }
+    display: flex;
+    gap: var(--sp-s);
+
     a {
-      display: block;
-      padding: 0.25em;
-      border-radius: var(--r-m);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 4px 8px;
       &:hover {
-        background-color: var(--color-main);
-        color: var(--color-base);
+        color: var(--color-theme);
+      }
+      &.active {
+        border-bottom: 2px solid var(--color-theme);
+        color: var(--color-theme);
+        pointer-events: none;
+      }
+      .material-icons-sharp {
+        opacity: 0.6;
+        margin-left: -0.1em;
       }
     }
   }
