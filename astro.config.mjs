@@ -1,7 +1,6 @@
 import mdx from '@astrojs/mdx';
-import { defineConfig } from 'astro/config';
-
 import sitemap from '@astrojs/sitemap';
+import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,6 +11,11 @@ export default defineConfig({
     locales: ['en', 'ja', 'zh-cn', 'ar'],
     routing: {
       prefixDefaultLocale: true,
+    },
+  },
+  markdown: {
+    shikiConfig: {
+      theme: 'one-dark-pro',
     },
   },
 });

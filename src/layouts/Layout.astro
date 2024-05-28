@@ -8,7 +8,10 @@ import "@/styles/global.css";
 interface Props {
   title?: Multilingual;
   description?: Multilingual;
+  frontmatter?: undefined;
 }
+
+// console.log(Astro.props.frontmatter.test["en"]);
 
 const {
   title = {
@@ -23,7 +26,7 @@ const {
     "zh-cn": "具有 i18n 支持的 Astro 入门模板。",
     ar: "قالب بداية لـ Astro مع دعم i18n.",
   },
-} = Astro.props;
+} = Astro.props.frontmatter || Astro.props;
 
 const locale = Astro.currentLocale as Lang;
 ---
