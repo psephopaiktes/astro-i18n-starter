@@ -25,3 +25,7 @@ https://starlight.astro.build/ja/reference/configuration/#locales に準拠
 
 
 ## ページコンテンツの作成
+
+## 404について
+https://developers.cloudflare.com/pages/configuration/redirects/
+現在404コードを返せません。サーバーによります。

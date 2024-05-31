@@ -1,3 +1,15 @@
 ---
 // Redirect to main locale
 ---
+
+<html lang="en">
+  <head>
+    <title>redirect...</title>
+    <meta
+      http-equiv="refresh"
+      content={import.meta.env.PROD ? `0;url=${Astro.site}` : "0;url=/"}
+    />
+    <link rel="canonical" href={Astro.site} />
+  </head>
+  <body><p>redirect...</p></body>
+</html>

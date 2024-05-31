@@ -10,7 +10,7 @@ export default defineConfig({
     defaultLocale: 'en',
     locales: ['en', 'ja', 'zh-cn', 'ar'],
     routing: {
-      prefixDefaultLocale: true,
+      // prefixDefaultLocale: true, // will not generate a 404
     },
   },
   markdown: {
