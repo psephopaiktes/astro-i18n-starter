@@ -3,16 +3,38 @@
 ---
 
 <footer class="l-footer">
+  <a
+    href="https://github.com/psephopaiktes/astro-i18n-starter"
+    target="_blank"
+    class="github"
+  >
+    GitHub
+    <span class="material-icons-sharp">open_in_new</span>
+  </a>
+
   <a href="https://hira.page/" target="_blank">
     © Akira HIRATA {new Date().getFullYear()}.
   </a>
 </footer>
 
 <style>
+  .github {
+    display: block;
+    margin-block-start: calc(var(--sp-m) * -1 - 24px);
+    margin-inline: auto;
+    width: 160px;
+    height: 48px;
+    line-height: 48px;
+    background: var(--color-accent);
+    color: var(--color-main);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border-radius: 100px;
+  }
   footer {
     background: var(--color-theme);
     text-align: center;
     color: var(--color-base);
-    padding-block: var(--sp-l);
+    padding-block: var(--sp-m) var(--sp-l);
   }
 </style>

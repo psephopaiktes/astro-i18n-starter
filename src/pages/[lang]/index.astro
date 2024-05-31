@@ -4,6 +4,12 @@ import { LOCALES, useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 const t = useTranslations(Astro.currentLocale as Lang);
 
+import heroImageAr from "@/assets/ar/hero.svg";
+import heroImageEn from "@/assets/en/hero.svg";
+import heroImageJa from "@/assets/ja/hero.svg";
+import heroImageZhCn from "@/assets/zh-cn/hero.svg";
+import { Image } from "astro:assets";
+
 export const getStaticPaths = () =>
   Object.keys(LOCALES).map((lang) => ({
     params: { lang },
@@ -11,6 +17,18 @@ export const getStaticPaths = () =>
 ---
 
 <Layout>
+  {
+    Astro.currentLocale === "ja" ? (
+      <Image src={heroImageJa} alt="こんにちは" />
+    ) : Astro.currentLocale === "zh-cn" ? (
+      <Image src={heroImageZhCn} alt="你好" />
+    ) : Astro.currentLocale === "ar" ? (
+      <Image src={heroImageAr} alt="مرحبًا" />
+    ) : (
+      <Image src={heroImageEn} alt="Hello" />
+    )
+  }
+
   <h1>{SITE_TITLE}</h1>
   <p>
     {
