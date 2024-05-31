@@ -1,6 +1,1 @@
-/:lang/* /:lang/404/ 404
-/en/* /en/404/ 404
-/ja/* /ja/404/ 404
-/ar/* /ar/404/ 404
-/zh-cn/* /zh-cn/404/ 404
-/test/ /en/about/ 301
+/:lang/* /:lang/404/ 302
