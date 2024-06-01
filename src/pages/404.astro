@@ -1,5 +1,13 @@
 ---
+// URLのlang読み取って対応する言語の404ページを表示する
 
+// URLはhistory.replaceとかで変更したい
+// localStorage.redirect = location.pathname + location.search + location.hash;
+// if (localStorage.redirect) {
+//       // public/404.html からリダイレクトしてきた場合
+//       this.$router.push(localStorage.redirect);
+//       localStorage.removeItem("redirect");
+//     }
 ---
 
 <!doctype html>
@@ -8,6 +16,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Global 404</title>
+    <link rel="canonical" href={Astro.site} />
   </head>
   <body>
     <p>Global 404</p>

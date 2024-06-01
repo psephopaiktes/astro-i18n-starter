@@ -1,37 +1,19 @@
 ---
-import { SITE_TITLE } from "@/consts";
-import { LOCALES, useTranslations, type Lang } from "@/i18n";
+import { localeParams, useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 const t = useTranslations(Astro.currentLocale as Lang);
+export const getStaticPaths = () => localeParams;
 
-import heroImageAr from "@/assets/ar/hero.svg";
-import heroImageEn from "@/assets/en/hero.svg";
-import heroImageJa from "@/assets/ja/hero.svg";
-import heroImageZhCn from "@/assets/zh-cn/hero.svg";
-import { Image } from "astro:assets";
-
-export const getStaticPaths = () =>
-  Object.keys(LOCALES).map((lang) => ({
-    params: { lang },
-  }));
-
-console.dir(Astro.currentLocale);
+const title = {
+  ja: "このサイトについて",
+  en: "About this site",
+  "zh-cn": "关于本站",
+  ar: "حول هذا الموقع",
+};
 ---
 
-<Layout>
-  {
-    Astro.currentLocale === "ja" ? (
-      <Image src={heroImageJa} alt="こんにちは" />
-    ) : Astro.currentLocale === "zh-cn" ? (
-      <Image src={heroImageZhCn} alt="你好" />
-    ) : Astro.currentLocale === "ar" ? (
-      <Image src={heroImageAr} alt="مرحبًا" />
-    ) : (
-      <Image src={heroImageEn} alt="Hello" />
-    )
-  }
-
-  <h1>{SITE_TITLE}</h1>
+<Layout {title}>
+  <h1>{t(title)}</h1>
   <p>
     {
       t({
@@ -43,5 +25,4 @@ console.dir(Astro.currentLocale);
       })
     }
   </p>
-  <!-- 使い方についてはAboutを御覧ください。みたいなの。getRelateteLocaleUrl(Astor.currentLocal, 'about')みたいので -->
 </Layout>

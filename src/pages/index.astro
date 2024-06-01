@@ -1,13 +1,19 @@
 ---
-// Redirect to main locale
+// Redirect to Browser locale
+// TODO: ブラウザの言語に応じてリダイレクトする
+// Scriptが無効場合どうするか
+
+const locale = "en";
 ---
 
-<html lang="en">
+<html lang={locale}>
   <head>
     <title>redirect...</title>
     <meta
       http-equiv="refresh"
-      content={import.meta.env.PROD ? `0;url=${Astro.site}` : "0;url=/"}
+      content={import.meta.env.PROD
+        ? `0;url=${Astro.site}/${locale}/`
+        : `0;url=/${locale}/`}
     />
     <link rel="canonical" href={Astro.site} />
   </head>

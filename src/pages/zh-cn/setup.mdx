@@ -1,0 +1,18 @@
+---
+layout: "@/layouts/Layout.astro"
+title: {"zh-cn": "Set up"}
+description: {"zh-cn": "This page describes the basic setup procedure for Astro i18n Starter"}
+---
+
+## {frontmatter.title["zh-cn"]}
+{frontmatter.description["zh-cn"]}
+
+```js
+var elm = document.getElementById('gotop');
+
+    window.addEventListener('scroll', function()
+    if( window.pageYOffset > 200 ) elm.classList.add('show');
+    else elm.classList.remove('show');
+
+}, false);
+```
