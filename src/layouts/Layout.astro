@@ -1,25 +1,20 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import LanguageSuggest from "@/components/LanguageSuggest.astro";
+
 import { SITE_TITLE } from "@/consts";
 import { LOCALES, getLocalePaths, type Lang, type Multilingual } from "@/i18n";
 import "@/styles/global.css";
 
 interface Props {
-  title?: Multilingual;
-  description?: Multilingual;
+  title?: Multilingual | string;
+  description?: Multilingual | string;
   frontmatter?: undefined;
 }
 
-// console.log(Astro.props.frontmatter.test["en"]);
-
 const {
-  title = {
-    en: "Astro i18n Starter",
-    ja: "Astro i18n スターター",
-    "zh-cn": "Astro i18n 入门",
-    ar: "Astro i18n البداية",
-  },
+  title,
   description = {
     en: "A starter template for Astro with i18n support.",
     ja: "i18n 対応の Astro スターターテンプレート。",
@@ -29,14 +24,22 @@ const {
 } = Astro.props.frontmatter || Astro.props;
 
 const locale = Astro.currentLocale as Lang;
+const localeTitle = title
+  ? typeof title === "string"
+    ? `${title} - ${SITE_TITLE}`
+    : `${title[locale]} - ${SITE_TITLE}`
+  : SITE_TITLE;
+const localeDescription = typeof description === "string"
+  ? description
+  : description[locale];
 ---
 
 <html lang={LOCALES[locale].lang || locale} dir={LOCALES[locale].dir || null}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title[locale]}</title>
-    <meta name="description" content={description[locale]} />
+    <title>{localeTitle}</title>
+    <meta name="description" content={localeDescription} />
     {
       getLocalePaths(Astro.url).map((props) => (
         <link
@@ -55,9 +58,9 @@ const locale = Astro.currentLocale as Lang;
 
     <!-- OGP -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={title[locale]} />
+    <meta property="og:title" content={localeTitle} />
     <meta property="og:site_name" content={SITE_TITLE} />
-    <meta property="og:description" content={description[locale]} />
+    <meta property="og:description" content={localeDescription} />
     <meta property="og:image" content={Astro.site + "ogp.png"} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:locale" content={LOCALES[locale].lang || locale} />
@@ -101,6 +104,7 @@ const locale = Astro.currentLocale as Lang;
   </head>
 
   <body>
+    <LanguageSuggest />
     <Header />
 
     <main class="l-main l-content">

@@ -1,0 +1,71 @@
+---
+import { LOCALES, type Lang } from "@/i18n";
+const currentLocale = Astro.currentLocale as Lang;
+---
+
+<div id="js-languageSuggest">
+  <a id="js-link" href="#">
+    <span class="material-icons-sharp">autorenew</span>
+    <span id="js-linkText"></span>
+  </a>
+
+  <button id="js-close">
+    <span class="material-icons-sharp">close</span>
+  </button>
+</div>
+
+<script is:inline define:vars={{ currentLocale, LOCALES }}>
+  const userLang = navigator.language.toLowerCase();
+  const suggest = document.getElementById("js-languageSuggest");
+
+  const showSuggest = (lang) => {
+    const pathnames = location.pathname.split("/");
+    const link = document.getElementById("js-link");
+    const linkText = document.getElementById("js-linkText");
+
+    pathnames[1] = lang;
+    link.href = pathnames.join("/");
+    linkText.innerText = LOCALES[lang].label;
+    suggest.style.display = "block";
+  };
+
+  if (
+    currentLocale === userLang ||
+    currentLocale === userLang.split("-")[0] ||
+    localStorage.languageSuggestDenied ||
+    localStorage.selectedLang
+  ) {
+    return;
+  } else if (Object.keys(LOCALES).includes(userLang)) {
+    showSuggest(userLang);
+  } else if (Object.keys(LOCALES).includes(userLang.split("-")[0])) {
+    showSuggest(userLang.split("-")[0]);
+  }
+
+  document.getElementById("js-close").addEventListener("click", () => {
+    suggest.style.display = "none";
+    localStorage.languageSuggestDenied = true;
+  });
+</script>
+
+<style>
+  #js-languageSuggest {
+    height: 44px;
+    display: none;
+    position: relative;
+    text-align: center;
+    background: var(--color-main);
+    color: var(--color-base);
+  }
+  #js-link {
+    line-height: 44px;
+  }
+  #js-close {
+    position: absolute;
+    inset: 0;
+    font-size: 24px;
+    width: 44px;
+    aspect-ratio: 1;
+    opacity: 0.5;
+  }
+</style>

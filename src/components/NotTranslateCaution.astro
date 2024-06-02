@@ -1,0 +1,38 @@
+---
+import { useTranslations, type Lang } from "@/i18n";
+const t = useTranslations(Astro.currentLocale as Lang);
+
+interface Props {
+  usedLangs: Lang[];
+}
+const { usedLangs } = Astro.props;
+
+const currentLocale = Astro.currentLocale as Lang;
+---
+
+{
+  !usedLangs.includes(currentLocale) && (
+    <p>
+      <span class="material-icons-sharp">warning</span>
+      {t({
+        en: "This page is not available in your language.",
+        ja: "このページはご利用の言語でご覧いただけません。",
+        "zh-cn": "此页面不支持您的语言。",
+        ar: "هذه الصفحة غير متوفرة بلغتك.",
+      })}
+    </p>
+  )
+}
+
+<style>
+  p {
+    padding: 0.5em;
+    margin-block: 1em;
+    color: var(--color-caution);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    font-size: 1.2em;
+    background: color-mix(in srgb, var(--color-caution) 5%, transparent);
+    border-radius: 6px;
+  }
+</style>

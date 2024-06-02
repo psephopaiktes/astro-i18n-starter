@@ -7,7 +7,10 @@ type LocaleConfig = {
 export const LOCALES = USER_LOCALES_LIST as Record<string, LocaleConfig>;
 
 export type Lang = keyof typeof LOCALES;
-export type Multilingual = { [key in Lang]?: string };
+// "en" | "ja" | ...
+
+export type Multilingual = { [key in Lang]?: string };2
+// { en: "Hello", ja: "こんにちは", ... }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Helper to get the translation function

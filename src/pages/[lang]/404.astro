@@ -3,6 +3,7 @@ import { localeParams, useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 const t = useTranslations(Astro.currentLocale as Lang);
 export const getStaticPaths = () => localeParams;
+import LanguageHomeList from "@/components/LanguageHomeList.astro";
 
 const title = {
   ja: "404 ページが見つかりません",
@@ -25,4 +26,36 @@ const title = {
       })
     }
   </p>
+
+  <section class="langList">
+    <h2>
+      {
+        t({
+          en: "Supported Languages",
+          ja: "対応言語一覧",
+          "zh-cn": "支持的语言",
+          ar: "اللغات المدعومة",
+        })
+      }
+    </h2>
+    <ul>
+      <LanguageHomeList />
+    </ul>
+  </section>
 </Layout>
+
+<script is:inline>
+  if (localStorage.userAccessPath) {
+    history.replaceState("", "", localStorage.userAccessPath);
+    localStorage.removeItem("userAccessPath");
+  }
+</script>
+
+<style>
+  .langList {
+    margin-top: 2rem;
+    ul {
+      list-style: disc;
+    }
+  }
+</style>

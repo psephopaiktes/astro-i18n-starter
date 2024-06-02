@@ -25,9 +25,32 @@ const currentPath = Astro.url.pathname;
             ? "active"
             : ""}
         >
-          {t({ ja: "概要", en: "ABOUT", "zh-cn": "关于", ar: "حول" })}
+          {t({ ja: "概要", en: "About", "zh-cn": "关于", ar: "حول" })}
         </a>
       </li>
+
+      <li>
+        <a
+          href={getRelativeLocaleUrl(locale, "/setup")}
+          class={getRelativeLocaleUrl(locale, "/setup") === currentPath
+            ? "active"
+            : ""}
+        >
+          {t({ ja: "設定", en: "Setup", "zh-cn": "设置", ar: "إعداد" })}
+        </a>
+      </li>
+
+      <li class="en-only">
+        <a
+          href={getRelativeLocaleUrl(locale, "/monolingual")}
+          class={getRelativeLocaleUrl(locale, "/monolingual") === currentPath
+            ? "active"
+            : ""}
+        >
+          Monolingual
+        </a>
+      </li>
+
       <li>
         <a
           href="https://github.com/psephopaiktes/astro-i18n-starter"
@@ -81,6 +104,19 @@ const currentPath = Astro.url.pathname;
   ul {
     display: flex;
     gap: var(--sp-s);
+
+    .en-only {
+      position: relative;
+      &:before {
+        content: "EN";
+        position: absolute;
+        inset: -0.4em -0.6em auto auto;
+        font-size: 0.8em;
+        font-weight: 900;
+        color: var(--color-main);
+        opacity: 0.6;
+      }
+    }
 
     a {
       font-size: 1.1rem;

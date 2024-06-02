@@ -1,21 +1,38 @@
 ---
-// Redirect to Browser locale
-// TODO: ブラウザの言語に応じてリダイレクトする
-// Scriptが無効場合どうするか
+// Redirect by user locale
 
-const locale = "en";
+import { LOCALES } from "@/i18n";
+
+const langs = Object.keys(LOCALES);
+const baseUrl = import.meta.env.PROD ? Astro.site : "/";
 ---
 
-<html lang={locale}>
+<html lang={langs[0]}>
   <head>
+    <meta charset="UTF-8" />
     <title>redirect...</title>
-    <meta
-      http-equiv="refresh"
-      content={import.meta.env.PROD
-        ? `0;url=${Astro.site}/${locale}/`
-        : `0;url=/${locale}/`}
-    />
-    <link rel="canonical" href={Astro.site} />
+
+    <noscript>
+      <meta http-equiv="refresh" content={`0;url=${baseUrl + langs[0]}/`} />
+    </noscript>
+
+    <script is:inline define:vars={{ langs, baseUrl }}>
+      if (localStorage.selectedLang) {
+        location.href = `${baseUrl + localStorage.selectedLang}/`;
+      } else {
+        const userLang = navigator.language.toLowerCase();
+
+        if (langs.includes(userLang)) {
+          location.href = `${baseUrl + userLang}/`;
+        } else if (langs.includes(userLang.split("-")[0])) {
+          location.href = `${baseUrl + userLang.split("-")[0]}/`;
+        } else {
+          location.href = `${baseUrl + langs[0]}/`;
+        }
+      }
+    </script>
   </head>
-  <body><p>redirect...</p></body>
+  <body>
+    <h1>redirect...</h1>
+  </body>
 </html>

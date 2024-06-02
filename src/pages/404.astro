@@ -1,24 +1,43 @@
 ---
-// URLのlang読み取って対応する言語の404ページを表示する
+// Redirect by user locale
 
-// URLはhistory.replaceとかで変更したい
-// localStorage.redirect = location.pathname + location.search + location.hash;
-// if (localStorage.redirect) {
-//       // public/404.html からリダイレクトしてきた場合
-//       this.$router.push(localStorage.redirect);
-//       localStorage.removeItem("redirect");
-//     }
+import { LOCALES } from "@/i18n";
+
+const langs = Object.keys(LOCALES);
+const baseUrl = import.meta.env.PROD ? Astro.site : "/";
 ---
 
-<!doctype html>
-<html lang="en">
+<html lang={langs[0]}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Global 404</title>
+    <title>404 PAGE NOT FOUND</title>
     <link rel="canonical" href={Astro.site} />
+
+    <noscript>
+      <meta http-equiv="refresh" content={`0;url=${baseUrl + langs[0]}/404/`} />
+    </noscript>
+
+    <script is:inline define:vars={{ langs, baseUrl }}>
+      localStorage.userAccessPath = location.pathname;
+
+      if (langs.includes(location.pathname.split("/")[1])) {
+        location.href = `${baseUrl + location.pathname.split("/")[1]}/404/`;
+      } else if (localStorage.selectedLang) {
+        location.href = `${baseUrl + localStorage.selectedLang}/404/`;
+      } else {
+        const userLang = navigator.language.toLowerCase();
+
+        if (langs.includes(userLang)) {
+          location.href = `${baseUrl + userLang}/404/`;
+        } else if (langs.includes(userLang.split("-")[0])) {
+          location.href = `${baseUrl + userLang.split("-")[0]}/404/`;
+        } else {
+          location.href = `${baseUrl + langs[0]}/404/`;
+        }
+      }
+    </script>
   </head>
   <body>
-    <p>Global 404</p>
+    <h1>404 PAGE NOT FOUND</h1>
   </body>
 </html>

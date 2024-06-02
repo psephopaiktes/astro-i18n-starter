@@ -2,15 +2,17 @@
 import { getLocalePaths, LOCALES } from "@/i18n";
 ---
 
-<label for="languageSelect">
+<label for="js-languageSelect">
   <span class="material-icons-sharp">translate</span>
-  <select id="languageSelect">
+  <select id="js-languageSelect">
     {
       getLocalePaths(Astro.url).map(({ path, lang }) => (
         <option
           label={LOCALES[lang].label}
           value={path}
+          data-lang={lang}
           selected={lang === Astro.currentLocale}
+          dir={LOCALES[lang].dir || null}
         />
       ))
     }
@@ -19,8 +21,9 @@ import { getLocalePaths, LOCALES } from "@/i18n";
 </label>
 
 <script is:inline>
-  const select = document.getElementById("languageSelect");
+  const select = document.getElementById("js-languageSelect");
   select?.addEventListener("change", (event) => {
+    localStorage.selectedLang = event.target?.selectedOptions[0].dataset.lang;
     location.href = event.target?.value;
   });
 </script>

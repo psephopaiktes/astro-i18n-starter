@@ -14,8 +14,6 @@ export const getStaticPaths = () =>
   Object.keys(LOCALES).map((lang) => ({
     params: { lang },
   }));
-
-console.dir(Astro.currentLocale);
 ---
 
 <Layout>

@@ -1,0 +1,25 @@
+---
+import { LOCALES } from "@/i18n";
+---
+
+<>
+  {
+    Object.entries(LOCALES).map(([lang, { label }]) => (
+      <li>
+        <a
+          href={`/${lang}/`}
+          onclick={`setLang("${lang}")`}
+          dir={LOCALES[lang].dir || null}
+        >
+          {label}
+        </a>
+      </li>
+    ))
+  }
+</>
+
+<script is:inline>
+  function setLang(lang) {
+    localStorage.selectedLang = lang;
+  }
+</script>
