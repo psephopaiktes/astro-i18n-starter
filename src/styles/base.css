@@ -1,5 +1,5 @@
-:lang(en) {
-  /* write style for specific lang */
+:lang(ar) {
+  * { letter-spacing: 0 !important; }
 }
 
 :root {

@@ -1,8 +1,9 @@
 {
   "name": "astro-i18n-starter",
-  "type": "module",
   "version": "0.0.1",
   "private": false,
+  "license": "MIT",
+  "homepage": "https://astro-i18n-starter.pages.dev/",
   "engines": {
     "node": ">=18"
   },

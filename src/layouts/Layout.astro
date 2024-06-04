@@ -3,43 +3,57 @@ import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import LanguageSuggest from "@/components/LanguageSuggest.astro";
 
-import { SITE_TITLE } from "@/consts";
-import { LOCALES, getLocalePaths, type Lang, type Multilingual } from "@/i18n";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+import { LOCALES, getLocalePaths, type Lang } from "@/i18n";
 import "@/styles/global.css";
 
 interface Props {
-  title?: Multilingual | string;
-  description?: Multilingual | string;
+  title?: string;
+  description?: string;
   frontmatter?: undefined;
 }
 
 const {
   title,
-  description = {
-    en: "A starter template for Astro with i18n support.",
-    ja: "i18n 対応の Astro スターターテンプレート。",
-    "zh-cn": "具有 i18n 支持的 Astro 入门模板。",
-    ar: "قالب بداية لـ Astro مع دعم i18n.",
-  },
+  description,
 } = Astro.props.frontmatter || Astro.props;
 
 const locale = Astro.currentLocale as Lang;
-const localeTitle = title
-  ? typeof title === "string"
-    ? `${title} - ${SITE_TITLE}`
-    : `${title[locale]} - ${SITE_TITLE}`
-  : SITE_TITLE;
-const localeDescription = typeof description === "string"
-  ? description
-  : description[locale];
+
+
+let localeTitle;
+if(typeof SITE_TITLE === "object") {
+  if( title ) localeTitle = `${title} - ${SITE_TITLE[locale]}`;
+  else localeTitle = SITE_TITLE[locale];
+} else {
+  if( title ) localeTitle = `${title} - ${SITE_TITLE}`;
+  else localeTitle = SITE_TITLE;
+}
+
+let localeDescription;
+if(typeof SITE_DESCRIPTION === "object") {
+  if( description ) localeDescription = description;
+  else localeDescription = SITE_DESCRIPTION[locale];
+} else {
+  if( description ) localeDescription = description;
+  else localeDescription = SITE_DESCRIPTION;
+}
 ---
 
+<!--
+
+  Source Code:
+  https://github.com/psephopaiktes/astro-i18n-starter
+
+-->
 <html lang={LOCALES[locale].lang || locale} dir={LOCALES[locale].dir || null}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{localeTitle}</title>
     <meta name="description" content={localeDescription} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
     {
       getLocalePaths(Astro.url).map((props) => (
         <link
@@ -55,11 +69,12 @@ const localeDescription = typeof description === "string"
     <link rel="icon" sizes="192x192" href="/android-chrome.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#ef4d1a" />
+    <meta name="color-scheme" content="light dark" />
 
     <!-- OGP -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={localeTitle} />
-    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:site_name" content={localeTitle} />
     <meta property="og:description" content={localeDescription} />
     <meta property="og:image" content={Astro.site + "ogp.png"} />
     <meta property="og:url" content={Astro.url} />

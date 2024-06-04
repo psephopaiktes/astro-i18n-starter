@@ -1,20 +1,23 @@
 ---
 // Redirect by user locale
 
-import { LOCALES } from "@/i18n";
+import { LOCALES, DEFAULT_LOCALE } from "@/i18n";
 
 const langs = Object.keys(LOCALES);
 const baseUrl = import.meta.env.PROD ? Astro.site : "/";
 ---
 
-<html lang={langs[0]}>
+<html lang={DEFAULT_LOCALE}>
   <head>
     <meta charset="UTF-8" />
     <title>404 PAGE NOT FOUND</title>
     <link rel="canonical" href={Astro.site} />
 
     <noscript>
-      <meta http-equiv="refresh" content={`0;url=${baseUrl + langs[0]}/404/`} />
+      <meta
+        http-equiv="refresh"
+        content={`0;url=${baseUrl + DEFAULT_LOCALE}/404/`}
+      />
     </noscript>
 
     <script is:inline define:vars={{ langs, baseUrl }}>
@@ -32,7 +35,7 @@ const baseUrl = import.meta.env.PROD ? Astro.site : "/";
         } else if (langs.includes(userLang.split("-")[0])) {
           location.href = `${baseUrl + userLang.split("-")[0]}/404/`;
         } else {
-          location.href = `${baseUrl + langs[0]}/404/`;
+          location.href = `${baseUrl + DEFAULT_LOCALE}/404/`;
         }
       }
     </script>

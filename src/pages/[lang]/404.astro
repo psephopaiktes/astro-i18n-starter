@@ -5,16 +5,16 @@ const t = useTranslations(Astro.currentLocale as Lang);
 export const getStaticPaths = () => localeParams;
 import LanguageHomeList from "@/components/LanguageHomeList.astro";
 
-const title = {
+const title = t({
   ja: "404 ページが見つかりません",
   en: "404 Page Not Found",
   "zh-cn": "404 页面未找到",
   ar: "404 الصفحة غير موجودة",
-};
+});
 ---
 
 <Layout {title}>
-  <h1>{t(title)}</h1>
+  <h1>{title}</h1>
   <p>
     {
       t({

@@ -5,7 +5,9 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 const t = useTranslations(Astro.currentLocale as Lang);
 
 const locale = Astro.currentLocale as Lang;
-const currentPath = Astro.url.pathname;
+
+const isActive = (path: string) =>
+  getRelativeLocaleUrl(locale, path) === Astro.url.pathname;
 ---
 
 <header>
@@ -20,21 +22,8 @@ const currentPath = Astro.url.pathname;
     <ul>
       <li>
         <a
-          href={getRelativeLocaleUrl(locale, "/about")}
-          class={getRelativeLocaleUrl(locale, "/about") === currentPath
-            ? "active"
-            : ""}
-        >
-          {t({ ja: "概要", en: "About", "zh-cn": "关于", ar: "حول" })}
-        </a>
-      </li>
-
-      <li>
-        <a
           href={getRelativeLocaleUrl(locale, "/setup")}
-          class={getRelativeLocaleUrl(locale, "/setup") === currentPath
-            ? "active"
-            : ""}
+          class={isActive("/setup") ? "active" : null}
         >
           {t({ ja: "設定", en: "Setup", "zh-cn": "设置", ar: "إعداد" })}
         </a>
@@ -43,11 +32,18 @@ const currentPath = Astro.url.pathname;
       <li class="en-only">
         <a
           href={getRelativeLocaleUrl(locale, "/monolingual")}
-          class={getRelativeLocaleUrl(locale, "/monolingual") === currentPath
-            ? "active"
-            : ""}
+          class={isActive("/monolingual") ? "active" : null}
         >
           Monolingual
+        </a>
+      </li>
+
+      <li>
+        <a
+          href={getRelativeLocaleUrl(locale, "/blog")}
+          class={isActive("/blog") ? "active" : null}
+        >
+          {t({ ja: "ブログ", en: "Blog", "zh-cn": "博客", ar: "مدونة" })}
         </a>
       </li>
 
@@ -107,7 +103,7 @@ const currentPath = Astro.url.pathname;
 
     .en-only {
       position: relative;
-      &:before {
+      &:not(:lang(en))::before {
         content: "EN";
         position: absolute;
         inset: -0.4em -0.6em auto auto;

@@ -1,0 +1,61 @@
+---
+import { LOCALES, useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+
+const posts = (await getCollection("blog"))
+  .filter((post) => post.slug.split("/")[0] === locale)
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+
+const title = t({
+  ja: "ブログ",
+  en: "Blog",
+  "zh-cn": "博客",
+  ar: "مدونة",
+});
+
+export const getStaticPaths = () =>
+  Object.keys(LOCALES).map((lang) => ({
+    params: { lang },
+  }));
+---
+
+<Layout {title}>
+  <h1>{title}</h1>
+  <ul>
+    {
+      posts.map((post) => {
+        const [, ...slug] = post.slug.split("/");
+        return (
+          <li>
+            <a href={`/${locale}/blog/${slug.join("/")}/`}>
+              {post.data.cover && (
+                <Image src={post.data.cover} alt={post.data.title} />
+              )}
+              <h2>{post.data.title}</h2>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</Layout>
+
+<style>
+  ul {
+    margin-block-start: var(--sp-m);
+    display: grid;
+    gap: var(--sp-s);
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
+
+  li {
+    margin-bottom: 1rem;
+    img {
+      border-radius: 6px;
+    }
+  }
+</style>
