@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -23,5 +24,6 @@ const title = post.data.title;
   <time datetime={post.data.date.toISOString()}>
     {post.data.date.toLocaleDateString(lang)}
   </time>
+  {post.data.cover && <Image src={post.data.cover} alt={post.data.title} />}
   <Content />
 </Layout>

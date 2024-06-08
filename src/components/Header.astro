@@ -1,8 +1,12 @@
 ---
 import LanguageSelect from "@/components/LanguageSelect.astro";
+import { Image } from "astro:assets";
 import { useTranslations, type Lang } from "@/i18n";
 import { getRelativeLocaleUrl } from "astro:i18n";
 const t = useTranslations(Astro.currentLocale as Lang);
+
+import AstroImage from "@/assets/astro-logo.svg";
+import SymbolImage from "@/assets/symbol.svg";
 
 const locale = Astro.currentLocale as Lang;
 
@@ -13,10 +17,16 @@ const isActive = (path: string) =>
 <header>
   <h1>
     <a href={getRelativeLocaleUrl(locale, "/")}>
-      <img width="460" height="160" src="/astro-logo.svg" alt="Astro" />
+      <Image src={AstroImage} alt="Astro" />
       i18n Starter
     </a>
   </h1>
+
+  <a href={getRelativeLocaleUrl(locale, "/")} class="symbol">
+    <Image src={SymbolImage} alt="i18n Symbol" />
+  </a>
+
+  <LanguageSelect />
 
   <nav class="l-content">
     <ul>
@@ -26,6 +36,22 @@ const isActive = (path: string) =>
           class={isActive("/setup") ? "active" : null}
         >
           {t({ ja: "設定", en: "Setup", "zh-cn": "设置", ar: "إعداد" })}
+        </a>
+      </li>
+
+      <li>
+        <a
+          href={getRelativeLocaleUrl(locale, "/page")}
+          class={isActive("/page") ? "active" : null}
+        >
+          {
+            t({
+              ja: "ページの追加",
+              en: "Add Page",
+              "zh-cn": "添加页面",
+              ar: "إضافة صفحة",
+            })
+          }
         </a>
       </li>
 
@@ -57,8 +83,6 @@ const isActive = (path: string) =>
         </a>
       </li>
     </ul>
-
-    <LanguageSelect />
   </nav>
 </header>
 
@@ -92,6 +116,15 @@ const isActive = (path: string) =>
     }
   }
 
+  .symbol {
+    position: fixed;
+    inset: 0 0 auto auto;
+    width: 96px;
+    @media (width < 800px) {
+      display: none;
+    }
+  }
+
   nav {
     display: flex;
     align-items: center;
@@ -100,6 +133,7 @@ const isActive = (path: string) =>
   ul {
     display: flex;
     gap: var(--sp-s);
+    margin-block-start: var(--sp-s);
 
     .en-only {
       position: relative;
@@ -116,20 +150,25 @@ const isActive = (path: string) =>
 
     a {
       font-size: 1.1rem;
-      font-weight: 600;
+      display: block;
+      font-weight: 500;
       letter-spacing: 0.05em;
-      padding: 4px 8px;
-      &:hover {
-        color: var(--color-theme);
+      padding: 0.2em 0.4em;
+      background-color: color-mix(in srgb, var(--color-theme) 5%, transparent);
+      color: var(--color-theme);
+      border-radius: 4px;
+      &:hover,
+      &.active {
+        color: var(--color-base);
+        background: var(--color-theme);
       }
       &.active {
-        border-bottom: 2px solid var(--color-theme);
-        color: var(--color-theme);
         pointer-events: none;
       }
       .material-icons-sharp {
         opacity: 0.6;
-        margin-left: -0.1em;
+        margin-inline-start: -0.2em;
+        font-size: 0.9em;
       }
     }
   }

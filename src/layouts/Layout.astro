@@ -4,7 +4,8 @@ import Header from "@/components/Header.astro";
 import LanguageSuggest from "@/components/LanguageSuggest.astro";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
-import { LOCALES, getLocalePaths, type Lang } from "@/i18n";
+import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
+const t = useTranslations(Astro.currentLocale as Lang);
 import "@/styles/global.css";
 
 interface Props {
@@ -19,25 +20,8 @@ const {
 } = Astro.props.frontmatter || Astro.props;
 
 const locale = Astro.currentLocale as Lang;
-
-
-let localeTitle;
-if(typeof SITE_TITLE === "object") {
-  if( title ) localeTitle = `${title} - ${SITE_TITLE[locale]}`;
-  else localeTitle = SITE_TITLE[locale];
-} else {
-  if( title ) localeTitle = `${title} - ${SITE_TITLE}`;
-  else localeTitle = SITE_TITLE;
-}
-
-let localeDescription;
-if(typeof SITE_DESCRIPTION === "object") {
-  if( description ) localeDescription = description;
-  else localeDescription = SITE_DESCRIPTION[locale];
-} else {
-  if( description ) localeDescription = description;
-  else localeDescription = SITE_DESCRIPTION;
-}
+const localeTitle = title ? `${title} - ${t(SITE_TITLE)}` : t(SITE_TITLE);
+const localeDescription = description || t(SITE_DESCRIPTION);
 ---
 
 <!--

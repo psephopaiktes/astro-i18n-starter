@@ -61,7 +61,7 @@ label {
 }
 
 p {
-  margin-top: 0.8em;
+  margin-block-start: 0.8em;
 }
 
 a,
@@ -80,7 +80,6 @@ path {
 }
 
 [class^="material-icons"] {
-  vertical-align: -0.2em;
-  font-size: 1.4em;
-  line-height: 1;
+  vertical-align: middle;
+  font-size: 1.1em;
 }

@@ -42,8 +42,9 @@ export type Multilingual = { [key in Lang]?: string };
  * @returns - The translation function
  */
 export function useTranslations(lang: Lang) {
-  return function t(multilingual: Multilingual) {
-    return multilingual[lang] || multilingual[DEFAULT_LOCALE];
+  return function t(multilingual: Multilingual | string) {
+    if (typeof multilingual === "string") return multilingual;
+    else return multilingual[lang] || multilingual[DEFAULT_LOCALE];
   };
 }
 
@@ -77,4 +78,3 @@ type LocalePath = {
 export const localeParams = Object.keys(LOCALES).map((lang) => ({
   params: { lang },
 }));
-// TODO

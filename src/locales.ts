@@ -1,6 +1,6 @@
 export const DEFAULT_LOCALE_SETTING = "en";
 
-export const LOCALES_SETTING = {
+export const LOCALES_SETTING: LocaleSetting = {
   "en": {
     "label": "English"
   },
@@ -14,5 +14,12 @@ export const LOCALES_SETTING = {
   "ar": {
     "label": "العربية",
     "dir": "rtl"
-  }
+  },
 };
+interface LocaleSetting {
+  [key: Lowercase<string>]: {
+    label: string;
+    lang?: string;
+    dir?: 'rtl' | 'ltr';
+  };
+ }

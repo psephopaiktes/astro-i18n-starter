@@ -1,0 +1,21 @@
+---
+import { localeParams, useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/Layout.astro";
+export const getStaticPaths = () => localeParams;
+const t = useTranslations(Astro.currentLocale as Lang);
+
+const title = t({
+  ja: "ページを追加する",
+  en: "Add a page",
+  "zh-cn": "添加页面",
+  ar: "إضافة صفحة",
+});
+---
+
+<Layout {title}>
+  <h1>{title}</h1>
+  <h2>通常</h2>
+  <h2>Markdownで書きたい場合、言語ごとにファイルを分けたい場合</h2>
+  <h2>特定の言語のみで</h2>
+  <h2>Content Collectionを利用したい場合</h2>
+</Layout>
