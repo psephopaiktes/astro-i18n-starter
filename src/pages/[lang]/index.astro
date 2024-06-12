@@ -1,14 +1,16 @@
 ---
-import { SITE_TITLE } from "@/consts";
 import { LOCALES, useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 const t = useTranslations(Astro.currentLocale as Lang);
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 import heroImageAr from "@/assets/ar/hero.svg";
 import heroImageEn from "@/assets/en/hero.svg";
 import heroImageJa from "@/assets/ja/hero.svg";
 import heroImageZhCn from "@/assets/zh-cn/hero.svg";
 import { Image } from "astro:assets";
+
+const locale = Astro.currentLocale as Lang;
 
 export const getStaticPaths = () =>
   Object.keys(LOCALES).map((lang) => ({
@@ -18,28 +20,118 @@ export const getStaticPaths = () =>
 
 <Layout>
   {
-    Astro.currentLocale === "ja" ? (
+    locale === "ja" ? (
       <Image src={heroImageJa} alt="こんにちは" />
-    ) : Astro.currentLocale === "zh-cn" ? (
+    ) : locale === "zh-cn" ? (
       <Image src={heroImageZhCn} alt="你好" />
-    ) : Astro.currentLocale === "ar" ? (
+    ) : locale === "ar" ? (
       <Image src={heroImageAr} alt="مرحبًا" />
     ) : (
       <Image src={heroImageEn} alt="Hello" />
     )
   }
 
-  <!-- TODO: 特徴、PRを書いていく -->
-  <p>
-    {
-      t({
-        ja: "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。 またそのなかでいっしょになったたくさんのひとたち、ファゼーロとロザーロ、羊飼のミーロや、顔の赤いこどもたち、地主のテーモ、山猫博士のボーガント・デストゥパーゴなど、いまこの暗い巨きな石の建物のなかで考えていると、みんなむかし風のなつかしい青い幻燈のように思われます。では、わたくしはいつかの小さなみだしをつけながら、しずかにあの年のイーハトーヴォの五月から十月までを書きつけましょう",
-        en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "zh-cn":
-          "你好，我是一个中国人。我喜欢吃饭，我喜欢睡觉，我喜欢打游戏。我喜欢看电影，我喜欢听音乐，我喜欢看书。我喜欢旅行，我喜欢运动，我喜欢学习。我喜欢工作，我喜欢生活，我喜欢自由。我喜欢和朋友一起，我喜欢和家人一起，我喜欢和爱人一起。我喜欢和陌生人一起，我喜欢和动物一起，我喜欢和植物一起。我喜欢和大自然一起，我喜欢和宇宙一起，我喜欢和上帝一起。我喜欢和自己一起，我喜欢和别人一起，我喜欢和一切一起。",
-        ar: "مرحبا، أنا شخص عربي. أنا أحب الأكل، أحب النوم، أحب اللعب. أحب مشاهدة الأفلام، أحب الاستماع إلى الموسيقى، أحب قراءة الكتب. أحب السفر، أحب ممارسة الرياضة، أحب التعلم. أحب العمل، أحب الحياة، أحب الحرية. أحب القيام بالأشياء مع الأصدقاء، أحب القيام بالأشياء مع العائلة، أحب القيام بالأشياء مع الحبيب. أحب القيام بالأشياء مع الغرباء، أحب القيام بالأشياء مع الحيوانات، أحب القيام بالأشياء مع النباتات. أحب القيام بالأشياء مع الطبيعة، أحب القيام بالأشياء مع الكون، أحب القيام بالأشياء مع الله. أحب القيام بالأشياء مع نفسي، أحب القيام بالأشياء مع الآخرين، أحب القيام بالأشياء مع كل شيء.",
-      })
-    }
-  </p>
-  <!-- 使い方についてはAboutを御覧ください。みたいなの。getRelateteLocaleUrl(Astor.currentLocal, 'about')みたいので -->
+  <article class="post">
+    <p>
+      {
+        t({
+          ja: "i18n Starter は多言語対応サイトを作成するためのシンプルな Astro theme です。Astro v4.0からのi18n機能に対応しています。",
+          en: "i18n Starter is a simple Astro theme for creating multilingual websites. It supports i18n feature from Astro v4.0.",
+          "zh-cn":
+            "i18n Starter 是一个用于创建多语言网站的简单 Astro 主题。它支持 Astro v4.0 的 i18n 功能。",
+          ar: "i18n Starter هو موضوع Astro بسيط لإنشاء مواقع الويب متعددة اللغات.يدعم ميزة i18n من Astro v4.0.",
+        })
+      }
+    </p>
+
+    <p>
+      <a
+        href={`https://docs.astro.build/${locale}/guides/internationalization/`}
+        target="_blank"
+      >
+        Internationalization (i18n) Routing | Astro Docs
+        <span class="material-icons-sharp">open_in_new</span>
+      </a>
+    </p>
+
+    <p>
+      {
+        t({
+          ja: "基本的にサブディレクトリ方式のURLのみサポートしています。言語ごとに以下のようなURLで管理されます。ルートURLは指定したデフォルト言語にリダイレクトされます。",
+          en: "Basically, only the subdirectory URL scheme is supported. It is managed by the URL as follows for each language. The root URL is redirected to the specified default language.",
+          "zh-cn":
+            "基本上，只支持子目录 URL 方案。 它由以下 URL 为每种语言进行管理。 根 URL 将重定向到指定的默认语言。",
+          ar: "أساساً، يتم دعم نظام URL الفرعي فقط. يتم إدارتها من خلال URL كما يلي لكل لغة. يتم توجيه عنوان URL الجذري إلى اللغة الافتراضية المحددة.",
+        })
+      }
+    </p>
+
+    <ul class="disc">
+      <li>example.com/en/</li>
+      <li>example.com/ja/</li>
+    </ul>
+
+    <h2>
+      {
+        t({
+          ja: "特徴",
+          en: "Feature",
+          "zh-cn": "特点",
+          ar: "ميزة",
+        })
+      }
+    </h2>
+
+    <ul>
+      <li>
+        {
+          t({
+            ja: "Astro公式のi18n機能を100%サポート",
+            en: "100% support for Astro's official i18n feature",
+            "zh-cn": "100% 支持 Astro 官方的 i18n 功能",
+            ar: "دعم 100% لميزة i18n الرسمية لـ Astro",
+          })
+        }
+      </li>
+      <li>
+        {
+          t({
+            ja: "多言語ページの様々な管理方法",
+            en: "Various management methods for multilingual pages",
+            "zh-cn": "多语言页面的各种管理方法",
+            ar: "طرق إدارة متعددة للصفحات متعددة اللغات",
+          })
+        }
+      </li>
+      <li>Pure CSS</li>
+      <li>
+        {
+          t({
+            ja: "SEOフレンドリー",
+            en: "SEO friendly",
+            "zh-cn": "SEO 友好",
+            ar: "SEO ودية",
+          })
+        }
+      </li>
+    </ul>
+
+    <h2>
+      {
+        t({
+          en: "Getting Started",
+          ja: "はじめに",
+          "zh-cn": "入门指南",
+          ar: "البدء",
+        })
+      }
+    </h2>
+    <p>
+      <a href={getRelativeLocaleUrl(locale, "setup")}>
+        {t({ ja: "設定", en: "Setup", "zh-cn": "设置", ar: "إعداد" })}
+      </a>
+    </p>
+  </article>
 </Layout>
+
+<style></style>

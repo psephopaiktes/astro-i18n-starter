@@ -4,15 +4,95 @@ description: '这是一个虚拟文本'
 date: 2024-04-02
 cover: "./cover.png"
 ---
+## 二级标题 二级标题 二级标题 二级标题 二级标题 二级标题 二级标题 二级标题
+正文。那透明的伊哈托风，夏天底部仍带寒意的蓝天，装饰着美丽森林的莫里奥市，郊区闪闪发光的草浪。还有在那一起的人们，法泽罗和罗扎罗，牧羊人米罗，红脸的孩子们，地主特莫，山猫博士博甘特·德斯图帕戈等，现在在这个黑暗的大石建筑中回想起来，都像怀旧的蓝色幻灯片。那我就静静地写下那年五月到十月的伊哈托吧。
 
-这是一段虚拟文本，用于新网页或印刷品中检查文字布局。一般来说，使用无意义的文本是为了确保读者不会集中在内容上。Lorem ipsum 是一个典型的例子。
+### 三级标题 三级标题 三级标题 三级标题 三级标题 三级标题 三级标题 三级标题 三级标题
+- 列表
+- 那透明的伊哈托风，夏天底部仍带寒意的蓝天，装饰着美丽森林的莫里奥市，郊区闪闪发光的草浪。
+    - aaaa
+    - aaaaaaaaaaaaa
+    - aaa
+- aaaaa
 
-其历史可以追溯到古罗马。它是从一本书中摘录的一段话，经过时间的流传，形成了现在的样子。在现代，设计和排版领域广泛使用这种文本。
+#### 四级标题
+1. 数字列表
+1. Lorem ipsum elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    1. aaa
+    1. aaa
+1. aaaaa
+    * aaa
+    * aaa
 
-在网页设计中，Lorem ipsum 用于视觉上确认文本的长度和布局，从而预测实际文本输入时的效果。
+## 基本元素
+- *斜体*
+- <b>轻度强调 (b 标签)</b>
+- **强烈强调**。
+- ~~删除线~~
+- aaa `行内代码` aaa
+- 这段文字将有一个脚注。[^^1]
+- 这段文字将有一个脚注。[^^2]
+- [链接文本](https://astro.build/)
+- [ ] 未完成任务
+- [x] 已完成任务
 
-此外，它在印刷品、广告和杂志布局等多种场景中都有应用。对于设计师和编辑来说，这是一个不可或缺的工具。
+[^^1]: 脚注说明。最后汇总。
+[^^2]: 脚注说明。最后汇总。
 
-将来，在设计的初期阶段仍将继续使用这种虚拟文本。Lorem ipsum 之类的虚拟文本在设计过程中起着非常重要的作用。
+> 引用 Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
 
-最终，它将有助于实现视觉美感和功能性的统一。今后，它将在许多项目中继续得到广泛应用。
+<small>※ 小字体</small>
+
+## 链接
+- URL 自动链接: https://astro.build/
+- <a href="https://astro.build/" target="brank_">如果想在新标签页中打开，请使用 HTML 编写</a>
+- [悬停显示标题的链接](https://astro.build/ "你好")
+
+## 定义列表
+
+<dl>
+    <dt>猫</dt>
+    <dd>大家都喜欢的毛茸茸的动物</dd>
+</dl>
+
+---
+
+## 表格
+右对齐 | 左对齐
+--:|:--
+aa | aa
+aadg | aadfgb
+
+标题 | 居中对齐 | 标题
+:--|:--:|:--
+aa | aa | aa
+
+## 代码高亮
+
+#### test.js
+
+```js
+var elm = document.getElementById('gotop');
+
+    window.addEventListener('scroll', function()
+    if( window.pageYOffset > 200 ) elm.classList.add('show');
+    else elm.classList.remove('show');
+
+}, false);
+```
+
+#### test.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</body>
+</html>
+```

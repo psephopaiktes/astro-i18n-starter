@@ -20,10 +20,12 @@ const title = post.data.title;
 ---
 
 <Layout {title}>
-  <h1>{title}</h1>
-  <time datetime={post.data.date.toISOString()}>
-    {post.data.date.toLocaleDateString(lang)}
-  </time>
-  {post.data.cover && <Image src={post.data.cover} alt={post.data.title} />}
-  <Content />
+  <article class="post">
+    <h1>{title}</h1>
+    <time datetime={post.data.date.toISOString()}>
+      {post.data.date.toLocaleDateString(lang)}
+    </time>
+    {post.data.cover && <Image src={post.data.cover} alt={post.data.title} />}
+    <Content class="material-icons" />
+  </article>
 </Layout>

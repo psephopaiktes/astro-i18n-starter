@@ -5,14 +5,97 @@ date: 2024-04-02
 cover: "./cover.png"
 ---
 
-この文章はダミーテキストです。新しいウェブページや印刷物において、文字の配置を確認するために使用されます。一般的に、読者が内容に集中しないようにするために意味のない文章が使われます。Lorem ipsumはその代表的な例です。
+## 見出し2見出し2見出し2見出し2見出し2見出し2見出し2見出し2
+本文。あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。 またそのなかでいっしょになったたくさんのひとたち、ファゼーロとロザーロ、羊飼のミーロや、顔の赤いこどもたち、地主のテーモ、山猫博士のボーガント・デストゥパーゴなど、いまこの暗い巨きな石の建物のなかで考えていると、みんなむかし風のなつかしい青い幻燈のように思われます。では、わたくしはいつかの小さなみだしをつけながら、しずかにあの年のイーハトーヴォの五月から十月までを書きつけましょう
 
-その歴史は古代ローマに遡ります。ある書物からの一節が切り取られ、時を経て現在の形に至りました。現代においても、デザインやタイポグラフィの分野で広く利用されています。
+### 見出し3見出し3見出し3見出し3見出し3見出し3見出し3見出し3見出し3
+- リスト
+- あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
+    - ああああ
+    - あああああああああああああああ
+    - あああ
+- あああああああ
 
-ウェブデザインでは、テキストの長さや配置を視覚的に確認するために使われます。これにより、実際の文章が入力されたときの見た目を予測することができます。
+#### 見出し4
+1. 数値リスト
+1. Lorem ipsum elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    1. あああ
+    1. あああ
+1. ああああああ
+    * あああ
+    * あああ
 
-他にも印刷物や広告、雑誌のレイアウトなど、様々な場面で役立っています。デザイナーや編集者にとっては、不可欠なツールの一つです。
+## 基本要素
+- *斜体*
+- <b>軽い強調(bタグ)</b>
+- **強い強調**。
+- ~~否定~~
+- あああ `インラインのコード` あああ
+- この文章に脚注をつける.[^1]
+- この文章に脚注をつける.[^2]
+- [リンクテキスト](https://astro.build/)
+- [ ] 未完了チェック
+- [x] 完了済みチェック
 
-将来的にも、デザインの初期段階での利用が続くことでしょう。Lorem ipsumのようなダミーテキストは、デザインプロセスにおいて非常に重要な役割を果たしています。
+[^1]: 脚注の説明。最後にまとめられる
+[^2]: 脚注の説明。最後にまとめられる
 
-最終的には、視覚的な美しさと機能性を両立させるための一助となるでしょう。これからも、多くのプロジェクトで活用されることでしょう。
+> 引用 Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem 
+
+<small>※ Smallテキスト</small>
+
+## Link
+- URLは自動的にリンクされる: https://astro.build/
+- <a href="https://astro.build/" target="brank_">新しいタブで開きたい場合はHTMLで書く</a>
+- [HoverでTitleが出るリンク](https://astro.build/ "こんにちは")
+
+
+## 定義リスト
+
+<dl>
+    <dt>Cat</dt>
+    <dd>Fluffy animal everyone likes</dd>
+</dl>
+
+---
+
+## Table
+右寄せ | 左寄せ
+--:|:--
+aa | aa 
+aadg | aadfgb 
+
+header | 真ん中寄せ | header 
+:--|:--:|:--
+aa | aa | aa 
+
+
+## CODE Highlight
+
+#### test.js
+
+```js
+var elm = document.getElementById('gotop');
+
+    window.addEventListener('scroll', function()
+    if( window.pageYOffset > 200 ) elm.classList.add('show');
+    else elm.classList.remove('show');
+
+}, false);
+```
+
+#### test.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</body>
+</html>
+```

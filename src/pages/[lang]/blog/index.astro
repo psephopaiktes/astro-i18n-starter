@@ -25,6 +25,25 @@ export const getStaticPaths = () =>
 
 <Layout {title}>
   <h1>{title}</h1>
+  <p>
+    {
+      t({
+        ja: "ブログやニュースコンテンツを管理したい場合のサンプルです。Astroのコンテンツコレクションを利用しています。",
+        en: "A sample for managing blog or news content. It uses Astro's content collection.",
+        "zh-cn": "用于管理博客或新闻内容的示例。它使用了Astro的内容集合。",
+        ar: "عينة لإدارة محتوى المدونة أو الأخبار. يستخدم مجموعة محتويات Astro.",
+      })
+    }
+  </p>
+  <p>
+    <a
+      href={`https://docs.astro.build/${Astro.currentLocale}/guides/content-collections/`}
+      target="_blank"
+    >
+      Content Collection | Astro Docs
+      <span class="material-icons-sharp"> open_in_new </span>
+    </a>
+  </p>
   <ul>
     {
       posts.map((post) => {

@@ -4,17 +4,50 @@ title: "設定"
 description: "Astroの設定"
 ---
 
+<article class="post"> 
+TODO: これはLayoutにするべきかなあ
+
 ## {frontmatter.title}
 {frontmatter.description}
 
+## Install
 
-```js
-<!-- TODO: 設定を書いていく -->
-var elm = document.getElementById('gotop');
 
-    window.addEventListener('scroll', function()
-    if( window.pageYOffset > 200 ) elm.classList.add('show');
-    else elm.classList.remove('show');
+## 設定
 
-}, false);
+
+### 1. [./astro.config.mjs](./astro.config.mjs) にlangコードを設定します。
+
+> [!TIP]
+> langコードについてはこちらをご確認ください。
+> [lang - HTML: HyperText Markup Language | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang)
+
+### 2. [./src/locales.json](./src/locales.json) にLocaleの設定をします
+https://starlight.astro.build/ja/reference/configuration/#locales に準拠
+
+
+## ページコンテンツの作成
+
+## 404について
+https://developers.cloudflare.com/pages/configuration/redirects/
+現在404コードを返せません。サーバーによります。
+
+## Project Structure
 ```
+src/
+├── assets/
+│   └── socialIcons.ts
+├── components/
+├── content/
+│   |  blog/
+│   |    └── some-blog-posts.md
+│   └── config.ts
+├── layouts/
+└── pages/
+└── styles/
+└── utils/
+└── config.ts
+└── types.ts
+```
+
+</article>
