@@ -1,17 +1,43 @@
 ---
-layout: "@/layouts/Layout.astro"
-title: "設定"
-description: "Astroの設定"
+layout: "@/layouts/Article.astro"
+title: "初期設定"
+description: "初期設定方法について"
 ---
+import PageHeadline from "@/components/PageHeadline.astro";
 
-<article class="post"> 
-TODO: これはLayoutにするべきかなあ
+<PageHeadline title={frontmatter.title} />
 
-## {frontmatter.title}
-{frontmatter.description}
 
 ## Install
 
+
+```js
+var elm = document.getElementById('gotop');
+
+    window.addEventListener('scroll', function()
+    if( window.pageYOffset > 200 ) elm.classList.add('show');
+    else elm.classList.remove('show');
+
+}, false);
+```
+
+```diff
+- var elm = document.getElementById('gotop');
++ var const = document.getElementById('gotop');
+
+    window.addEventListener('scroll', function()
+    if( window.pageYOffset > 200 ) elm.classList.add('show');
+-    else elm.classList.remove('show');
++    else elm.classList.remove('show');
+
+}, false);
+```
+
+
+
+```sh
+npm create astro@latest -- --template astro-i18n-starter
+```
 
 ## 設定
 
@@ -49,5 +75,3 @@ src/
 └── config.ts
 └── types.ts
 ```
-
-</article>

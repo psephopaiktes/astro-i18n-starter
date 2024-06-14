@@ -2,6 +2,10 @@
 
 # Astro i18n Starter
 
+```sh
+npm create astro@latest -- --template astro-i18n-starter
+```
+
 i18n Starter は多言語対応サイトを作成するためのシンプルな Astro theme です。
 
 Astro v4.0からの[i18n](https://docs.astro.build/en/guides/internationalization/)機能に対応しています。

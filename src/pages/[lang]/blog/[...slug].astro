@@ -1,5 +1,5 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import Layout from "@/layouts/Article.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
@@ -20,12 +20,33 @@ const title = post.data.title;
 ---
 
 <Layout {title}>
-  <article class="post">
+  {
+    post.data.cover && (
+      <Image src={post.data.cover} alt={post.data.title} class="cover" />
+    )
+  }
+
+  <header>
     <h1>{title}</h1>
     <time datetime={post.data.date.toISOString()}>
       {post.data.date.toLocaleDateString(lang)}
     </time>
-    {post.data.cover && <Image src={post.data.cover} alt={post.data.title} />}
-    <Content class="material-icons" />
-  </article>
+  </header>
+
+  <Content class="material-icons" />
 </Layout>
+
+<style>
+  header {
+    text-align: center;
+    border-block-end: 1px solid var(--color-theme);
+    padding-block-end: var(--sp-m);
+    h1 {
+      color: var(--color-theme);
+      font-size: 1.8rem;
+    }
+  }
+  .cover {
+    border-radius: 16px;
+  }
+</style>

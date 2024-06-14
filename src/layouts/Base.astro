@@ -1,7 +1,7 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import LanguageSuggest from "@/components/LanguageSuggest.astro";
+import LocaleSuggest from "@/components/LocaleSuggest.astro";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
 import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
@@ -103,7 +103,7 @@ const localeDescription = description || t(SITE_DESCRIPTION);
   </head>
 
   <body>
-    <LanguageSuggest />
+    <LocaleSuggest />
     <Header />
 
     <main class="l-main l-content">

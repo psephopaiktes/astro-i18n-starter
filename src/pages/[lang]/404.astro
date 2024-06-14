@@ -1,61 +1,145 @@
 ---
-import { localeParams, useTranslations, type Lang } from "@/i18n";
-import Layout from "@/layouts/Layout.astro";
+import { LOCALES, localeParams, useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/Base.astro";
 const t = useTranslations(Astro.currentLocale as Lang);
-export const getStaticPaths = () => localeParams;
-import LanguageHomeList from "@/components/LanguageHomeList.astro";
 
 const title = t({
-  ja: "404 ページが見つかりません",
-  en: "404 Page Not Found",
-  "zh-cn": "404 页面未找到",
-  ar: "404 الصفحة غير موجودة",
+  ja: "ページが見つかりません",
+  en: "Page Not Found",
+  "zh-cn": "页面未找到",
+  ar: "الصفحة غير موجودة",
 });
+
+export const getStaticPaths = () => localeParams;
 ---
 
 <Layout {title}>
-  <h1>{title}</h1>
-  <p>
-    {
-      t({
-        ja: "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。 またそのなかでいっしょになったたくさんのひとたち、ファゼーロとロザーロ、羊飼のミーロや、顔の赤いこどもたち、地主のテーモ、山猫博士のボーガント・デストゥパーゴなど、いまこの暗い巨きな石の建物のなかで考えていると、みんなむかし風のなつかしい青い幻燈のように思われます。では、わたくしはいつかの小さなみだしをつけながら、しずかにあの年のイーハトーヴォの五月から十月までを書きつけましょう",
-        en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "zh-cn":
-          "你好，我是一个中国人。我喜欢吃饭，我喜欢睡觉，我喜欢打游戏。我喜欢看电影，我喜欢听音乐，我喜欢看书。我喜欢旅行，我喜欢运动，我喜欢学习。我喜欢工作，我喜欢生活，我喜欢自由。我喜欢和朋友一起，我喜欢和家人一起，我喜欢和爱人一起。我喜欢和陌生人一起，我喜欢和动物一起，我喜欢和植物一起。我喜欢和大自然一起，我喜欢和宇宙一起，我喜欢和上帝一起。我喜欢和自己一起，我喜欢和别人一起，我喜欢和一切一起。",
-        ar: "مرحبا، أنا شخص عربي. أنا أحب الأكل، أحب النوم، أحب اللعب. أحب مشاهدة الأفلام، أحب الاستماع إلى الموسيقى، أحب قراءة الكتب. أحب السفر، أحب ممارسة الرياضة، أحب التعلم. أحب العمل، أحب الحياة، أحب الحرية. أحب القيام بالأشياء مع الأصدقاء، أحب القيام بالأشياء مع العائلة، أحب القيام بالأشياء مع الحبيب. أحب القيام بالأشياء مع الغرباء، أحب القيام بالأشياء مع الحيوانات، أحب القيام بالأشياء مع النباتات. أحب القيام بالأشياء مع الطبيعة، أحب القيام بالأشياء مع الكون، أحب القيام بالأشياء مع الله. أحب القيام بالأشياء مع نفسي، أحب القيام بالأشياء مع الآخرين، أحب القيام بالأشياء مع كل شيء.",
-      })
-    }
-  </p>
+  <section class="container">
+    <h1>
+      <b>404</b>
+      {title}
+    </h1>
 
-  <section class="langList">
-    <h2>
+    <p>
       {
         t({
-          en: "Supported Languages",
-          ja: "対応言語一覧",
-          "zh-cn": "支持的语言",
-          ar: "اللغات المدعومة",
+          ja: "お探しのページは見つかりませんでした。トップに戻るか、他の言語でお試しください。",
+          en: "The page you are looking for could not be found. Please return to the top or try another language.",
+          "zh-cn": "您要查找的页面不存在。请返回顶部或尝试其他语言。",
+          ar: "الصفحة التي تبحث عنها غير موجودة. يرجى العودة إلى الأعلى أو تجربة لغة أخرى.",
         })
       }
-    </h2>
-    <ul>
-      <LanguageHomeList />
-    </ul>
+    </p>
+
+    <a href="/" class="gotop">
+      {
+        t({
+          ja: "トップページ",
+          en: "Top Page",
+          "zh-cn": "首页",
+          ar: "الصفحة الرئيسية",
+        })
+      }
+    </a>
+
+    <section class="langList">
+      <h2>
+        {
+          t({
+            ja: "他の言語で見る",
+            en: "View in other languages",
+            "zh-cn": "用其他语言查看",
+            ar: "عرض بلغات أخرى",
+          })
+        }
+      </h2>
+
+      <ul>
+        {
+          Object.entries(LOCALES).map(([lang, { label }]) => (
+            <li>
+              <a
+                href={`/${lang}/`}
+                data-lang-path={lang}
+                onclick={`setLang("${lang}")`}
+                dir={LOCALES[lang].dir || null}
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </section>
 </Layout>
 
 <script is:inline>
   if (localStorage.userAccessPath) {
     history.replaceState("", "", localStorage.userAccessPath);
+
+    document.querySelectorAll("a[data-lang-path]").forEach((a) => {
+      const pathnames = localStorage.userAccessPath.split("/");
+      const lang = a.getAttribute("data-lang-path");
+      pathnames[1] = lang;
+      a.href = pathnames.join("/");
+    });
+
     localStorage.removeItem("userAccessPath");
+  }
+
+  function setLang(lang) {
+    localStorage.selectedLang = lang;
   }
 </script>
 
 <style>
+  .container {
+    text-align: center;
+    border: 4px dotted color-mix(in srgb, var(--color-caution) 40%, transparent);
+    padding: var(--sp-l);
+    border-radius: 16px;
+  }
+
+  .container > h1 {
+    color: var(--color-caution);
+    font-size: 2rem;
+    b {
+      display: block;
+      font-size: 4em;
+      font-weight: 900;
+      letter-spacing: -0.1em;
+      opacity: 0.6;
+    }
+  }
+
+  .container > p {
+    margin-block-start: var(--sp-s);
+  }
+
+  .gotop {
+    display: inline-block;
+    margin-inline: auto;
+    margin-block-start: var(--sp-s);
+    padding: 0.5em 1.5em;
+    border-radius: 999px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: var(--color-theme);
+    color: var(--color-base);
+  }
+
   .langList {
-    margin-top: 2rem;
+    margin-top: var(--sp-l);
     ul {
-      list-style: disc;
+      margin-top: var(--sp-s);
+      display: flex;
+      gap: var(--sp-s);
+      justify-content: center;
+    }
+    a {
+      color: var(--color-theme);
+      text-decoration: underline;
     }
   }
 </style>

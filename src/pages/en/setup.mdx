@@ -1,11 +1,12 @@
 ---
-layout: "@/layouts/Layout.astro"
+layout: "@/layouts/Article.astro"
 title: "Set up"
 description: "This page describes the basic setup procedure for Astro i18n Starter"
 ---
+import PageHeadline from "@/components/PageHeadline.astro";
 
-## {frontmatter.title}
-{frontmatter.description}
+<PageHeadline title={frontmatter.title} />
+
 
 ```js
 var elm = document.getElementById('gotop');

@@ -1,6 +1,6 @@
 ---
 import { LOCALES, useTranslations, type Lang } from "@/i18n";
-import Layout from "@/layouts/Layout.astro";
+import Layout from "@/layouts/Base.astro";
 const t = useTranslations(Astro.currentLocale as Lang);
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -31,107 +31,148 @@ export const getStaticPaths = () =>
     )
   }
 
-  <article class="post">
-    <p>
+  <p>
+    {
+      t({
+        ja: "i18n Starter は多言語対応サイトを作成するためのシンプルな Astro theme です。Astro v4.0からのi18n機能に対応しています。",
+        en: "i18n Starter is a simple Astro theme for creating multilingual websites. It supports i18n feature from Astro v4.0.",
+        "zh-cn":
+          "i18n Starter 是一个用于创建多语言网站的简单 Astro 主题。它支持 Astro v4.0 的 i18n 功能。",
+        ar: "i18n Starter هو موضوع Astro بسيط لإنشاء مواقع الويب متعددة اللغات.يدعم ميزة i18n من Astro v4.0.",
+      })
+    }
+  </p>
+
+  <p>
+    <a
+      href={`https://docs.astro.build/${locale}/guides/internationalization/`}
+      target="_blank"
+    >
+      Internationalization (i18n) Routing | Astro Docs
+      <span class="material-icons-sharp">open_in_new</span>
+    </a>
+  </p>
+
+  <p>
+    {
+      t({
+        ja: "基本的にサブディレクトリ方式のURLのみサポートしています。言語ごとに以下のようなURLで管理されます。ルートURLは指定したデフォルト言語にリダイレクトされます。",
+        en: "Basically, only the subdirectory URL scheme is supported. It is managed by the URL as follows for each language. The root URL is redirected to the specified default language.",
+        "zh-cn":
+          "基本上，只支持子目录 URL 方案。 它由以下 URL 为每种语言进行管理。 根 URL 将重定向到指定的默认语言。",
+        ar: "أساساً، يتم دعم نظام URL الفرعي فقط. يتم إدارتها من خلال URL كما يلي لكل لغة. يتم توجيه عنوان URL الجذري إلى اللغة الافتراضية المحددة.",
+      })
+    }
+  </p>
+
+  <ul>
+    <li>example.com/en/</li>
+    <li>example.com/ja/</li>
+  </ul>
+
+  <h2>
+    {
+      t({
+        ja: "特徴",
+        en: "Feature",
+        "zh-cn": "特点",
+        ar: "ميزة",
+      })
+    }
+  </h2>
+
+  <ul>
+    <li>
       {
         t({
-          ja: "i18n Starter は多言語対応サイトを作成するためのシンプルな Astro theme です。Astro v4.0からのi18n機能に対応しています。",
-          en: "i18n Starter is a simple Astro theme for creating multilingual websites. It supports i18n feature from Astro v4.0.",
-          "zh-cn":
-            "i18n Starter 是一个用于创建多语言网站的简单 Astro 主题。它支持 Astro v4.0 的 i18n 功能。",
-          ar: "i18n Starter هو موضوع Astro بسيط لإنشاء مواقع الويب متعددة اللغات.يدعم ميزة i18n من Astro v4.0.",
+          ja: "Astro公式のi18n機能を100%サポート",
+          en: "100% support for Astro's official i18n feature",
+          "zh-cn": "100% 支持 Astro 官方的 i18n 功能",
+          ar: "دعم 100% لميزة i18n الرسمية لـ Astro",
         })
       }
-    </p>
-
-    <p>
-      <a
-        href={`https://docs.astro.build/${locale}/guides/internationalization/`}
-        target="_blank"
-      >
-        Internationalization (i18n) Routing | Astro Docs
-        <span class="material-icons-sharp">open_in_new</span>
-      </a>
-    </p>
-
-    <p>
+    </li>
+    <li>
       {
         t({
-          ja: "基本的にサブディレクトリ方式のURLのみサポートしています。言語ごとに以下のようなURLで管理されます。ルートURLは指定したデフォルト言語にリダイレクトされます。",
-          en: "Basically, only the subdirectory URL scheme is supported. It is managed by the URL as follows for each language. The root URL is redirected to the specified default language.",
-          "zh-cn":
-            "基本上，只支持子目录 URL 方案。 它由以下 URL 为每种语言进行管理。 根 URL 将重定向到指定的默认语言。",
-          ar: "أساساً، يتم دعم نظام URL الفرعي فقط. يتم إدارتها من خلال URL كما يلي لكل لغة. يتم توجيه عنوان URL الجذري إلى اللغة الافتراضية المحددة.",
+          ja: "多言語ページの様々な管理方法",
+          en: "Various management methods for multilingual pages",
+          "zh-cn": "多语言页面的各种管理方法",
+          ar: "طرق إدارة متعددة للصفحات متعددة اللغات",
         })
       }
-    </p>
-
-    <ul class="disc">
-      <li>example.com/en/</li>
-      <li>example.com/ja/</li>
-    </ul>
-
-    <h2>
+    </li>
+    <li>Pure CSS</li>
+    <li>
       {
         t({
-          ja: "特徴",
-          en: "Feature",
-          "zh-cn": "特点",
-          ar: "ميزة",
+          ja: "SEOフレンドリー",
+          en: "SEO friendly",
+          "zh-cn": "SEO 友好",
+          ar: "SEO ودية",
         })
       }
-    </h2>
+    </li>
+  </ul>
 
-    <ul>
-      <li>
-        {
-          t({
-            ja: "Astro公式のi18n機能を100%サポート",
-            en: "100% support for Astro's official i18n feature",
-            "zh-cn": "100% 支持 Astro 官方的 i18n 功能",
-            ar: "دعم 100% لميزة i18n الرسمية لـ Astro",
-          })
-        }
-      </li>
-      <li>
-        {
-          t({
-            ja: "多言語ページの様々な管理方法",
-            en: "Various management methods for multilingual pages",
-            "zh-cn": "多语言页面的各种管理方法",
-            ar: "طرق إدارة متعددة للصفحات متعددة اللغات",
-          })
-        }
-      </li>
-      <li>Pure CSS</li>
-      <li>
-        {
-          t({
-            ja: "SEOフレンドリー",
-            en: "SEO friendly",
-            "zh-cn": "SEO 友好",
-            ar: "SEO ودية",
-          })
-        }
-      </li>
-    </ul>
+  <h2>
+    {
+      t({
+        en: "Getting Started",
+        ja: "はじめに",
+        "zh-cn": "入门指南",
+        ar: "البدء",
+      })
+    }
+  </h2>
 
-    <h2>
-      {
-        t({
-          en: "Getting Started",
-          ja: "はじめに",
-          "zh-cn": "入门指南",
-          ar: "البدء",
-        })
-      }
-    </h2>
-    <p>
-      <a href={getRelativeLocaleUrl(locale, "setup")}>
-        {t({ ja: "設定", en: "Setup", "zh-cn": "设置", ar: "إعداد" })}
-      </a>
-    </p>
-  </article>
+  <p>
+    {
+      t({
+        ja: "さっそく初めましょう！",
+        en: "Let's get started!",
+        "zh-cn": "让我们开始吧！",
+        ar: "لنبدأ!",
+      })
+    }
+  </p>
+
+  <p>
+    <a href={getRelativeLocaleUrl(locale, "setup")}>
+      {t({ ja: "設定", en: "Setup", "zh-cn": "设置", ar: "إعداد" })}
+    </a>
+  </p>
 </Layout>
 
-<style></style>
+<style>
+  body {
+    &::before {
+      content: "translate";
+      font-family: "Material Icons Sharp";
+      position: fixed;
+      inset: -2vw -2vw auto auto;
+      font-size: 20vw;
+      line-height: 1;
+      pointer-events: none;
+      color: var(--color-theme);
+      z-index: -1;
+      opacity: 0.1;
+      filter: blur(1px);
+    }
+    @media (width < 800px) {
+      &::before {
+        display: none;
+      }
+    }
+  }
+  ul {
+    margin-block-start: var(--sp-s);
+    list-style: disc;
+    padding-inline-start: 1em;
+  }
+
+  h2 {
+    color: var(--color-theme);
+    margin-block-start: var(--sp-l);
+  }
+</style>

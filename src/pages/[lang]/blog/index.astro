@@ -1,8 +1,10 @@
 ---
 import { LOCALES, useTranslations, type Lang } from "@/i18n";
-import Layout from "@/layouts/Layout.astro";
+import Layout from "@/layouts/Base.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
+import PageHeadline from "@/components/PageHeadline.astro";
+
 const locale = Astro.currentLocale as Lang;
 const t = useTranslations(locale);
 
@@ -24,7 +26,8 @@ export const getStaticPaths = () =>
 ---
 
 <Layout {title}>
-  <h1>{title}</h1>
+  <PageHeadline {title} />
+
   <p>
     {
       t({
@@ -35,6 +38,7 @@ export const getStaticPaths = () =>
       })
     }
   </p>
+
   <p>
     <a
       href={`https://docs.astro.build/${Astro.currentLocale}/guides/content-collections/`}
@@ -44,6 +48,7 @@ export const getStaticPaths = () =>
       <span class="material-icons-sharp"> open_in_new </span>
     </a>
   </p>
+
   <ul>
     {
       posts.map((post) => {
@@ -64,6 +69,9 @@ export const getStaticPaths = () =>
 </Layout>
 
 <style>
+  p {
+    margin-top: var(--sp-s);
+  }
   ul {
     margin-block-start: var(--sp-m);
     display: grid;

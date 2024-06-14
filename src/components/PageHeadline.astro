@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<header>
+  <h1>{title}</h1>
+  <slot />
+</header>
+
+<style>
+  header {
+    padding-block: var(--sp-l);
+    padding-inline: var(--sp-s);
+    text-align: center;
+    border-radius: 16px;
+    color: var(--color-theme);
+    background-color: color-mix(in srgb, var(--color-theme) 5%, transparent);
+    @media (width < 768px) {
+      margin-inline: calc(var(--sp-m) * -1);
+      border-radius: 0;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+    }
+  }
+</style>

@@ -1,12 +1,11 @@
 ---
-import LanguageSelect from "@/components/LanguageSelect.astro";
+import LocaleSelect from "@/components/LocaleSelect.astro";
 import { Image } from "astro:assets";
 import { useTranslations, type Lang } from "@/i18n";
 import { getRelativeLocaleUrl } from "astro:i18n";
 const t = useTranslations(Astro.currentLocale as Lang);
 
 import AstroImage from "@/assets/astro-logo.svg";
-import SymbolImage from "@/assets/symbol.svg";
 
 const locale = Astro.currentLocale as Lang;
 
@@ -15,18 +14,14 @@ const isActive = (path: string) =>
 ---
 
 <header>
-  <h1>
+  <h1 dir="ltr">
     <a href={getRelativeLocaleUrl(locale, "/")}>
       <Image src={AstroImage} alt="Astro" />
       i18n Starter
     </a>
   </h1>
 
-  <a href={getRelativeLocaleUrl(locale, "/")} class="symbol">
-    <Image src={SymbolImage} alt="i18n Symbol" />
-  </a>
-
-  <LanguageSelect />
+  <LocaleSelect />
 
   <nav class="l-content">
     <ul>
@@ -105,6 +100,10 @@ const isActive = (path: string) =>
     font-family: var(--english-font);
     font-weight: 900;
     vertical-align: middle;
+    @media (width < 480px) {
+      font-size: 28px;
+    }
+
     a {
       display: flex;
       align-items: center;
@@ -113,15 +112,6 @@ const isActive = (path: string) =>
       width: 6em;
       position: relative;
       inset: 0.1em;
-    }
-  }
-
-  .symbol {
-    position: fixed;
-    inset: 0 0 auto auto;
-    width: 96px;
-    @media (width < 800px) {
-      display: none;
     }
   }
 
@@ -149,21 +139,29 @@ const isActive = (path: string) =>
     }
 
     a {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       display: block;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.05em;
-      padding: 0.2em 0.4em;
-      background-color: color-mix(in srgb, var(--color-theme) 5%, transparent);
+      padding-block: 0.2em;
+      padding-inline: 0.4em;
       color: var(--color-theme);
       border-radius: 4px;
       &:hover,
-      &.active {
-        color: var(--color-base);
-        background: var(--color-theme);
+      &:active {
+        background: color-mix(in srgb, var(--color-theme) 5%, transparent);
       }
       &.active {
         pointer-events: none;
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 100% 0.4em 0;
+          height: 0.2em;
+          background: var(--color-theme);
+          border-radius: 0.1em;
+        }
       }
       .material-icons-sharp {
         opacity: 0.6;

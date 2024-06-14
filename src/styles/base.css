@@ -44,9 +44,9 @@
 body {
   line-height: 1.6;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   @media (width < 480px) {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
