@@ -1,3 +1,5 @@
+/* to define the layout and structure of the entire page */
+
 .l-main {
   margin-block-start: var(--sp-l);
 }

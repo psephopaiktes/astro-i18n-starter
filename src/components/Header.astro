@@ -1,5 +1,7 @@
 ---
-import LocaleSelect from "@/components/LocaleSelect.astro";
+// Header & Navigation UI displayed on each page.
+
+import LocaleSelect from "@/components/i18n/LocaleSelect.astro";
 import { Image } from "astro:assets";
 import { useTranslations, type Lang } from "@/i18n";
 import { getRelativeLocaleUrl } from "astro:i18n";
@@ -45,6 +47,22 @@ const isActive = (path: string) =>
               en: "Add Page",
               "zh-cn": "添加页面",
               ar: "إضافة صفحة",
+            })
+          }
+        </a>
+      </li>
+
+      <li>
+        <a
+          href={getRelativeLocaleUrl(locale, "/feature")}
+          class={isActive("/feature") ? "active" : null}
+        >
+          {
+            t({
+              ja: "その他の機能",
+              en: "Other Features",
+              "zh-cn": "其他功能",
+              ar: "ميزات أخرى",
             })
           }
         </a>

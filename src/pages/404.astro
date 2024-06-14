@@ -1,5 +1,5 @@
 ---
-// Redirect by user locale
+// Redirect to 404 page for user's system locale
 
 import { LOCALES, DEFAULT_LOCALE } from "@/i18n";
 
@@ -38,6 +38,10 @@ const baseUrl = import.meta.env.PROD ? Astro.site : "/";
           location.href = `${baseUrl + DEFAULT_LOCALE}/404/`;
         }
       }
+
+      // TODO
+      // URLにlangが入ってない場合はユーザー言語にリダイレクトする
+      // /setup/ → /en/setup/
     </script>
   </head>
   <body>

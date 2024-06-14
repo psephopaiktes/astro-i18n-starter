@@ -1,3 +1,6 @@
+// Place any global data in this file.
+// You can import this data from anywhere in your site by using the `import` keyword.
+
 import { type Multilingual } from "@/i18n";
 
 export const SITE_TITLE: string | Multilingual = "Astor i18n Starter";

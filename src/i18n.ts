@@ -11,13 +11,15 @@ type LocaleConfig = {
   readonly lang?: string;
   readonly dir?: "ltr" | "rtl";
 };
+// TODO: JSでも形一致しない場合はconsole.errorを出してあげる
 
 
 /**
  * Default locale code
  * @constant @readonly
- */
+*/
 export const DEFAULT_LOCALE = DEFAULT_LOCALE_SETTING as Lang;
+// TODO: JSでも形一致しない場合はconsole.errorを出してあげる
 
 
 /**

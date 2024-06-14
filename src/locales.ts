@@ -1,3 +1,6 @@
+// locale settings for this theme
+// https://astro-i18n-starter.pages.dev/setup/
+
 export const DEFAULT_LOCALE_SETTING = "en";
 
 export const LOCALES_SETTING: LocaleSetting = {
@@ -16,6 +19,7 @@ export const LOCALES_SETTING: LocaleSetting = {
     "dir": "rtl"
   },
 };
+
 interface LocaleSetting {
   [key: Lowercase<string>]: {
     label: string;

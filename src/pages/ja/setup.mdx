@@ -4,36 +4,12 @@ title: "初期設定"
 description: "初期設定方法について"
 ---
 import PageHeadline from "@/components/PageHeadline.astro";
+import { SITE_TITLE } from "@/consts";
 
 <PageHeadline title={frontmatter.title} />
 
 
-## Install
-
-
-```js
-var elm = document.getElementById('gotop');
-
-    window.addEventListener('scroll', function()
-    if( window.pageYOffset > 200 ) elm.classList.add('show');
-    else elm.classList.remove('show');
-
-}, false);
-```
-
-```diff
-- var elm = document.getElementById('gotop');
-+ var const = document.getElementById('gotop');
-
-    window.addEventListener('scroll', function()
-    if( window.pageYOffset > 200 ) elm.classList.add('show');
--    else elm.classList.remove('show');
-+    else elm.classList.remove('show');
-
-}, false);
-```
-
-
+## プロジェクトの作成
 
 ```sh
 npm create astro@latest -- --template astro-i18n-starter
@@ -42,36 +18,120 @@ npm create astro@latest -- --template astro-i18n-starter
 ## 設定
 
 
-### 1. [./astro.config.mjs](./astro.config.mjs) にlangコードを設定します。
+### 1. astro.config.mjs の設定
 
-> [!TIP]
-> langコードについてはこちらをご確認ください。
+astroの設定ファイルに`defaultLocale`と`locales`を設定します。
+
+```diff
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';  // [!code focus] // [!code ++]
+import { defineConfig } from 'astro/config';
+
+// https://astro.build/config
+export default defineConfig({
+  site: 'https://astro-i18n-starter.pages.dev',
+  integrations: [mdx(), sitemap()],
+  i18n: {
++   defaultLocale: 'ja',
++   locales: ['en', 'ja', 'zh-cn', 'ar'],
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: false,
+    },
+  },
+  markdown: {
+    shikiConfig: {
+      theme: 'one-dark-pro',
+    },
+  },
+});
+```
+
+astroの詳細な設定方法については公式ドキュメントを参考にしてください。
+
+> [Configuration Reference | Docs](https://docs.astro.build/en/reference/configuration-reference/)
+
+> [Internationalization (i18n) Routing | Docs](https://docs.astro.build/en/guides/internationalization/#configure-i18n-routing)
+
+`prefixDefaultLocale`, `redirectToDefaultLocale` の設定を変えることはおすすめしません。{ SITE_TITLE } ではクライアント再度のJavascriptでリダイレクト処理を管理しており、URLにlocaleが含まれていない場合はデフォルトのlocaleにリダイレクトします。例えば `/setup/` は `/en/setup/` にリダイレクトされます。
+
+
+### 2. /src/locales.ts の設定
+同様にして { SITE_TITLE } の設定ファイルを更新します。
+
+`DEFAULT_LOCALE_SETTING`に先ほど設定したデフォルトロケールを、`LOCALES_SETTING`には作成したいロケールのリストを設定します。こちらは[Starlightの`locales`設定](https://starlight.astro.build/en/reference/configuration/#locales) に準拠しています。
+
+```ts
+export const DEFAULT_LOCALE_SETTING = "en";
+
+export const LOCALES_SETTING: LocaleSetting = {
+  "en": {
+    "label": "English"
+  },
+  "ja": {
+    "label": "日本語"
+  },
+  "zh-cn": {
+    "label": "简体中文",
+    "lang": "zh-CN"
+  },
+  "ar": {
+    "label": "العربية",
+    "dir": "rtl"
+  },
+};
+
+interface LocaleSetting {
+  [key: Lowercase<string>]: {
+    label: string;
+    lang?: string;
+    dir?: 'rtl' | 'ltr';
+  };
+ }
+```
+
+langコードについてはこちらをご確認ください。
+
 > [lang - HTML: HyperText Markup Language | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang)
 
-### 2. [./src/locales.json](./src/locales.json) にLocaleの設定をします
-https://starlight.astro.build/ja/reference/configuration/#locales に準拠
+
+## ディレクトリ構造
+
+[Astroのディレクトリ構造](https://docs.astro.build/en/basics/project-structure/)に準拠します。
 
 
-## ページコンテンツの作成
-
-## 404について
-https://developers.cloudflare.com/pages/configuration/redirects/
-現在404コードを返せません。サーバーによります。
-
-## Project Structure
-```
+```text
 src/
 ├── assets/
-│   └── socialIcons.ts
+│   └── en/, ja/ ...
 ├── components/
+│   └── i18n/
 ├── content/
 │   |  blog/
-│   |    └── some-blog-posts.md
 │   └── config.ts
 ├── layouts/
 └── pages/
+│   └── [lang]/
+│   └── en/, ja/ ...
 └── styles/
-└── utils/
-└── config.ts
-└── types.ts
+└── consts.ts
+└── i18n.ts
+└── locales.ts
 ```
+
+### src/components/i18n
+
+多言語対応サイトで使用するUIコンポーネントのフォルダです。
+
+### src/pages
+
+- `src/pages/[lang]` 配下のファイルはひとつの`.astro`ファイルから、動的に各ロケールのhtmlファイルを生成します。
+- `src/pages/en`、`src/pages/ja`といったフォルダからは各言語のhtmlファイルを生成できます。
+
+### src/consts.ts
+
+プロジェクト内でimportして使用できる定数データのファイルです。使用しないこともできます。
+
+### src/i18n.ts
+
+{ SITE_TITLE } で使用している関数などの定義ファイルです。基本的に編集する必要はありません。

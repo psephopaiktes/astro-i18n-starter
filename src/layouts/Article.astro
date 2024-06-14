@@ -1,4 +1,7 @@
 ---
+// Layout for pages such as articles or documents
+// Nested in Base layout
+
 import Base from "@/layouts/Base.astro";
 
 interface Props {
@@ -28,9 +31,9 @@ const { title, description } = Astro.props.frontmatter || Astro.props;
     }
 
     h2 {
-      margin-block: 2.2em 0;
+      margin-block: 3em 0;
       padding-block-end: 0.2em;
-      border-inline-start: 4px solid var(--color-theme);
+      border-inline-start: 4px solid var(--color-accent);
       padding-inline-start: var(--sp-s);
       line-height: 1.4;
       font-size: 1.6rem;
@@ -189,6 +192,7 @@ const { title, description } = Astro.props.frontmatter || Astro.props;
     }
 
     pre {
+      direction: ltr;
       padding: 1em;
       border-radius: 4px;
       border: 2px solid color-mix(in srgb, var(--color-main) 20%, transparent);

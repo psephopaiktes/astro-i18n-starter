@@ -1,4 +1,6 @@
 ---
+// Returns a link to the top page of each locale
+
 import { LOCALES } from "@/i18n";
 ---
 
@@ -19,6 +21,7 @@ import { LOCALES } from "@/i18n";
 </>
 
 <script is:inline>
+  // used for 404 page
   function setLang(lang) {
     localStorage.selectedLang = lang;
   }

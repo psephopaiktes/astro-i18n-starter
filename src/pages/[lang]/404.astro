@@ -75,6 +75,7 @@ export const getStaticPaths = () => localeParams;
 </Layout>
 
 <script is:inline>
+  // todo comment
   if (localStorage.userAccessPath) {
     history.replaceState("", "", localStorage.userAccessPath);
 

@@ -1,4 +1,6 @@
 ---
+// Select UI to switch between locales.
+
 import { getLocalePaths, LOCALES } from "@/i18n";
 ---
 
@@ -23,6 +25,7 @@ import { getLocalePaths, LOCALES } from "@/i18n";
 <script is:inline>
   const select = document.getElementById("js-languageSelect");
   select?.addEventListener("change", (event) => {
+    // used for 404 page
     localStorage.selectedLang = event.target?.selectedOptions[0].dataset.lang;
     location.href = event.target?.value;
   });
