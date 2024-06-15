@@ -4,9 +4,9 @@
 import { getLocalePaths, LOCALES } from "@/i18n";
 ---
 
-<label for="js-languageSelect">
+<label>
   <span class="material-icons-sharp">translate</span>
-  <select id="js-languageSelect">
+  <select data-languageSelect>
     {
       getLocalePaths(Astro.url).map(({ path, lang }) => (
         <option
@@ -22,19 +22,24 @@ import { getLocalePaths, LOCALES } from "@/i18n";
   <span class="material-icons-sharp">expand_more</span>
 </label>
 
-<script is:inline>
-  const select = document.getElementById("js-languageSelect");
-  select?.addEventListener("change", (event) => {
-    // used for 404 page
-    localStorage.selectedLang = event.target?.selectedOptions[0].dataset.lang;
-    location.href = event.target?.value;
+<script>
+  const selects = document.querySelectorAll("[data-languageSelect]");
+
+  selects.forEach((select) => {
+    select.addEventListener("change", (event) => {
+      // used for 404 page
+      localStorage.selectedLang = event.target?.selectedOptions[0].dataset.lang;
+      location.href = event.target?.value;
+    });
   });
 </script>
 
 <style>
   label {
     position: relative;
+    display: inline-block;
     width: 240px;
+    text-align-last: left;
     .material-icons-sharp {
       pointer-events: none;
       position: absolute;

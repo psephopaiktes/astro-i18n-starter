@@ -6,6 +6,8 @@
 npm create astro@latest -- --template astro-i18n-starter
 ```
 
+![Logo Image](./public/ogp.png)
+
 i18n Starter は多言語対応サイトを作成するためのシンプルな Astro theme です。
 
 Astro v4.0からの[i18n](https://docs.astro.build/en/guides/internationalization/)機能に対応しています。
@@ -17,7 +19,7 @@ Astro v4.0からの[i18n](https://docs.astro.build/en/guides/internationalizatio
 
 
 ## 特徴
-- Astro公式のi18n機能を100%サポート
+- Astro公式のi18n機能をサポート
 - 多言語ページの様々な管理方法
 - Pure CSS
 - SEOフレンドリー

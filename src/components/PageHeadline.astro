@@ -22,29 +22,31 @@ const { title } = Astro.props;
     text-align: center;
     border-radius: 16px;
     color: var(--color-theme);
-    background-color: color-mix(in srgb, var(--color-accent) 15%, transparent);
+    background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
     @media (width < 768px) {
       margin-inline: calc(var(--sp-m) * -1);
       border-radius: 0;
     }
 
-    &::before {
-      content: "translate";
-      font-family: "Material Icons Sharp";
+    &::before,
+    &::after {
+      content: "";
       position: absolute;
-      inset: -8px -8px auto auto;
-      font-size: 128px;
-      line-height: 1;
       pointer-events: none;
-      color: var(--color-theme);
+      background: var(--color-theme);
       z-index: -1;
       opacity: 0.1;
-      filter: blur(4px);
+      height: 60%;
+      aspect-ratio: 1;
+      filter: blur(32px);
     }
-    @media (width < 800px) {
-      &::before {
-        display: none;
-      }
+    &::before {
+      inset: 0 0 auto auto;
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+    }
+    &::after {
+      inset: auto auto 0 0;
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
     }
 
     h1 {

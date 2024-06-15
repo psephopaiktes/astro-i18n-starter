@@ -1,19 +1,137 @@
 ---
 layout: "@/layouts/Article.astro"
 title: "设置"
-description: "This page describes the basic setup procedure for Astro i18n Starter"
+description: "关于设置过程"
 ---
-
 import PageHeadline from "@/components/PageHeadline.astro";
+import { SITE_TITLE } from "@/consts";
 
 <PageHeadline title={frontmatter.title} />
 
-```js
-var elm = document.getElementById('gotop');
 
-    window.addEventListener('scroll', function()
-    if( window.pageYOffset > 200 ) elm.classList.add('show');
-    else elm.classList.remove('show');
+## 项目创建
 
-}, false);
+```sh
+npm create astro@latest -- --template astro-i18n-starter
 ```
+
+## 配置
+
+
+### 1. 配置 astro.config.mjs
+
+在 astro 配置文件中设置 `defaultLocale` 和 `locales`。
+
+```diff
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
+import { defineConfig } from 'astro/config';
+
+// https://astro.build/config
+export default defineConfig({
+    site: 'https://astro-i18n-starter.pages.dev',
+    integrations: [mdx(), sitemap()],
+    i18n: {
++   defaultLocale: 'en',
++   locales: ['en', 'ja', 'zh-cn', 'ar'],
+        routing: {
+            prefixDefaultLocale: true,
+            redirectToDefaultLocale: false,
+        },
+    },
+    markdown: {
+        shikiConfig: {
+            theme: 'one-dark-pro',
+        },
+    },
+});
+```
+
+有关 Astro 的详细配置选项，请参阅官方文档。
+
+> [配置参考 | 文档](https://docs.astro.build/zh-cn/reference/configuration-reference/)
+
+> [国际化 (i18n) 路由 | 文档](https://docs.astro.build/zh-cn/guides/internationalization/#configure-i18n-routing)
+
+不建议更改 `prefixDefaultLocale` 和 `redirectToDefaultLocale` 的设置。{ SITE_TITLE } 使用客户端 JavaScript 管理重定向过程。如果 URL 不包含语言环境，则会重定向到默认语言环境。例如，`/setup/` 将重定向到 `/en/setup/`。
+
+
+### 2. 配置 /src/locales.ts
+
+同样，更新 { SITE_TITLE } 的配置文件。
+
+在 `DEFAULT_LOCALE_SETTING` 中设置默认语言环境，在 `LOCALES_SETTING` 中设置所需语言环境的列表。这遵循 [Starlight 的 `locales` 配置](https://starlight.astro.build/zh-cn/reference/configuration/#locales)。
+
+```ts
+export const DEFAULT_LOCALE_SETTING = "en";
+
+export const LOCALES_SETTING: LocaleSetting = {
+    "en": {
+        "label": "English"
+    },
+    "ja": {
+        "label": "日本語"
+    },
+    "zh-cn": {
+        "label": "简体中文",
+        "lang": "zh-CN"
+    },
+    "ar": {
+        "label": "العربية",
+        "dir": "rtl"
+    },
+};
+
+interface LocaleSetting {
+    [key: Lowercase<string>]: {
+        label: string;
+        lang?: string;
+        dir?: 'rtl' | 'ltr';
+    };
+ }
+```
+
+有关语言代码的信息，请参阅以下链接。
+
+> [lang - HTML: 超文本标记语言 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/lang)
+
+
+## 项目结构
+
+遵循 [Astro 项目结构](https://docs.astro.build/zh-cn/basics/project-structure/)。
+
+```text
+src/
+├── assets/
+│   └── en/, ja/ ...
+├── components/
+│   └── i18n/
+├── content/
+│   |  blog/
+│   └── config.ts
+├── layouts/
+└── pages/
+│   └── [lang]/
+│   └── en/, ja/ ...
+└── styles/
+└── consts.ts
+└── i18n.ts
+└── locales.ts
+```
+
+### src/components/i18n
+
+用于多语言网站中使用的 UI 组件的目录。
+
+### src/pages
+
+- `src/pages/[lang]/` 下的文件会从单个 `.astro` 文件动态生成每个语言环境的 HTML 文件。
+- 您可以从类似 `src/pages/en/`、`src/pages/ja/` 的文件夹中生成每种语言的 HTML 文件。
+
+### src/consts.ts
+
+用于在项目中导入和使用的常量数据的文件。如果不需要，也可以省略此文件。
+
+### src/i18n.ts
+
+包含在 { SITE_TITLE } 中使用的函数的定义的文件。通常情况下，不需要编辑此文件。

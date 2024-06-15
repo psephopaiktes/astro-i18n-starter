@@ -1,5 +1,8 @@
 ---
 // Footer UI displayed on each page.
+import LocalesHomeList from "@/components/i18n/LocalesHomeList.astro";
+import { useTranslations, type Lang } from "@/i18n";
+const t = useTranslations(Astro.currentLocale as Lang);
 ---
 
 <footer class="l-footer">
@@ -11,6 +14,10 @@
     GitHub
     <span class="material-icons-sharp">open_in_new</span>
   </a>
+
+  <ul>
+    <LocalesHomeList />
+  </ul>
 
   <a class="copy" href="https://hira.page/" target="_blank">
     © Akira HIRATA {new Date().getFullYear()}.
@@ -25,6 +32,7 @@
     background: var(--color-theme);
     color: var(--color-base);
   }
+
   .github {
     display: block;
     margin-block-start: calc(var(--sp-m) * -1 - 24px);
@@ -38,6 +46,28 @@
     letter-spacing: 0.01em;
     border-radius: 100px;
   }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-block-start: var(--sp-m);
+    gap: var(--sp-s);
+    a {
+      display: block;
+      padding-inline: 0.5em;
+      background-color: color-mix(in srgb, var(--color-base) 20%, transparent);
+      border-radius: 0.5em;
+    }
+    a::before {
+      content: "translate";
+      font-family: "Material Icons Sharp";
+      vertical-align: middle;
+      margin-inline-end: 0.2em;
+      opacity: 0.5;
+    }
+  }
+
   .copy {
     display: block;
     margin-block-start: var(--sp-m);

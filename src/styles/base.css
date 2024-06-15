@@ -41,9 +41,7 @@
     var(--color-base) 1px
   );
   background-size: 16px 16px;
-}
 
-body {
   line-height: 1.6;
   font-weight: 500;
   font-size: 18px;
