@@ -1,17 +1,109 @@
 ---
 layout: "@/layouts/Article.astro"
 title: "ページの追加"
-description: "ページの追加・管理などについて"
+description: "多言語ページの追加・管理などについて"
 ---
 import PageHeadline from "@/components/PageHeadline.astro";
 import { SITE_TITLE } from "@/consts";
 
+<PageHeadline title={frontmatter.title} />
+
+{ SITE_TITLE } で多言語のページを作成する方法はいくつか存在します。
 
 
 ## 言語ごとにファイルを分けたい場合
 
+`pages` の下に言語ごとにフォルダを作成し、Astro形式やMarkdown形式でファイルを追加します。
+
+```text
+src/pages
+├── en/
+│   └── page-1.astro
+│   └── page-2.mdx
+└── ja/
+     └── page-1.astro
+     └── page-2.mdx
+```
+
+以下のページが生成されます
+
+* /en/page-1/index.html
+* /en/page-2/index.html
+* /ja/page-1/index.html
+* /ja/page-2/index.html
+
+
 ## ひとつのファイルで管理したい場合
 
-### 特定の言語だけ用意したい場合
+文章量があまり多くない場合は、[Astroの動的ルーティング](https://docs.astro.build/en/guides/routing/#dynamic-routes)機能を使用して、ひとつのファイルから動的に各言語のページを生成できます。
+
+```text
+src/pages
+└── [lang]/
+    └── page-1.astro
+    └── page-2.mdx
+```
+
+ファイルの中で `LOCALES` オブジェクトをインポートし、Astroの `getStaticPaths()` 関数により動的ルートを生成します。
+
+```astro
+---
+import { LOCALES } from "@/i18n";
+
+export const getStaticPaths = () =>
+  Object.keys(LOCALES).map((lang) => ({
+    params: { lang },
+  }));
+---
+```
+
+以下のページが生成されます
+
+* /en/page-1/index.html
+* /en/page-2/index.html
+* /ja/page-1/index.html
+* /ja/page-2/index.html
 
 ## Content Collection を利用したい場合
+
+ブログやニュース等のページをMarkdownファイルで管理したい場合は、[Astroのコンテンツコレクション]()機能を利用できます。
+
+#### Directory
+
+```text
+src/
+├── content/
+│   ├── config.ts
+│   ├── blog/en/
+│   │   └── first-post.md
+│   │   └── second-post.md
+│   └── blog/ja/
+│        └── first-post.md
+│        └── second-post.md
+└── pages/[lang]/blog/
+     └── index.astro
+     └── [...slug].astro
+```
+
+#### pages/[lang]/blog/[...slug].astro
+
+```astro
+---
+import Layout from "@/layouts/Article.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => {
+    const [lang, ...slug] = post.slug.split("/");
+    return { params: { lang, slug: slug.join("/") || undefined }, props: post };
+  });
+}
+---
+```
+
+
+詳しくはAstroのドキュメントをご確認ください。
+
+> [Content Collections | Docs](https://docs.astro.build/en/guides/content-collections/)

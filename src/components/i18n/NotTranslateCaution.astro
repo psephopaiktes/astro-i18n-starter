@@ -17,6 +17,7 @@ const currentLocale = Astro.currentLocale as Lang;
   !usedLangs.includes(currentLocale) && (
     <p>
       <span class="material-icons-sharp">warning</span>
+      {/* TODO CONSTにいれるべきか */}
       {t({
         en: "This page is not available in your language.",
         ja: "このページはご利用の言語でご覧いただけません。",

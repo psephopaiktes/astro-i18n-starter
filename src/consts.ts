@@ -11,3 +11,5 @@ export const SITE_DESCRIPTION: string | Multilingual = {
   "zh-cn": "具有 i18n 支持的 Astro 入门模板。",
   ar: "قالب بداية لـ Astro مع دعم i18n.",
 };
+
+export const X_ACCOUNT: string | Multilingual = "@psephopaiktes";

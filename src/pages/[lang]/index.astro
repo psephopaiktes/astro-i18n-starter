@@ -102,7 +102,7 @@ export const getStaticPaths = () =>
         })
       }
     </li>
-    <li>Pure CSS</li>
+    <li>Vanilla CSS</li>
     <li>
       {
         t({
@@ -129,10 +129,28 @@ export const getStaticPaths = () =>
   <p>
     {
       t({
-        ja: "さっそく初めましょう！",
-        en: "Let's get started!",
-        "zh-cn": "让我们开始吧！",
-        ar: "لنبدأ!",
+        ja: "Astroの基本的な知識を前提とします。",
+        en: "Assumes basic knowledge of Astro.",
+        "zh-cn": "假设您具有 Astro 的基本知识。",
+        ar: "يفترض المعرفة الأساسية بـ Astro.",
+      })
+    }
+  </p>
+
+  <p>
+    <a href="https://docs.astro.build/" target="_blank">
+      https://docs.astro.build/
+      <span class="material-icons-sharp">open_in_new</span>
+    </a>
+  </p>
+
+  <p>
+    {
+      t({
+        ja: "大丈夫な方は、さっそく初めましょう！",
+        en: "If you're okay, let's get started!",
+        "zh-cn": "如果您没问题，让我们开始吧！",
+        ar: "إذا كنت على ما يرام، دعنا نبدأ!",
       })
     }
   </p>

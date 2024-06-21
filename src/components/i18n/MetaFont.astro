@@ -1,0 +1,53 @@
+---
+// Loading Noto Font for each language and Material Icons
+// https://fonts.google.com/noto/
+
+import { type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+---
+
+<>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  {/* TODO CONSTにいれるべきか */}
+  {
+    locale === "ja" ? (
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap"
+        rel="stylesheet"
+      />
+      <style>body{ font-family: "Noto Sans JP", sans-serif; }</style>
+    )
+
+    : locale === "zh-cn" ? (
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600&display=swap"
+        rel="stylesheet"
+      />
+      <style>body{ font-family: "Noto Sans SC", sans-serif; }</style>
+    )
+
+    : locale === "ar" ? (
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600&display=swap"
+        rel="stylesheet"
+      />
+      <style>body{ font-family: "Noto Sans Arabic", sans-serif; }</style>
+    )
+
+    : (
+      <style>body{ font-family: "Noto Sans", sans-serif; }</style>
+    )
+  }
+
+  <!-- Material Icon -->
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+    rel="stylesheet"
+  />
+</>

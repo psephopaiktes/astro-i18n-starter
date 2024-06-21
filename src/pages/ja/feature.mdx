@@ -4,13 +4,57 @@ title: "その他の機能"
 description: "Astro i18n Theme で使用できるその他の機能について説明します。"
 ---
 import PageHeadline from "@/components/PageHeadline.astro";
+import { SITE_TITLE } from "@/consts";
 
 <PageHeadline title={frontmatter.title} />
 
-## CSS
 
-## 404
+
+## Components
+
+`src/components/i18n/` フォルダ内には多言語サイトを生成する上で便利なUIコンポーネントをいくつか用意しています。必要に応じて内容をカスタムしたり、importしてご利用ください。
+
+### LocaleSelect.astro
+### LocalesHomeList.astro
+### LocaleSuggest.astro
+### MetaFont.astro
+### NotTranslateCaution.astro
+
+
+
 
 ## i18n関数
 
-## Components
+`src/i18n.ts` 内には多言語サイトを生成する上で便利な関数をいくつか用意しています。
+
+### useTranslations()
+### getLocalePaths()
+
+
+
+## 404
+
+{ SITE_TITLE } の404ページは2つのファイルから構成されています。404ページのデザインをカスタムしたい場合、基本的に `src/pages/[lang]/404.astro` だけを編集すればOKです。
+
+### src/pages/404.astro
+
+このファイルは以下を生成します。
+
+> /404.html
+
+多くのデプロイサービスはページが見つからない場合、まずこのファイルを見つけて使用します。
+
+https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page
+
+{ SITE_TITLE } でこのファイルにアクセスされた場合、ユーザーのシステム言語に対応し、以下の404ページにリダイレクトします。
+
+
+### src/pages/[lang]/404.astro
+
+このファイルは以下を動的に生成します。
+
+> * /en/404/index.html
+> * /ja/404/index.html
+> * ...
+
+`history.replaceState()` 処理により、ブラウザにはユーザーがリダイレクト前にアクセスしたURLが表示されます。

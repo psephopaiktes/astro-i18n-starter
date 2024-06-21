@@ -29,13 +29,12 @@
     --sp-s: 8px;
   }
 
-  --english-font: "Noto Sans", "Robot", "Futura Now Text", "Futura",
-    "Avenir Next", "Avenir", "Century Gothic", "SF Pro Text", "Helvetica Neue",
-    "Helvetica", "Arial", -apple-system, BlinkMacSystemFont, sans-serif;
+  --english-font: "Noto Sans", "Robot", "Avenir Next", "Avenir", "Century Gothic", "SF Pro Text", "Arial", -apple-system, BlinkMacSystemFont, sans-serif;
 
-  accent-color: var(--color-theme);
   color: var(--color-main);
   background-color: var(--color-base);
+  accent-color: var(--color-theme);
+
   background-image: radial-gradient(
     color-mix(in srgb, var(--color-main) 10%, transparent) 1px,
     var(--color-base) 1px
