@@ -12,7 +12,7 @@ import { SITE_TITLE } from "@/consts";
 
 ## Components
 
-`src/components/i18n/` フォルダ内には多言語サイトを生成する上で便利なUIコンポーネントをいくつか用意しています。必要に応じて内容をカスタムしたり、importしてご利用ください。
+`src/components/i18n/` 内には多言語サイトを生成する上で便利なUIコンポーネントをいくつか用意しています。必要に応じて内容をカスタムしたり、importしてご利用ください。
 
 ### LocaleSelect.astro
 ### LocaleSelectSingle.astro
@@ -29,9 +29,18 @@ localeごとの `<head>` タグ設定を記述できます。サンプルでは�
 
 ## i18n関数
 
-`src/i18n.ts` 内には多言語サイトを生成する上で便利な関数をいくつか用意しています。
+`src/i18n.ts` 内には多言語サイトを生成する上で便利な関数をいくつか用意しています。以下のようにimportして利用できます。
 
+```astro
+---
+import { LOCALES, DEFAULT_LOCALE, useTranslations, getLocalePaths } from "@/i18n";
+---
+```
+
+### LOCALES, DEFAULT_LOCALE
 ### useTranslations()
+https://docs.astro.build/ja/recipes/i18n/
+https://pote-chil.com/blog/astro-i18n
 ### getLocalePaths()
 
 
@@ -50,7 +59,7 @@ localeごとの `<head>` タグ設定を記述できます。サンプルでは�
 
 https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page
 
-{ SITE_TITLE } でこのファイルにアクセスされた場合、ユーザーのシステム言語に対応し、以下の404ページにリダイレクトします。
+{ SITE_TITLE } でこのファイルにアクセスされた場合、ユーザーのシステム言語などに対応して、以下の404ページにリダイレクトします。
 
 
 ### src/pages/[lang]/404.astro
@@ -61,4 +70,4 @@ https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page
 > * /ja/404/index.html
 > * ...
 
-`history.replaceState()` 処理により、ブラウザにはユーザーがリダイレクト前にアクセスしたURLが表示されます。
+`history.replaceState()` 処理により、ブラウザにはユーザーがリダイレクト前にアクセスしたURLのpathnameが表示されます。

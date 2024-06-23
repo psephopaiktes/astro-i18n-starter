@@ -1,37 +1,37 @@
-TODO: あとでGPTに英語にしてもらう
+WIP:
 
 # Astro i18n Starter
 
 ```sh
-npm create astro@latest -- --template astro-i18n-starter
+npm create astro@latest -- --template psephopaiktes/astro-i18n-starter
 ```
 
-![Logo Image](./public/ogp.png)
+[![Logo Image](./hero.webp)](https://astro-i18n-starter.pages.dev/ "See document")
 
-i18n Starter は多言語対応サイトを作成するためのシンプルな Astro theme です。
+i18n Starter is a simple [Astro](https://astro.build) theme for creating multilingual websites.
 
-Astro v4.0からの[i18n](https://docs.astro.build/en/guides/internationalization/)機能に対応しています。
+It supports [i18n routing in Astro v4.0](https://docs.astro.build/en/guides/internationalization/).
 
-基本的にサブディレクトリ方式のURLのみサポートしています。言語ごとに以下のようなURLで管理されます。ルートURLは指定したデフォルト言語にリダイレクトされます。
+It only supports the subdirectory URL format. Each language is managed with a URL like the following. The root URL will redirect to the specified default language.
 
 - example.com/en/
 - example.com/ja/
 
 
-## 特徴
-- Astro公式のi18n機能をサポート
-- 多言語ページの様々な管理方法
-- Vanilla CSS
-- SEOフレンドリー
+## Features
+- [x] Support for Astro's official i18n functionality
+- [x] Various methods for managing multilingual pages
+- [x] Vanilla CSS
+- [x] SEO-friendly
 
 
 ## Lighthouse Score
 
 
-## 設定方法・使い方
+## Documentation
 
-このテーマは自己文書化されており、このテーマ内の記事/投稿もドキュメントとして考えることができます。
+This theme is self-documented, and the pages within this theme can be considered as documentation.
 
-インストールしてローカルでプレビューするか、以下のサンプルサイトをご確認ください。
+Install and preview locally or check out the sample site below.
 
 https://astro-i18n-starter.pages.dev/

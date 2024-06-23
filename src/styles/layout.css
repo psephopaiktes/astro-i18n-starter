@@ -1,4 +1,6 @@
-/* to define the layout and structure of the entire page */
+/* define the layout and structure of the entire page */
+
+.l-header {}
 
 .l-main {
   margin-block-start: var(--sp-l);
@@ -13,4 +15,5 @@
 .l-footer {
   position: sticky;
   top: 100vh;
+  margin-block-start: calc(var(--sp-l) * 2);
 }

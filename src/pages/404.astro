@@ -30,6 +30,7 @@ const defaultLocale = DEFAULT_LOCALE;
         localStorage.selectedLang &&
         langs.includes(localStorage.selectedLang)
       ) {
+        // TODO 表示上404になっちゃう。ちゃんとリダイレクト先も変える
         localStorage.userAccessPath =
           "/" + localStorage.selectedLang + location.pathname;
         location.href = `${baseUrl + localStorage.selectedLang}/404/`;

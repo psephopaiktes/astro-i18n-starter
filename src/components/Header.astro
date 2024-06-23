@@ -15,7 +15,7 @@ const isActive = (path: string) =>
   getRelativeLocaleUrl(locale, path) === Astro.url.pathname;
 ---
 
-<header>
+<header class="l-header">
   <h1 dir="ltr">
     <a href={getRelativeLocaleUrl(locale, "/")}>
       <Image src={AstroImage} alt="Astro" />

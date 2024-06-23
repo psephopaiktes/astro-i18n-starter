@@ -1,5 +1,6 @@
 {
   "name": "astro-i18n-starter",
+  "description": "A starter for Astro with i18n support",
   "version": "0.0.1",
   "private": false,
   "license": "MIT",

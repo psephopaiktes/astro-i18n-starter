@@ -17,7 +17,7 @@ type LocaleConfig = {
 /**
  * Type for the language code
  * @example
- * // "en" | "ja" | ...
+ * "en" | "ja" | ...
  */
 export type Lang = keyof typeof LOCALES;
 
@@ -32,7 +32,7 @@ export const DEFAULT_LOCALE = DEFAULT_LOCALE_SETTING as Lang;
 /**
  * Type for the multilingual object
  * @example
- * // { en: "Hello", ja: "こんにちは", ... }
+ * { en: "Hello", ja: "こんにちは", ... }
  */
 export type Multilingual = { [key in Lang]?: string };
 

@@ -26,4 +26,5 @@ interface LocaleSetting {
     lang?: string;
     dir?: 'rtl' | 'ltr';
   };
- }
+}
+// refer: https://starlight.astro.build/reference/configuration/#locales

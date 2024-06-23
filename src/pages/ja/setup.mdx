@@ -12,7 +12,7 @@ import { SITE_TITLE } from "@/consts";
 ## プロジェクトの作成
 
 ```sh
-npm create astro@latest -- --template astro-i18n-starter
+npm create astro@latest -- --template psephopaiktes/astro-i18n-starter
 ```
 
 ## 設定
@@ -59,7 +59,7 @@ astroの詳細な設定方法については公式ドキュメントを参考に
 ### 2. /src/locales.ts の設定
 同様にして { SITE_TITLE } の設定ファイルを更新します。
 
-`DEFAULT_LOCALE_SETTING`に先ほど設定したデフォルトロケールを、`LOCALES_SETTING`には作成したいロケールのリストを設定します。こちらは[Starlightの`locales`設定](https://starlight.astro.build/en/reference/configuration/#locales) に準拠しています。
+`DEFAULT_LOCALE_SETTING`に先ほど設定したデフォルトロケールを、`LOCALES_SETTING`には作成したいロケールのリストを設定します。こちらは[Starlightの`locales`設定](https://starlight.astro.build/reference/configuration/#locales) に準拠しています。
 
 ```ts
 export const DEFAULT_LOCALE_SETTING = "en";
