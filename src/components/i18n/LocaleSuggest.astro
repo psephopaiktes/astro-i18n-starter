@@ -18,7 +18,7 @@ const currentLocale = Astro.currentLocale as Lang;
 </div>
 
 <script is:inline define:vars={{ currentLocale, LOCALES }}>
-  const userLang = navigator.language.toLowerCase();
+  const browserLang = navigator.language.toLowerCase();
   const suggest = document.getElementById("js-languageSuggest");
 
   const showSuggest = (lang) => {
@@ -33,16 +33,16 @@ const currentLocale = Astro.currentLocale as Lang;
   };
 
   if (
-    currentLocale === userLang ||
-    currentLocale === userLang.split("-")[0] ||
+    currentLocale === browserLang ||
+    currentLocale === browserLang.split("-")[0] ||
     localStorage.languageSuggestDenied ||
     localStorage.selectedLang
   ) {
     return;
-  } else if (Object.keys(LOCALES).includes(userLang)) {
-    showSuggest(userLang);
-  } else if (Object.keys(LOCALES).includes(userLang.split("-")[0])) {
-    showSuggest(userLang.split("-")[0]);
+  } else if (Object.keys(LOCALES).includes(browserLang)) {
+    showSuggest(browserLang);
+  } else if (Object.keys(LOCALES).includes(browserLang.split("-")[0])) {
+    showSuggest(browserLang.split("-")[0]);
   }
 
   document.getElementById("js-close").addEventListener("click", () => {

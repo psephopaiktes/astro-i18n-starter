@@ -3,7 +3,7 @@
 
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import MetaFont from "@/components/i18n/MetaFont.astro";
+import LocaleHtmlHead from "@/components/i18n/LocaleHtmlHead.astro";
 import LocaleSuggest from "@/components/i18n/LocaleSuggest.astro";
 
 import { SITE_TITLE, SITE_DESCRIPTION, X_ACCOUNT } from "@/consts";
@@ -69,7 +69,18 @@ const localeDescription = description || t(SITE_DESCRIPTION);
     <meta name="twitter:site" content={t(X_ACCOUNT)} />
 
     <!-- External Resource -->
-    <MetaFont />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+
+    <LocaleHtmlHead />
   </head>
 
   <body>

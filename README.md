@@ -1,4 +1,4 @@
-あとでGPTに英語にしてもらう
+TODO: あとでGPTに英語にしてもらう
 
 # Astro i18n Starter
 
@@ -21,7 +21,7 @@ Astro v4.0からの[i18n](https://docs.astro.build/en/guides/internationalizatio
 ## 特徴
 - Astro公式のi18n機能をサポート
 - 多言語ページの様々な管理方法
-- Pure CSS
+- Vanilla CSS
 - SEOフレンドリー
 
 
@@ -29,6 +29,7 @@ Astro v4.0からの[i18n](https://docs.astro.build/en/guides/internationalizatio
 
 
 ## 設定方法・使い方
+
 このテーマは自己文書化されており、このテーマ内の記事/投稿もドキュメントとして考えることができます。
 
 インストールしてローカルでプレビューするか、以下のサンプルサイトをご確認ください。

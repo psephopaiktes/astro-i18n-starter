@@ -15,9 +15,13 @@ import { SITE_TITLE } from "@/consts";
 `src/components/i18n/` フォルダ内には多言語サイトを生成する上で便利なUIコンポーネントをいくつか用意しています。必要に応じて内容をカスタムしたり、importしてご利用ください。
 
 ### LocaleSelect.astro
+### LocaleSelectSingle.astro
 ### LocalesHomeList.astro
 ### LocaleSuggest.astro
-### MetaFont.astro
+
+### LocaleHtmlHead.astro
+localeごとの `<head>` タグ設定を記述できます。サンプルでは各言語の[Noto Font](https://fonts.google.com/noto/)を読み込んでCSSを反映しています。
+
 ### NotTranslateCaution.astro
 
 

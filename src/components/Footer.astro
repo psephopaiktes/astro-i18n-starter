@@ -1,8 +1,6 @@
 ---
 // Footer UI displayed on each page.
 import LocalesHomeList from "@/components/i18n/LocalesHomeList.astro";
-import { useTranslations, type Lang } from "@/i18n";
-const t = useTranslations(Astro.currentLocale as Lang);
 ---
 
 <footer class="l-footer">
@@ -19,7 +17,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
     <LocalesHomeList />
   </ul>
 
-  <a class="copy" href="https://hira.page/" target="_blank">
+  <a class="copy" href="https://hira.page/" target="_blank" dir="ltr">
     © Akira HIRATA {new Date().getFullYear()}.
   </a>
 </footer>

@@ -1,4 +1,5 @@
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "./locales";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 
 /**
@@ -11,15 +12,6 @@ type LocaleConfig = {
   readonly lang?: string;
   readonly dir?: "ltr" | "rtl";
 };
-// TODO: JSでも形一致しない場合はconsole.errorを出してあげる
-
-
-/**
- * Default locale code
- * @constant @readonly
-*/
-export const DEFAULT_LOCALE = DEFAULT_LOCALE_SETTING as Lang;
-// TODO: JSでも形一致しない場合はconsole.errorを出してあげる
 
 
 /**
@@ -28,6 +20,13 @@ export const DEFAULT_LOCALE = DEFAULT_LOCALE_SETTING as Lang;
  * // "en" | "ja" | ...
  */
 export type Lang = keyof typeof LOCALES;
+
+
+/**
+ * Default locale code
+ * @constant @readonly
+*/
+export const DEFAULT_LOCALE = DEFAULT_LOCALE_SETTING as Lang;
 
 
 /**
@@ -60,12 +59,10 @@ export function useTranslations(lang: Lang) {
  * @returns - The list of locale paths
  */
 export function getLocalePaths(url: URL): LocalePath[] {
-  const pathnames = url.pathname.split("/");
   return Object.keys(LOCALES).map((lang) => {
-    pathnames[1] = lang;
     return {
       lang: lang as Lang,
-      path: pathnames.join("/"),
+      path: getRelativeLocaleUrl(lang, url.pathname.replace(/^\/[a-zA-Z-]+/, ''))
     };
   });
 }

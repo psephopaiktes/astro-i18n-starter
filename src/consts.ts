@@ -13,3 +13,10 @@ export const SITE_DESCRIPTION: string | Multilingual = {
 };
 
 export const X_ACCOUNT: string | Multilingual = "@psephopaiktes";
+
+export const NOT_TRANSLATED_CAUTION: string | Multilingual = {
+  en: "This page is not available in your language.",
+  ja: "このページはご利用の言語でご覧いただけません。",
+  "zh-cn": "此页面不支持您的语言。",
+  ar: "هذه الصفحة غير متوفرة بلغتك.",
+};

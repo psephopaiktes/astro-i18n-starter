@@ -1,0 +1,47 @@
+---
+// Link UI to switch another locale.
+// If you support only 2 locales, this style is useful.
+
+import { LOCALES } from "@/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+console.assert(
+  Object.keys(LOCALES).length === 2,
+  "The number of locale settings is not 2. This UI only supports switching between 2 languages.",
+);
+
+const anotherLang =
+  Astro.currentLocale === Object.keys(LOCALES)[0]
+    ? Object.keys(LOCALES)[1]
+    : Object.keys(LOCALES)[0];
+---
+
+<a
+  href={getRelativeLocaleUrl(
+    anotherLang,
+    Astro.url.pathname.replace(/^\/[a-zA-Z-]+/, ""),
+  )}
+>
+  <span class="material-icons-sharp">translate</span>
+  {LOCALES[anotherLang].label}
+</a>
+
+<style>
+  a {
+    display: inline-block;
+    padding: 0.5em;
+    background-color: color-mix(in srgb, var(--color-main) 10%, transparent);
+    border-radius: 6px;
+    font-family: "Noto Sans";
+    text-align: center;
+    opacity: 0.7;
+    &:hover {
+      opacity: 1;
+    }
+
+    span {
+      margin-inline-end: 0.2em;
+      opacity: 0.6;
+    }
+  }
+</style>

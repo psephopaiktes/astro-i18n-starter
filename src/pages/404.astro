@@ -6,6 +6,7 @@ import { LOCALES, DEFAULT_LOCALE } from "@/i18n";
 
 const langs = Object.keys(LOCALES);
 const baseUrl = import.meta.env.PROD ? Astro.site : "/";
+const defaultLocale = DEFAULT_LOCALE;
 ---
 
 <html lang={DEFAULT_LOCALE}>
@@ -21,28 +22,21 @@ const baseUrl = import.meta.env.PROD ? Astro.site : "/";
       />
     </noscript>
 
-    <script is:inline define:vars={{ langs, baseUrl }}>
-      localStorage.userAccessPath = location.pathname;
-
+    <script is:inline define:vars={{ langs, baseUrl, defaultLocale }}>
       if (langs.includes(location.pathname.split("/")[1])) {
+        localStorage.userAccessPath = location.pathname;
         location.href = `${baseUrl + location.pathname.split("/")[1]}/404/`;
-      } else if (localStorage.selectedLang) {
+      } else if (
+        localStorage.selectedLang &&
+        langs.includes(localStorage.selectedLang)
+      ) {
+        localStorage.userAccessPath =
+          "/" + localStorage.selectedLang + location.pathname;
         location.href = `${baseUrl + localStorage.selectedLang}/404/`;
       } else {
-        const userLang = navigator.language.toLowerCase();
-
-        if (langs.includes(userLang)) {
-          location.href = `${baseUrl + userLang}/404/`;
-        } else if (langs.includes(userLang.split("-")[0])) {
-          location.href = `${baseUrl + userLang.split("-")[0]}/404/`;
-        } else {
-          location.href = `${baseUrl + DEFAULT_LOCALE}/404/`;
-        }
+        localStorage.userAccessPath = "/" + defaultLocale + location.pathname;
+        location.href = `${baseUrl + defaultLocale}/404/`;
       }
-
-      // TODO
-      // URLの1番目が:langが入ってない場合はユーザー言語にリダイレクトする
-      // /setup/ → /en/setup/
     </script>
   </head>
   <body>

@@ -61,7 +61,7 @@ export const getStaticPaths = () => localeParams;
               <a
                 href={`/${lang}/`}
                 data-lang-path={lang}
-                onclick={`setLang("${lang}")`}
+                onclick={`localStorage.selectedLang = "${lang}"`}
                 dir={LOCALES[lang].dir || null}
               >
                 {label}
@@ -75,7 +75,6 @@ export const getStaticPaths = () => localeParams;
 </Layout>
 
 <script is:inline>
-  // todo commentで説明
   if (localStorage.userAccessPath) {
     history.replaceState("", "", localStorage.userAccessPath);
 
@@ -87,10 +86,6 @@ export const getStaticPaths = () => localeParams;
     });
 
     localStorage.removeItem("userAccessPath");
-  }
-
-  function setLang(lang) {
-    localStorage.selectedLang = lang;
   }
 </script>
 

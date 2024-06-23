@@ -44,6 +44,7 @@
   line-height: 1.6;
   font-weight: 500;
   font-size: 18px;
+  font-family: "Noto Sans", system-ui, "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
   @media (width < 480px) {
     font-size: 16px;
   }
