@@ -1,26 +1,39 @@
 <svg height="630" viewBox="0 0 1200 630" width="1200" xmlns="http://www.w3.org/2000/svg">
 
   <style>
-    @keyframes backInUp {
+    #type {
+      animation: slideUp 1s ease-out;
+      transform-origin: center;
+    }
+    @keyframes slideUp {
       0% {
-        transform: translateY(1200px) scale(0.7);
-        opacity: 0.7;
+        translate: 0 1200px;
+        scale: 0.7;
+        opacity: 0.8;
       }
-
       80% {
-        transform: translateY(0px) scale(0.7);
-        opacity: 0.7;
+        translate: 0;
+        scale: 0.7;
+        opacity: 0.8;
       }
-
       100% {
-        transform: scale(1);
+        scale: 1;
         opacity: 1;
       }
     }
 
-    #type {
-      animation-name: backInUp;
-      animation-duration: 1s;
+    #symbol {
+      animation: pulse 3s ease-in-out infinite alternate;
+    }
+    @keyframes pulse {
+      0% {
+        translate: 0 -8px;
+        opacity: 0.6;
+      }
+      100% {
+        translate: 0 8px;
+        opacity: 1;
+      }
     }
   </style>
 

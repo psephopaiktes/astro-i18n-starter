@@ -6,9 +6,7 @@ WIP:
 npm create astro@latest -- --template psephopaiktes/astro-i18n-starter
 ```
 
-<a href="https://astro-i18n-starter.pages.dev/" target="_blank" title="See document">
-  <img src="hero.svg" alt="Logo Animation" width="1660" height="830">
-</a>
+[![Logo Image](hero.svg)](https://astro-i18n-starter.pages.dev/ "See document")
 
 i18n Starter is a simple [Astro](https://astro.build) theme for creating multilingual websites.
 
