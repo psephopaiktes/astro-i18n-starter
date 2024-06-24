@@ -163,26 +163,6 @@ export const getStaticPaths = () =>
 </Layout>
 
 <style>
-  body {
-    &::before {
-      content: "translate";
-      font-family: "Material Icons Sharp";
-      position: fixed;
-      inset: -2vw -2vw auto auto;
-      font-size: 20vw;
-      line-height: 1;
-      pointer-events: none;
-      color: var(--color-accent);
-      z-index: -1;
-      opacity: 0.2;
-      filter: blur(1px);
-    }
-    @media (width < 800px) {
-      &::before {
-        display: none;
-      }
-    }
-  }
   ul {
     margin-block-start: var(--sp-s);
     list-style: disc;
