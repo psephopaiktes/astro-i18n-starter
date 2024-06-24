@@ -21,13 +21,13 @@ export const getStaticPaths = () =>
 <Layout>
   {
     locale === "ja" ? (
-      <Image src={heroImageJa} alt="こんにちは" />
+      <Image src={heroImageJa} alt="こんにちは" loading="eager" />
     ) : locale === "zh-cn" ? (
-      <Image src={heroImageZhCn} alt="你好" />
+      <Image src={heroImageZhCn} alt="你好" loading="eager" />
     ) : locale === "ar" ? (
-      <Image src={heroImageAr} alt="مرحبًا" />
+      <Image src={heroImageAr} alt="مرحبًا" loading="eager" />
     ) : (
-      <Image src={heroImageEn} alt="Hello" />
+      <Image src={heroImageEn} alt="Hello" loading="eager" />
     )
   }
 

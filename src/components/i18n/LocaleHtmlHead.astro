@@ -11,26 +11,20 @@ const locale = Astro.currentLocale as Lang;
   )
 
   : locale === "ja" ? (
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap" media="print" onload='this.media="all"' />
     <style>body{ font-family: "Noto Sans JP", sans-serif; }</style>
   )
 
   : locale === "zh-cn" ? (
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600&display=swap" media="print" onload='this.media="all"' />
     <style>body{ font-family: "Noto Sans SC", sans-serif; }</style>
   )
 
   : locale === "ar" ? (
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600&display=swap" media="print" onload='this.media="all"' />
     <style>body{ font-family: "Noto Sans Arabic", sans-serif; }</style>
   )
 

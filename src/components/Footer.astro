@@ -26,13 +26,12 @@ import LocalesHomeList from "@/components/i18n/LocalesHomeList.astro";
   footer {
     padding-block: var(--sp-m) var(--sp-l);
     text-align: center;
-    background: var(--color-theme);
-    color: var(--color-base);
+    border-block-start: 2px solid var(--color-theme);
   }
 
   .github {
     display: block;
-    margin-block-start: calc(var(--sp-m) * -1 - 24px);
+    margin-block-start: calc(var(--sp-m) * -1 - 26px);
     margin-inline: auto;
     width: 160px;
     height: 48px;
@@ -53,7 +52,7 @@ import LocalesHomeList from "@/components/i18n/LocalesHomeList.astro";
     a {
       display: block;
       padding-inline: 0.5em;
-      background-color: color-mix(in srgb, var(--color-base) 20%, transparent);
+      background: color-mix(in srgb, var(--color-main) 8%, transparent);
       border-radius: 0.5em;
     }
     a::before {
@@ -68,5 +67,7 @@ import LocalesHomeList from "@/components/i18n/LocalesHomeList.astro";
   .copy {
     display: block;
     margin-block-start: var(--sp-m);
+    opacity: 0.8;
+    letter-spacing: 0.05em;
   }
 </style>

@@ -71,13 +71,13 @@ const localeDescription = description || t(SITE_DESCRIPTION);
     <!-- External Resource -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+
+    <link rel="preload" as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&display=swap" media="print" onload='this.media="all"' />
+
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
-      rel="stylesheet"
+      rel="stylesheet" fetchpriority="high"
     />
 
     <LocaleHtmlHead />
