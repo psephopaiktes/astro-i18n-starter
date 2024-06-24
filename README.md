@@ -6,7 +6,7 @@ WIP:
 npm create astro@latest -- --template psephopaiktes/astro-i18n-starter
 ```
 
-[![Logo Image](hero.svg)](https://astro-i18n-starter.pages.dev/ "See document")
+[![Logo Image](docs/hero.svg)](https://astro-i18n-starter.pages.dev/ "See document")
 
 i18n Starter is a simple [Astro](https://astro.build) theme for creating multilingual websites.
 
@@ -23,9 +23,11 @@ It only supports the subdirectory URL format. Each language is managed with a UR
 - [x] Various methods for managing multilingual pages
 - [x] Vanilla CSS
 - [x] SEO-friendly
+- [x] 100/100 Lighthouse performance
 
 
-## Lighthouse Score
+## TODO: Lighthouse Score
+[![All scores are 100.](docs/lighthouse.png)](https://pagespeed.web.dev/analysis/https-astro-i18n-starter-pages-dev-en/8sg3q21r6c?form_factor=desktop "Check score")
 
 
 ## Documentation
