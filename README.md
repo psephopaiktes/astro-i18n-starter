@@ -23,7 +23,6 @@ It only supports the subdirectory URL format. Each language is managed with a UR
 - [x] Various methods for managing multilingual pages
 - [x] Vanilla CSS
 - [x] SEO-friendly
-- [x] 100/100 Lighthouse performance
 
 
 ## Lighthouse Score
@@ -37,3 +36,5 @@ This theme is self-documented, and the pages within this theme can be considered
 Install and preview locally or check out the sample site below.
 
 https://astro-i18n-starter.pages.dev/
+
+## TODO: Support
