@@ -1,0 +1,109 @@
+---
+layout: "@/layouts/Article.astro"
+title: "添加页面"
+description: "关于添加和管理多语言页面等"
+---
+import PageHeadline from "@/components/PageHeadline.astro";
+import { SITE_TITLE } from "@/consts";
+
+<PageHeadline title={frontmatter.title} />
+
+有几种方法可以使用 { SITE_TITLE } 创建多语言页面。
+
+
+## 如果想要按语言分开文件
+
+在 `pages` 目录下，按语言创建文件夹，并使用 Astro 或 Markdown 格式添加文件。
+
+```text
+src/pages
+├── en/
+│   └── page-1.astro
+│   └── page-2.mdx
+└── ja/
+  └── page-1.astro
+  └── page-2.mdx
+```
+
+将生成以下页面：
+
+* /en/page-1/index.html
+* /en/page-2/index.html
+* /ja/page-1/index.html
+* /ja/page-2/index.html
+
+
+## 如果想要在一个文件中管理
+
+如果内容不是很多，可以使用 [Astro 的动态路由](https://docs.astro.build/en/guides/routing/#dynamic-routes) 功能，从一个文件动态生成各语言的页面。
+
+```text
+src/pages
+└── [lang]/
+    └── page-1.astro
+    └── page-2.mdx
+```
+
+在文件中导入 `LOCALES` 对象，并使用 Astro 的 `getStaticPaths()` 函数生成动态路由。
+
+```astro
+---
+import { LOCALES } from "@/i18n";
+
+export const getStaticPaths = () =>
+  Object.keys(LOCALES).map((lang) => ({
+    params: { lang },
+  }));
+---
+```
+
+将生成以下页面：
+
+* /en/page-1/index.html
+* /en/page-2/index.html
+* /ja/page-1/index.html
+* /ja/page-2/index.html
+
+## 如果想要使用 Content Collection
+
+如果想要使用 Markdown 文件管理博客或新闻等页面，可以使用 [Astro 的内容集合](https://docs.astro.build/en/guides/content-collections/) 功能。
+
+#### 目录结构
+
+```text
+src/
+├── content/
+│   ├── config.ts
+│   ├── blog/en/
+│   │   └── first-post.md
+│   │   └── second-post.md
+│   └── blog/ja/
+│        └── first-post.md
+│        └── second-post.md
+└── pages/[lang]/blog/
+  └── index.astro
+  └── [...slug].astro
+```
+
+#### pages/[lang]/blog/[...slug].astro
+
+```astro
+---
+import Layout from "@/layouts/Article.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => {
+    const [lang, ...slug] = post.slug.split("/");
+    return { params: { lang, slug: slug.join("/") || undefined }, props: post };
+  });
+}
+---
+```
+
+
+请查阅 Astro 文档以获取更多详细信息。
+
+> [内容集合 | 文档](https://docs.astro.build/en/guides/content-collections/)

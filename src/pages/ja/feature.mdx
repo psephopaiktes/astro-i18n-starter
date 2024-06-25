@@ -15,33 +15,30 @@ import { SITE_TITLE } from "@/consts";
 `src/components/i18n/` 内には多言語サイトを生成する上で便利なUIコンポーネントをいくつか用意しています。必要に応じて内容をカスタムしたり、importしてご利用ください。
 
 ### LocaleSelect.astro
+利用言語を切り替えるためのセレクトUIです。
+
 ### LocaleSelectSingle.astro
+利用言語を切り替えるためのリンクUIです。**言語を2つしかサポートしない場合**にご利用ください。
+
 ### LocalesHomeList.astro
+各言語のトップページへのリンクを、`<li>`タグのリストで返します。
+
 ### LocaleSuggest.astro
+ユーザーがブラウザの言語と違うURLにアクセスした場合に、ブラウザの言語へのリンクを最上部に表示するUIです。
+
+例えば、英語設定のブラウザで `/ja/[slug]` というURLにアクセスした場合、 `/en/[slug]` へのリンクを提案します。
+
+いちど閉じると設定がlocalhostに保存され、再表示されません。
 
 ### LocaleHtmlHead.astro
 localeごとの `<head>` タグ設定を記述できます。サンプルでは各言語の[Noto Font](https://fonts.google.com/noto/)を読み込んでCSSを反映しています。
 
 ### NotTranslateCaution.astro
+あるページを特定の言語でしか用意できない場合に、ユーザーに警告を表示できます。
 
+[Monolingual](/monolingual/)ページがサンプルです。英語以外の言語でこのページを表示すると、ユーザーに警告UIを表示します。
 
-
-
-## i18n関数
-
-`src/i18n.ts` 内には多言語サイトを生成する上で便利な関数をいくつか用意しています。以下のようにimportして利用できます。
-
-```astro
----
-import { LOCALES, DEFAULT_LOCALE, useTranslations, getLocalePaths } from "@/i18n";
----
-```
-
-### LOCALES, DEFAULT_LOCALE
-### useTranslations()
-https://docs.astro.build/ja/recipes/i18n/
-https://pote-chil.com/blog/astro-i18n
-### getLocalePaths()
+サンプルでは警告UIのテキストは、`/src/const.ts`内に設定しています。
 
 
 

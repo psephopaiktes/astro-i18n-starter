@@ -26,7 +26,7 @@ It only supports the subdirectory URL format. Each language is managed with a UR
 - [x] 100/100 Lighthouse performance
 
 
-## TODO: Lighthouse Score
+## Lighthouse Score
 [![All scores are 100.](docs/lighthouse.png)](https://pagespeed.web.dev/analysis/https-astro-i18n-starter-pages-dev-en/8sg3q21r6c?form_factor=desktop "Check score")
 
 

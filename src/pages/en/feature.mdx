@@ -1,0 +1,69 @@
+---
+layout: "@/layouts/Article.astro"
+title: "Other Features"
+description: "This article explains other features available in the Astro i18n Theme."
+---
+import PageHeadline from "@/components/PageHeadline.astro";
+import { SITE_TITLE } from "@/consts";
+
+<PageHeadline title={frontmatter.title} />
+
+
+
+## Components
+
+Inside `src/components/i18n/`, you will find several UI components that are useful for generating multilingual sites. Feel free to customize their content or import them as needed.
+
+### LocaleSelect.astro
+A select UI for switching between languages.
+
+### LocaleSelectSingle.astro
+A link UI for switching between languages. Use this when you only support two languages.
+
+### LocalesHomeList.astro
+Returns a list of links to the top pages of each language, wrapped in `<li>` tags.
+
+### LocaleSuggest.astro
+Displays a UI at the top suggesting a link to the browser's language when the user accesses a URL different from their browser's language.
+
+For example, if a user with English settings accesses the URL `/ja/[slug]`, it suggests a link to `/en/[slug]`.
+
+Once closed, the setting is saved on localhost and will not be displayed again.
+
+### LocaleHtmlHead.astro
+Allows you to specify `<head>` tag settings for each locale. The sample code loads the [Noto Font](https://fonts.google.com/noto/) for each language and applies the CSS.
+
+### NotTranslateCaution.astro
+Displays a warning to the user when a specific page is only available in a certain language.
+
+The sample page is [Monolingual](/monolingual/). When this page is viewed in a language other than English, it displays a warning UI to the user.
+
+The text for the warning UI is set in `/src/const.ts` in the sample code.
+
+
+
+## 404
+
+The { SITE_TITLE } 404 page consists of two files. If you want to customize the design of the 404 page, you generally only need to edit `src/pages/[lang]/404.astro`.
+
+### src/pages/404.astro
+
+This file generates the following:
+
+> /404.html
+
+Many deployment services use this file when a page is not found.
+
+https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page
+
+When accessed with { SITE_TITLE }, it redirects to the following 404 page based on the user's system language:
+
+### src/pages/[lang]/404.astro
+
+This file dynamically generates the following:
+
+> * /en/404/index.html
+> * /ja/404/index.html
+> * ...
+
+Using `history.replaceState()` ensures that the browser displays the pathname of the URL the user accessed before the redirect.

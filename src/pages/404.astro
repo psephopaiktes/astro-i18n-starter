@@ -31,6 +31,7 @@ const defaultLocale = DEFAULT_LOCALE;
         langs.includes(localStorage.selectedLang)
       ) {
         // TODO 表示上404になっちゃう。ちゃんとリダイレクト先も変える
+        // feature.mdxのリンクで確認。
         localStorage.userAccessPath =
           "/" + localStorage.selectedLang + location.pathname;
         location.href = `${baseUrl + localStorage.selectedLang}/404/`;

@@ -1,0 +1,70 @@
+---
+layout: "@/layouts/Article.astro"
+title: "其他功能"
+description: "介绍了 Astro i18n Theme 中可用的其他功能。"
+---
+import PageHeadline from "@/components/PageHeadline.astro";
+import { SITE_TITLE } from "@/consts";
+
+<PageHeadline title={frontmatter.title} />
+
+
+
+## 组件
+
+`src/components/i18n/` 目录下提供了一些在生成多语言网站时非常有用的 UI 组件。您可以根据需要自定义内容或导入并使用它们。
+
+### LocaleSelect.astro
+用于切换使用语言的选择界面。
+
+### LocaleSelectSingle.astro
+用于切换使用语言的链接界面。**仅在只支持两种语言的情况下**使用。
+
+### LocalesHomeList.astro
+以 `<li>` 标签列表的形式返回各语言的首页链接。
+
+### LocaleSuggest.astro
+当用户访问与浏览器语言不同的 URL 时，在页面顶部显示与浏览器语言相关的链接界面。
+
+例如，当使用英语设置的浏览器访问 `/ja/[slug]` 这样的 URL 时，会提供链接到 `/en/[slug]` 的建议。
+
+一旦关闭，设置将保存在本地主机上，并且不会再次显示。
+
+### LocaleHtmlHead.astro
+可以编写每个语言的 `<head>` 标签设置。示例中加载了各语言的[Noto Font](https://fonts.google.com/noto/)并应用了相应的 CSS。
+
+### NotTranslateCaution.astro
+当某个页面只能以特定语言提供时，可以向用户显示警告界面。
+
+[Monolingual](/monolingual/) 页面是一个示例。当以英语以外的语言显示此页面时，会向用户显示警告界面。
+
+示例中，警告界面的文本在 `/src/const.ts` 中进行了设置。
+
+
+
+## 404
+
+{ SITE_TITLE } 的 404 页面由两个文件组成。如果要自定义 404 页面的设计，通常只需编辑 `src/pages/[lang]/404.astro` 文件即可。
+
+### src/pages/404.astro
+
+此文件生成以下内容：
+
+> /404.html
+
+许多部署服务在找不到页面时首先查找此文件并使用它。
+
+https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page
+
+当用户访问 { SITE_TITLE } 并访问此文件时，根据用户的系统语言等，将重定向到以下 404 页面。
+
+
+### src/pages/[lang]/404.astro
+
+此文件动态生成以下内容：
+
+> * /en/404/index.html
+> * /ja/404/index.html
+> * ...
+
+通过 `history.replaceState()` 处理，浏览器将显示用户在重定向之前访问的 URL 的路径名。
