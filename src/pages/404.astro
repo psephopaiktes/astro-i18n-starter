@@ -23,25 +23,29 @@ const defaultLocale = DEFAULT_LOCALE;
     </noscript>
 
     <script is:inline define:vars={{ langs, baseUrl, defaultLocale }}>
-      if (langs.includes(location.pathname.split("/")[1])) {
+      const urlHasLang = langs.includes(location.pathname.split("/")[1]);
+      const localStorageHasLang =
+        localStorage.selectedLang && langs.includes(localStorage.selectedLang);
+      const referrerHasLang =
+        document.referrer &&
+        new URL(document.referrer).host == location.host &&
+        langs.includes(new URL(document.referrer).pathname.split("/")[1]);
+
+      if (urlHasLang) {
         localStorage.userAccessPath = location.pathname;
         location.href = `${baseUrl + location.pathname.split("/")[1]}/404/`;
-      } else if (
-        localStorage.selectedLang &&
-        langs.includes(localStorage.selectedLang)
-      ) {
-        // TODO 表示上404になっちゃう。ちゃんとリダイレクト先も変える
-        // feature.mdxのリンクで確認。
-        localStorage.userAccessPath =
-          "/" + localStorage.selectedLang + location.pathname;
-        location.href = `${baseUrl + localStorage.selectedLang}/404/`;
+      } else if (localStorageHasLang) {
+        location.href = baseUrl + localStorage.selectedLang + location.pathname;
+      } else if (referrerHasLang) {
+        const referrerLang = new URL(document.referrer).pathname.split("/")[1];
+        location.href = baseUrl + referrerLang + location.pathname;
       } else {
-        localStorage.userAccessPath = "/" + defaultLocale + location.pathname;
-        location.href = `${baseUrl + defaultLocale}/404/`;
+        location.href = baseUrl + defaultLocale + location.pathname;
       }
     </script>
   </head>
   <body>
     <h1>404 PAGE NOT FOUND</h1>
+    <a href={baseUrl}>TOP PAGE</a>
   </body>
 </html>

@@ -35,13 +35,13 @@ The following pages will be generated:
 
 ## Managing in a Single File
 
-If the amount of content is not too large, you can use Astro's dynamic routing feature to generate pages for each language dynamically from a single file.
+If the amount of page content is not too large, you can use Astro's dynamic routing feature to generate pages for each language dynamically from a single file.
 
 ```text
 src/pages
 └── [lang]/
     └── page-1.astro
-    └── page-2.mdx
+    └── page-2.astro
 ```
 
 Import the `LOCALES` object in the file and generate dynamic routes using Astro's `getStaticPaths()` function.

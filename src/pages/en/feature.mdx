@@ -12,13 +12,13 @@ import { SITE_TITLE } from "@/consts";
 
 ## Components
 
-Inside `src/components/i18n/`, you will find several UI components that are useful for generating multilingual sites. Feel free to customize their content or import them as needed.
+Inside `src/components/i18n/`, you will find several UI components that are useful for generating multilingual sites. Feel free to customize their content and import them as needed.
 
 ### LocaleSelect.astro
 A select UI for switching between languages.
 
 ### LocaleSelectSingle.astro
-A link UI for switching between languages. Use this when you only support two languages.
+A link UI to another language. Use this when you only support two languages.
 
 ### LocalesHomeList.astro
 Returns a list of links to the top pages of each language, wrapped in `<li>` tags.
@@ -52,9 +52,7 @@ This file generates the following:
 
 > /404.html
 
-Many deployment services use this file when a page is not found.
-
-https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page
+Most deploy services will find and use this file when a page is not found.
 
 When accessed with { SITE_TITLE }, it redirects to the following 404 page based on the user's system language:
 
@@ -66,4 +64,4 @@ This file dynamically generates the following:
 > * /ja/404/index.html
 > * ...
 
-Using `history.replaceState()` ensures that the browser displays the pathname of the URL the user accessed before the redirect.
+Actually, by `history.replaceState()` process displays the URL the user accessed before the redirect in the browser

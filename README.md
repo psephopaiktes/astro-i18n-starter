@@ -19,6 +19,7 @@ It only supports the subdirectory URL format. Each language is managed with a UR
 
 
 ## Features
+
 - [x] Support for Astro's official i18n functionality
 - [x] Various methods for managing multilingual pages
 - [x] Vanilla CSS
@@ -26,6 +27,7 @@ It only supports the subdirectory URL format. Each language is managed with a UR
 
 
 ## Lighthouse Score
+
 [![All scores are 100.](docs/lighthouse.png)](https://pagespeed.web.dev/analysis/https-astro-i18n-starter-pages-dev-en/8sg3q21r6c?form_factor=desktop "Check score")
 
 
@@ -36,5 +38,3 @@ This theme is self-documented, and the pages within this theme can be considered
 Install and preview locally or check out the sample site below.
 
 https://astro-i18n-starter.pages.dev/
-
-## TODO: Support

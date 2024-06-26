@@ -215,6 +215,63 @@ const { title, description } = Astro.props.frontmatter || Astro.props;
       }
     }
 
+    details {
+      background-color: color-mix(in srgb, var(--color-main) 8%, transparent);
+      border: 0.12em solid
+        color-mix(in srgb, var(--color-main) 10%, transparent);
+      padding: var(--sp-s);
+      border-radius: 10px;
+      overflow: hidden;
+      p:empty {
+        display: none;
+      }
+
+      & summary {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+        position: relative;
+        margin: calc(-1 * var(--sp-s));
+        padding: var(--sp-s);
+        padding-inline-start: calc(var(--sp-s) + 1.8em);
+        cursor: pointer;
+        background-color: var(--color-base);
+        line-height: 1.2;
+        &::-webkit-details-marker {
+          display: none;
+        }
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          inset: var(--sp-s);
+          width: 1.2em;
+          aspect-ratio: 1;
+          background: color-mix(in srgb, var(--color-main) 20%, transparent);
+          clip-path: polygon(
+            10% 35%,
+            50% 75%,
+            90% 35%,
+            80% 25%,
+            50% 55%,
+            20% 25%
+          );
+          transition: 0.2s linear;
+          transform-origin: center;
+        }
+      }
+
+      &[open] summary {
+        text-overflow: unset;
+        white-space: unset;
+        margin-block-end: var(--sp-s);
+        &::before {
+          rotate: x 180deg;
+        }
+      }
+    }
+
     .footnotes {
       margin-block-start: 8em;
       padding-block-start: 2em;
