@@ -75,3 +75,84 @@ This file dynamically generates the following:
 > * ...
 
 Actually, by `history.replaceState()` process displays the URL the user accessed before the redirect in the browser
+
+
+## CSS Tips
+
+### Separating CSS for each language
+
+You can separate the definitions using CSS alone by writing as follows:
+
+```css
+:lang(en) {
+    /* Styles for English */
+}
+:lang(ar) {
+    /* Styles for Arabic */
+}
+```
+
+However, in this case, all language CSS will be loaded simultaneously, resulting in wasted resources.
+
+If you are writing inside `.astro` files, consider writing as follows or separating the definitions within [LocaleHtmlHead.astro](#localehtmlheadastro).
+
+```astro
+---
+import { type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+---
+
+{
+    locale === "en" ? (
+        <style>
+            /* Styles for English */
+        </style>
+    )
+    : locale === "ar" ? (
+        <style>
+            /* Styles for Arabic */
+        </style>
+    )
+    : null
+}
+```
+
+
+### Letter-spacing for Arabic
+
+In some designs, you may want to adjust the letter-spacing for headings and other elements. However, it is important not to add spacing for Arabic text.
+
+> [Right-to-left Styling](https://rtlstyling.com/posts/rtl-styling#1.-letter-spacing)
+
+Therefore, please note that { SITE_TITLE } defines the following in `src/styles/base.css`:
+
+```css
+:lang(ar) {
+    * { letter-spacing: 0 !important; }
+}
+```
+
+
+### RTL Icons
+
+In RTL languages, icons such as arrows need to be mirrored.
+
+> [Right to left | Apple Developer Documentation](https://developer.apple.com/design/human-interface-guidelines/right-to-left#Interface-icons)
+
+{ SITE_TITLE } uses [Material Icon](https://fonts.google.com/icons), and the following is defined in `src/styles/base.css`:
+
+```css
+[class^="material-icons"]:dir(rtl).dir {
+    scale: -1 1;
+}
+```
+
+By adding the `.dir` class, the icons will be mirrored in RTL languages.
+
+```html
+<span class="material-icons-sharp dir">arrow_forward</span>
+```
+
+Actual display: 
+<span class="material-icons-sharp dir">arrow_forward</span>
+<span class="material-icons-sharp dir">open_in_new</span>

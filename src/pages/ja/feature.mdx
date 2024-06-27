@@ -78,3 +78,84 @@ https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page
 > * ...
 
 `history.replaceState()` 処理により、ブラウザにはユーザーがリダイレクト前にアクセスしたURLのpathnameが表示されます。
+
+
+## CSS Tips
+
+### 言語ごとにCSSを分けたい場合
+
+以下のように記述することで、CSSだけで定義を分けることができます。
+
+```css
+:lang(en) {
+  /* 英語のスタイル */
+}
+:lang(ar) {
+  /* アラビア語のスタイル */
+}
+```
+
+ただしこの場合、すべての言語のCSSを同時に読み込むことになるため、リソースの無駄になります。
+
+`.astro`ファイルの中であれば以下のように書いたり、もしくは[LocaleHtmlHead.astro](#localehtmlheadastro)の中で定義を分けることを検討してください。
+
+```astro
+---
+import { type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+---
+
+{
+    locale === "en" ? (
+        <style>
+            /* 英語のスタイル */
+        </style>
+    )
+    : locale === "ar" ? (
+        <style>
+            /* アラビア語のスタイル */
+        </style>
+    )
+    : null
+}
+```
+
+
+### アラビア語のletter-spacing
+
+見出しなどデザインによっては文字間隔を調整したい場合があります。ただし、そのような場合でもアラビア語だけは間隔を開けるべきではありません。
+
+> [Right-to-left Styling](https://rtlstyling.com/posts/rtl-styling#1.-letter-spacing)
+
+そのため{ SITE_TITLE }では、`src/styles/base.css`の中に以下が定義されていることに注意してください。
+
+```css
+:lang(ar) {
+  * { letter-spacing: 0 !important; }
+}
+```
+
+
+### アイコンのRTL
+
+RTL言語では、矢印などのアイコンは反転する必要があります。
+
+> [Right to left | Apple Developer Documentation](https://developer.apple.com/design/human-interface-guidelines/right-to-left#Interface-icons)
+
+{ SITE_TITLE }では[Material Icon](https://fonts.google.com/icons)を使用しており、`src/styles/base.css`の中に以下が定義されています。
+
+```css
+[class^="material-icons"]:dir(rtl).dir {
+  scale: -1 1;
+}
+```
+
+以下のように`.dir`クラスをつけることで、RTL言語の表示ではアイコンが反転されます。
+
+```html
+<span class="material-icons-sharp dir">arrow_forward</span>
+```
+
+実際の表示: 
+<span class="material-icons-sharp dir">arrow_forward</span>
+<span class="material-icons-sharp dir">open_in_new</span>

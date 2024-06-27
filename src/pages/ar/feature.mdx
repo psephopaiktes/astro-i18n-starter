@@ -75,3 +75,84 @@ https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page
 > * ...
 
 باستخدام عملية `history.replaceState()`، سيتم عرض عنوان URL الذي قام المستخدم بزيارته قبل إعادة التوجيه في متصفحه.
+
+
+## نصائح CSS
+
+### تقسيم الـ CSS حسب اللغة
+
+يمكنك تقسيم التعريفات في الـ CSS حسب اللغة عن طريق كتابة الكود التالي:
+
+```css
+:lang(en) {
+    /* أنماط اللغة الإنجليزية */
+}
+:lang(ar) {
+    /* أنماط اللغة العربية */
+}
+```
+
+ومع ذلك، يجب ملاحظة أنه في هذه الحالة سيتم تحميل CSS لجميع اللغات في نفس الوقت، مما يؤدي إلى استهلاك غير ضروري للموارد.
+
+إذا كنت ترغب في تقسيم التعريفات داخل ملف `.astro`، يمكنك استخدام الكود التالي، أو يمكنك أيضًا النظر في تقسيم التعريفات داخل ملف [LocaleHtmlHead.astro](#localehtmlheadastro).
+
+```astro
+---
+import { type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+---
+
+{
+    locale === "en" ? (
+        <style>
+            /* أنماط اللغة الإنجليزية */
+        </style>
+    )
+    : locale === "ar" ? (
+        <style>
+                /* أنماط اللغة العربية */
+        </style>
+    )
+    : null
+}
+```
+
+
+### تباعد الحروف في اللغة العربية
+
+قد تحتاج في بعض التصاميم إلى ضبط تباعد الحروف، ولكن يجب أن يتم الحرص على عدم فصل الحروف في اللغة العربية.
+
+> [Right-to-left Styling](https://rtlstyling.com/posts/rtl-styling#1.-letter-spacing)
+
+لذلك، يرجى ملاحظة أنه في { SITE_TITLE }، يتم تعريف الكود التالي داخل ملف `src/styles/base.css`:
+
+```css
+:lang(ar) {
+    * { letter-spacing: 0 !important; }
+}
+```
+
+
+### RTL للأيقونات
+
+في اللغات التي تكتب من اليمين إلى اليسار، يجب أن تتم عكس الأيقونات مثل السهم.
+
+> [Right to left | Apple Developer Documentation](https://developer.apple.com/design/human-interface-guidelines/right-to-left#Interface-icons)
+
+في { SITE_TITLE }، نستخدم [Material Icon](https://fonts.google.com/icons)، ويتم تعريف الكود التالي داخل ملف `src/styles/base.css`:
+
+```css
+[class^="material-icons"]:dir(rtl).dir {
+    scale: -1 1;
+}
+```
+
+باستخدام الكلاس `.dir`، ستتم عكس الأيقونات في اللغات التي تكتب من اليمين إلى اليسار.
+
+```html
+<span class="material-icons-sharp dir">arrow_forward</span>
+```
+
+العرض الفعلي:
+<span class="material-icons-sharp dir">arrow_forward</span>
+<span class="material-icons-sharp dir">open_in_new</span>

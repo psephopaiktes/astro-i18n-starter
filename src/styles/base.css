@@ -87,10 +87,12 @@ path {
 [class^="material-icons"] {
   vertical-align: middle;
   font-size: 1.1em;
-  /* for Layout Shift */
   line-height: 1;
   display: inline-block;
   width: 1em;
   height: 1em;
   overflow: hidden;
+  &:dir(rtl).dir {
+    scale: -1 1;
+  }
 }

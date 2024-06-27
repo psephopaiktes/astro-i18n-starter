@@ -77,3 +77,81 @@ https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page
 > * ...
 
 通过 `history.replaceState()` 处理，浏览器将显示用户在重定向之前访问的 URL 的路径名。
+
+
+## CSS Tips
+### 根据语言分离CSS样式
+
+您可以通过以下方式将CSS样式分离为不同的语言定义：
+
+```css
+:lang(en) {
+    /* 英语样式 */
+}
+:lang(ar) {
+    /* 阿拉伯语样式 */
+}
+```
+
+但是请注意，这种方式会同时加载所有语言的CSS，可能会浪费资源。如果在`.astro`文件中，您可以考虑以下方式，或者在[LocaleHtmlHead.astro](#localehtmlheadastro)中分离定义：
+
+```astro
+---
+import { type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+---
+
+{
+    locale === "en" ? (
+        <style>
+            /* 英语样式 */
+        </style>
+    )
+    : locale === "ar" ? (
+        <style>
+            /* 阿拉伯语样式 */
+        </style>
+    )
+    : null
+}
+```
+
+
+### 阿拉伯语的字间距
+
+在某些设计中，可能需要调整标题等的字间距。但是，请注意阿拉伯语不应该有额外的间距。
+
+> [从右到左的样式](https://rtlstyling.com/posts/rtl-styling#1.-letter-spacing)
+
+因此，请注意在{ SITE_TITLE }的`src/styles/base.css`中定义了以下内容：
+
+```css
+:lang(ar) {
+    * { letter-spacing: 0 !important; }
+}
+```
+
+
+### RTL图标
+
+在RTL语言中，箭头等图标需要进行反转。
+
+> [从右到左 | Apple Developer Documentation](https://developer.apple.com/design/human-interface-guidelines/right-to-left#Interface-icons)
+
+在{ SITE_TITLE }中，我们使用[Material Icon](https://fonts.google.com/icons)，在`src/styles/base.css`中定义了以下内容：
+
+```css
+[class^="material-icons"]:dir(rtl).dir {
+    scale: -1 1;
+}
+```
+
+通过添加`.dir`类，RTL语言下的图标将被反转显示：
+
+```html
+<span class="material-icons-sharp dir">arrow_forward</span>
+```
+
+实际显示效果：
+<span class="material-icons-sharp dir">arrow_forward</span>
+<span class="material-icons-sharp dir">open_in_new</span>
