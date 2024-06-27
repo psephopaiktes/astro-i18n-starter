@@ -14,7 +14,7 @@ const locale = Astro.currentLocale as Lang;
     <link rel="preload" as="style" fetchpriority="high"
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;800&display=swap"
     />
-    <link rel="stylesheet" media="print" onload='this.media="all"'
+    <link rel="stylesheet" media="print" onload={`this.media='all'`}
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;800&display=swap"
     />
     <style>body{ font-family: "Noto Sans JP", sans-serif; }</style>
@@ -24,7 +24,7 @@ const locale = Astro.currentLocale as Lang;
     <link rel="preload" as="style" fetchpriority="high"
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;800&display=swap"
     />
-    <link rel="stylesheet" media="print" onload='this.media="all"'
+    <link rel="stylesheet" media="print" onload={`this.media='all'`}
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;800&display=swap"
     />
     <style>body{ font-family: "Noto Sans SC", sans-serif; }</style>
@@ -34,7 +34,7 @@ const locale = Astro.currentLocale as Lang;
     <link rel="preload" as="style" fetchpriority="high"
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;800&display=swap"
     />
-    <link rel="stylesheet" media="print" onload='this.media="all"'
+    <link rel="stylesheet" media="print" onload={`this.media='all'`}
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;800&display=swap"
     />
     <style>body{ font-family: "Noto Sans Arabic", sans-serif; }</style>

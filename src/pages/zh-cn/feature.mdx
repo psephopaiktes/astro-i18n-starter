@@ -58,6 +58,15 @@ https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page
 
 当用户访问 { SITE_TITLE } 并访问此文件时，根据用户的系统语言等，将重定向到以下 404 页面。
 
+<details>
+    <summary>详细的重定向条件</summary>
+    通过以下条件分支进行重定向。请查看[源代码](https://github.com/psephopaiktes/astro-i18n-starter/blob/main/src/pages/404.astro#L25)以获取更多详细信息。
+
+    1. 如果URL包含`/ja/...`这样的语言标识
+    2. 如果`localStorage.selectedLang`中包含语言标识
+        * `localStorage.selectedLang`是用户在UI上选择语言时保存的
+    3. 如果来源页面包含`/ja/...`这样的语言标识
+</details>
 
 ### src/pages/[lang]/404.astro
 

@@ -19,28 +19,35 @@ export const getStaticPaths = () =>
 ---
 
 <Layout>
-  {
-    locale === "ja" ? (
-      <Image src={heroImageJa} alt="こんにちは" loading="eager" />
-    ) : locale === "zh-cn" ? (
-      <Image src={heroImageZhCn} alt="你好" loading="eager" />
-    ) : locale === "ar" ? (
-      <Image src={heroImageAr} alt="مرحبًا" loading="eager" />
-    ) : (
-      <Image src={heroImageEn} alt="Hello" loading="eager" />
-    )
-  }
+  <Image
+    src={locale === "ja"
+      ? heroImageJa
+      : locale === "zh-cn"
+        ? heroImageZhCn
+        : locale === "ar"
+          ? heroImageAr
+          : heroImageEn}
+    alt={t({
+      ja: "こんにちは",
+      en: "Hello",
+      "zh-cn": "你好",
+      ar: "مرحبًا",
+    })}
+    loading="eager"
+  />
 
   <p>
-    {
-      t({
-        ja: "i18n Starter は多言語対応サイトを作成するためのシンプルな Astro theme です。Astro v4.0からのi18n機能に対応しています。",
-        en: "i18n Starter is a simple Astro theme for creating multilingual websites. It supports i18n feature from Astro v4.0.",
-        "zh-cn":
-          "i18n Starter 是一个用于创建多语言网站的简单 Astro 主题。它支持 Astro v4.0 的 i18n 功能。",
-        ar: "i18n Starter هو موضوع Astro بسيط لإنشاء مواقع الويب متعددة اللغات.يدعم ميزة i18n من Astro v4.0.",
-      })
-    }
+    <em>
+      {
+        t({
+          ja: "i18n Starter は多言語対応サイトを作成するためのシンプルな Astro theme です。Astro v4.0からのi18n機能に対応しています。",
+          en: "i18n Starter is a simple Astro theme for creating multilingual websites. It supports i18n feature from Astro v4.0.",
+          "zh-cn":
+            "i18n Starter 是一个用于创建多语言网站的简单 Astro 主题。它支持 Astro v4.0 的 i18n 功能。",
+          ar: "i18n Starter هو موضوع Astro بسيط لإنشاء مواقع الويب متعددة اللغات.يدعم ميزة i18n من Astro v4.0.",
+        })
+      }
+    </em>
   </p>
 
   <p>
@@ -166,8 +173,16 @@ export const getStaticPaths = () =>
   </p>
 
   <p>
-    <a href={getRelativeLocaleUrl(locale, "setup")}>
-      {t({ ja: "設定", en: "Setup", "zh-cn": "设置", ar: "إعداد" })}
+    <a href={getRelativeLocaleUrl(locale, "setup")} class="start">
+      <span class="material-icons-sharp">auto_awesome</span>
+      {
+        t({
+          ja: "設定を開始",
+          en: "Start Setup",
+          "zh-cn": "开始设置",
+          ar: "ابدأ الإعداد",
+        })
+      }
     </a>
   </p>
 </Layout>
@@ -182,5 +197,23 @@ export const getStaticPaths = () =>
   h2 {
     color: var(--color-theme);
     margin-block-start: var(--sp-l);
+  }
+
+  em {
+    display: block;
+    font-style: normal;
+    font-size: 1.4em;
+    margin-block-end: var(--sp-m);
+  }
+
+  .start {
+    display: block;
+    width: fit-content;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    background: var(--color-main);
+    color: var(--color-base);
+    text-decoration: none;
+    letter-spacing: 0.05em;
   }
 </style>

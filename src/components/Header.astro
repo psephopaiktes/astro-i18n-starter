@@ -162,23 +162,18 @@ const isActive = (path: string) =>
       letter-spacing: 0.05em;
       padding-block: 0.2em;
       padding-inline: 0.4em;
-      color: var(--color-theme);
       border-radius: 4px;
       &:hover,
       &:active {
-        background: color-mix(in srgb, var(--color-theme) 5%, transparent);
+        background-color: color-mix(
+          in srgb,
+          var(--color-theme) 5%,
+          transparent
+        );
       }
       &.active {
         pointer-events: none;
-        position: relative;
-        &::before {
-          content: "";
-          position: absolute;
-          inset: 100% 0.4em 0;
-          height: 0.2em;
-          background: var(--color-theme);
-          border-radius: 0.1em;
-        }
+        color: var(--color-theme);
       }
       .material-icons-sharp {
         opacity: 0.6;

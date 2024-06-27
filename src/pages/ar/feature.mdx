@@ -56,6 +56,16 @@ https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page
 
 عندما يتم الوصول إلى هذا الملف في { SITE_TITLE }، سيتم إعادة توجيه المستخدم إلى صفحة الخطأ 404 المناسبة وفقًا للغة النظام وما إلى ذلك.
 
+<details>
+    <summary>شروط إعادة التوجيه التفصيلية</summary>
+    سيتم إجراء إعادة التوجيه وفقًا للشروط التالية. يرجى الاطلاع على [الشيفرة المصدرية](https://github.com/psephopaiktes/astro-i18n-starter/blob/main/src/pages/404.astro#L25) لمزيد من التفاصيل.
+
+    1. إذا كان عنوان URL يحتوي على `lang` مثل `/ja/...`
+    2. إذا كان `localStorage.selectedLang` يحتوي على `lang`
+        * يتم حفظ `localStorage.selectedLang` عندما يقوم المستخدم بتحديد اللغة في واجهة المستخدم.
+    3. إذا كانت صفحة الرابط الأصلية تحتوي على `lang` مثل `/ja/...`
+</details>
+
 ### src/pages/[lang]/404.astro
 
 ينشئ هذا الملف بشكل ديناميكي ما يلي:

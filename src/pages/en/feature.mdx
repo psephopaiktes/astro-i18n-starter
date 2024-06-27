@@ -56,6 +56,16 @@ Most deploy services will find and use this file when a page is not found.
 
 When accessed with { SITE_TITLE }, it redirects to the following 404 page based on the user's system language:
 
+<details>
+    <summary>Detailed Redirect Conditions</summary>
+    The redirect is performed based on the following conditions. For more details, please refer to the [source code](https://github.com/psephopaiktes/astro-i18n-starter/blob/main/src/pages/404.astro#L25).
+
+    1. If the URL contains `/ja/...` or any other language code.
+    2. If the `localStorage.selectedLang` contains the language code.
+        * The `localStorage.selectedLang` is saved when the user selects a language in the UI.
+    3. If the referring page contains `/ja/...` or any other language code.
+</details>
+
 ### src/pages/[lang]/404.astro
 
 This file dynamically generates the following:
