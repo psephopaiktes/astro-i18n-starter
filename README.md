@@ -1,5 +1,3 @@
-WIP:
-
 # Astro i18n Starter
 
 ```sh
