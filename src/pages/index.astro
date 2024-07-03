@@ -2,8 +2,16 @@
 // Redirect to Top page for user's system locale
 // Basically, you don't need to edit this file.
 
-import { LOCALES, DEFAULT_LOCALE } from "@/i18n";
+import {
+  useTranslations,
+  getLocalePaths,
+  LOCALES,
+  DEFAULT_LOCALE,
+  type Lang,
+} from "@/i18n";
+import { SITE_TITLE, SITE_DESCRIPTION, X_ACCOUNT } from "@/consts";
 
+const t = useTranslations(Astro.currentLocale as Lang);
 const langs = Object.keys(LOCALES);
 const baseUrl = import.meta.env.PROD ? Astro.site : "/";
 const defaultLocale = DEFAULT_LOCALE;
@@ -13,6 +21,34 @@ const defaultLocale = DEFAULT_LOCALE;
   <head>
     <meta charset="UTF-8" />
     <title>redirect...</title>
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    {
+      getLocalePaths(Astro.url).map((props) => (
+        <link
+          rel="alternate"
+          hreflang={LOCALES[props.lang].lang || props.lang}
+          href={Astro.site?.origin + props.path}
+        />
+      ))
+    }
+
+    <!-- icon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" sizes="192x192" href="/android-chrome.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={t(SITE_TITLE)} />
+    <meta property="og:site_name" content={t(SITE_TITLE)} />
+    <meta property="og:description" content={t(SITE_DESCRIPTION)} />
+    <meta property="og:image" content={Astro.site + "ogp.png"} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content={DEFAULT_LOCALE} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content={t(X_ACCOUNT)} />
 
     <noscript>
       <meta
