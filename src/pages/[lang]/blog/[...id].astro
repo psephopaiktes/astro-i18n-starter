@@ -1,21 +1,21 @@
 ---
 import Layout from "@/layouts/Article.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
 
   return posts.map((post) => {
-    const [lang, ...slug] = post.slug.split("/");
-    return { params: { lang, slug: slug.join("/") || undefined }, props: post };
+    const [lang, ...id] = post.id.split("/");
+    return { params: { lang, id: id.join("/") || undefined }, props: post };
   });
 }
 
 const { lang } = Astro.params;
 const post = Astro.props;
 
-const { Content } = await post.render();
+const { Content } = await render(post);
 const title = post.data.title;
 ---
 
