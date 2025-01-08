@@ -9,7 +9,7 @@ const locale = Astro.currentLocale as Lang;
 const t = useTranslations(locale);
 
 const posts = (await getCollection("blog"))
-  .filter((post) => post.slug.split("/")[0] === locale)
+  .filter((post) => post.id.split("/")[0] === locale)
   .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
 
 const title = t({
@@ -52,10 +52,10 @@ export const getStaticPaths = () =>
   <ul>
     {
       posts.map((post) => {
-        const [, ...slug] = post.slug.split("/");
+        const [, ...id] = post.id.split("/");
         return (
           <li>
-            <a href={`/${locale}/blog/${slug.join("/")}/`}>
+            <a href={`/${locale}/blog/${id.join("/")}/`}>
               {post.data.cover && (
                 <Image src={post.data.cover} alt={post.data.title} />
               )}
