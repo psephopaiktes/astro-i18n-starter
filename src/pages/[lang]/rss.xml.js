@@ -3,23 +3,21 @@ import { getCollection } from 'astro:content';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 import { localeParams } from "@/i18n";
 
-
 export const getStaticPaths = () => localeParams;
-
 
 export async function GET(context) {
 
 	const locale = context.params.lang;
 
-	const localeTitle = typeof SITE_TITLE == "string"
+	const localeTitle = typeof SITE_TITLE === "string"
 		? SITE_TITLE
 		: SITE_TITLE[locale];
-	const localeDescription = typeof SITE_DESCRIPTION == "string"
+	const localeDescription = typeof SITE_DESCRIPTION === "string"
 		? SITE_DESCRIPTION
 		: SITE_DESCRIPTION[locale];
 
-	const posts = await getCollection('blog', ({ slug }) => {
-		return slug.split("/")[0] == locale;
+	const posts = await getCollection('blog', ({ id }) => {
+		return id.split("/")[0] === locale;
 	});
 	posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
@@ -31,7 +29,7 @@ export async function GET(context) {
 			title: post.data.title,
 			pubDate: post.data.date,
 			description: post.data.description,
-			link: `/${locale}/blog/${post.slug}/`,
+			link: `/${locale}/blog/${post.id.split("/")[1]}/`,
 		})),
 	});
 }
