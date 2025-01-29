@@ -1,27 +1,28 @@
 ---
 layout: "@/layouts/Article.astro"
 title: "إضافة صفحة"
-description: "إضافة وإدارة صفحات متعددة اللغات"
+description: "إضافة وإدارة الصفحات متعددة اللغات"
 ---
 import PageHeadline from "@/components/PageHeadline.astro";
 import { SITE_TITLE } from "@/consts";
 
 <PageHeadline title={frontmatter.title} />
 
-يوجد عدة طرق لإنشاء صفحات متعددة اللغات باستخدام { SITE_TITLE }.
+هناك عدة طرق لإنشاء صفحات متعددة اللغات في { SITE_TITLE }.
 
 
-## إذا كنت ترغب في تقسيم الملفات حسب اللغة
 
-أنشئ مجلدًا لكل لغة تحت `pages` وأضف الملفات بتنسيق Astro أو Markdown.
+## إذا كنت تريد فصل الملفات لكل لغة
+
+قم بإنشاء مجلد لكل لغة تحت `pages` وأضف الملفات بتنسيق Astro أو Markdown.
 
 ```text
 src/pages
 ├── en/
-│   └── page-1.astro
+│   ├── page-1.astro
 │   └── page-2.mdx
-└── ja/
-  └── page-1.astro
+└── ar/
+  ├── page-1.astro
   └── page-2.mdx
 ```
 
@@ -29,22 +30,23 @@ src/pages
 
 * /en/page-1/index.html
 * /en/page-2/index.html
-* /ja/page-1/index.html
-* /ja/page-2/index.html
+* /ar/page-1/index.html
+* /ar/page-2/index.html
 
 
-## إذا كنت ترغب في إدارة الصفحات في ملف واحد
 
-إذا كانت النصوص غير كبيرة جدًا، يمكنك استخدام ميزة [توجيه Astro الديناميكي](https://docs.astro.build/en/guides/routing/#dynamic-routes) لإنشاء صفحات اللغات المختلفة من ملف واحد بشكل دينامي.
+## إذا كنت تريد إدارة كل شيء في ملف واحد
+
+إذا لم يكن هناك الكثير من النصوص في الصفحة، يمكنك استخدام ميزة [التوجيه الديناميكي في Astro](https://docs.astro.build/en/guides/routing/#dynamic-routes) لإنشاء صفحات لكل لغة ديناميكيًا من ملف واحد.
 
 ```text
 src/pages
 └── [lang]/
-    └── page-1.astro
+    ├── page-1.astro
     └── page-2.astro
 ```
 
-استورد كائن `LOCALES` داخل الملف واستخدم دالة `getStaticPaths()` في Astro لإنشاء المسارات الديناميكية.
+داخل الملف، قم باستيراد كائن `LOCALES` واستخدم دالة `getStaticPaths()` في Astro لإنشاء المسارات الديناميكية.
 
 ```astro
 ---
@@ -61,49 +63,50 @@ export const getStaticPaths = () =>
 
 * /en/page-1/index.html
 * /en/page-2/index.html
-* /ja/page-1/index.html
-* /ja/page-2/index.html
+* /ar/page-1/index.html
+* /ar/page-2/index.html
 
-## إذا كنت ترغب في استخدام مجموعة المحتوى
 
-إذا كنت ترغب في إدارة صفحات مثل المدونات أو الأخبار باستخدام ملفات Markdown، يمكنك استخدام ميزة [مجموعة المحتوى في Astro]().
 
-#### الدليل
+## إذا كنت تريد استخدام Content Collection
+
+إذا كنت تريد إدارة صفحات المدونة أو الأخبار بملفات Markdown، يمكنك استخدام ميزة Content Collection في Astro.
+
+#### Directory
 
 ```text
 src/
-├── content/
-│   ├── config.ts
-│   ├── blog/en/
-│   │   └── first-post.md
+├── content.config.ts
+├── blog/
+│   ├── en/
+│   │   ├── first-post.md
 │   │   └── second-post.md
-│   └── blog/ja/
-│        └── first-post.md
+│   └── ar/
+│        ├── first-post.md
 │        └── second-post.md
 └── pages/[lang]/blog/
-  └── index.astro
-  └── [...slug].astro
+  ├── index.astro
+  └── [...id].astro
 ```
 
-#### pages/[lang]/blog/[...slug].astro
+#### pages/[lang]/blog/[...id].astro
 
 ```astro
 ---
-import Layout from "@/layouts/Article.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
 
   return posts.map((post) => {
-    const [lang, ...slug] = post.slug.split("/");
-    return { params: { lang, slug: slug.join("/") || undefined }, props: post };
+    const [lang, ...id] = post.id.split("/");
+    return { params: { lang, id: id.join("/") || undefined }, props: post };
   });
 }
 ---
 ```
 
 
-لمزيد من التفاصيل، يرجى الاطلاع على وثائق Astro.
+لمزيد من التفاصيل، يرجى مراجعة وثائق Astro.
 
-> [مجموعات المحتوى | الوثائق](https://docs.astro.build/en/guides/content-collections/)
+> [Content Collections | Docs](https://docs.astro.build/en/guides/content-collections/)

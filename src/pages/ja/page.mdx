@@ -11,6 +11,7 @@ import { SITE_TITLE } from "@/consts";
 { SITE_TITLE } で多言語のページを作成する方法はいくつか存在します。
 
 
+
 ## 言語ごとにファイルを分けたい場合
 
 `pages` の下に言語ごとにフォルダを作成し、Astro形式やMarkdown形式でファイルを追加します。
@@ -18,10 +19,10 @@ import { SITE_TITLE } from "@/consts";
 ```text
 src/pages
 ├── en/
-│   └── page-1.astro
+│   ├── page-1.astro
 │   └── page-2.mdx
 └── ja/
-     └── page-1.astro
+     ├── page-1.astro
      └── page-2.mdx
 ```
 
@@ -33,6 +34,7 @@ src/pages
 * /ja/page-2/index.html
 
 
+
 ## ひとつのファイルで管理したい場合
 
 ページ内の文章量があまり多くない場合は、[Astroの動的ルーティング](https://docs.astro.build/en/guides/routing/#dynamic-routes)機能を使用して、ひとつのファイルから動的に各言語のページを生成できます。
@@ -40,7 +42,7 @@ src/pages
 ```text
 src/pages
 └── [lang]/
-    └── page-1.astro
+    ├── page-1.astro
     └── page-2.astro
 ```
 
@@ -64,40 +66,41 @@ export const getStaticPaths = () =>
 * /ja/page-1/index.html
 * /ja/page-2/index.html
 
+
+
 ## Content Collection を利用したい場合
 
-ブログやニュース等のページをMarkdownファイルで管理したい場合は、[Astroのコンテンツコレクション]()機能を利用できます。
+ブログやニュース等のページをMarkdownファイルで管理したい場合は、Astroのコンテンツコレクション機能を利用できます。
 
 #### Directory
 
 ```text
 src/
-├── content/
-│   ├── config.ts
-│   ├── blog/en/
-│   │   └── first-post.md
+├── content.config.ts
+├── blog/
+│   ├── en/
+│   │   ├── first-post.md
 │   │   └── second-post.md
-│   └── blog/ja/
-│        └── first-post.md
+│   └── ja/
+│        ├── first-post.md
 │        └── second-post.md
 └── pages/[lang]/blog/
-     └── index.astro
-     └── [...slug].astro
+     ├── index.astro
+     └── [...id].astro
 ```
 
-#### pages/[lang]/blog/[...slug].astro
+#### pages/[lang]/blog/[...id].astro
 
 ```astro
 ---
-import Layout from "@/layouts/Article.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
 
   return posts.map((post) => {
-    const [lang, ...slug] = post.slug.split("/");
-    return { params: { lang, slug: slug.join("/") || undefined }, props: post };
+    const [lang, ...id] = post.id.split("/");
+    return { params: { lang, id: id.join("/") || undefined }, props: post };
   });
 }
 ---

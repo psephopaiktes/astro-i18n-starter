@@ -9,91 +9,82 @@ import { SITE_TITLE } from "@/consts";
 <PageHeadline title={frontmatter.title} />
 
 
+
 ## Project Creation
 
 ```sh
 npm create astro@latest -- --template psephopaiktes/astro-i18n-starter
 ```
 
+
+
 ## Configuration
 
+### 1. Configure /src/locales.ts
 
-### 1. Configure astro.config.mjs
+First, update the language settings file.
 
-Set `defaultLocale` and `locales` in the astro configuration file.
-
-```diff
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-import { defineConfig } from 'astro/config';
-
-// https://astro.build/config
-export default defineConfig({
-    site: 'https://astro-i18n-starter.pages.dev',
-    integrations: [mdx(), sitemap()],
-    i18n: {
-+   defaultLocale: 'en',
-+   locales: ['en', 'ja', 'zh-cn', 'ar'],
-        routing: {
-            prefixDefaultLocale: true,
-            redirectToDefaultLocale: false,
-        },
-    },
-    markdown: {
-        shikiConfig: {
-            theme: 'one-dark-pro',
-        },
-    },
-});
-```
-
-Please refer to the official documentation for detailed configuration options for Astro.
-
-> [Configuration Reference | Docs](https://docs.astro.build/en/reference/configuration-reference/)
-
-> [Internationalization (i18n) Routing | Docs](https://docs.astro.build/en/guides/internationalization/#configure-i18n-routing)
-
-Changing the settings of `prefixDefaultLocale` and `redirectToDefaultLocale` is not recommended. { SITE_TITLE } manages the redirect process with client-side JavaScript. If the URL does not contain a locale, it will redirect to the default locale. For example, `/setup/` will be redirected to `/en/setup/`.
-
-
-### 2. Configure /src/locales.ts
-
-Similarly, update the configuration file for { SITE_TITLE }.
-
-Set the default locale in `DEFAULT_LOCALE_SETTING` and the list of desired locales in `LOCALES_SETTING`. This follows the [Starlight `locales` configuration](https://starlight.astro.build/reference/configuration/#locales).
+Set the default locale in `DEFAULT_LOCALE_SETTING` and the list of desired locales in `LOCALES_SETTING`. This follows the [Starlight configuration](https://starlight.astro.build/reference/configuration/#locales).
 
 ```ts
-export const DEFAULT_LOCALE_SETTING = "en";
+// Set your site's default locale.
+export const DEFAULT_LOCALE_SETTING: string = "en";
 
 export const LOCALES_SETTING: LocaleSetting = {
-    "en": {
-        "label": "English"
-    },
-    "ja": {
-        "label": "日本語"
-    },
-    "zh-cn": {
-        "label": "简体中文",
-        "lang": "zh-CN"
-    },
-    "ar": {
-        "label": "العربية",
-        "dir": "rtl"
-    },
+    // Add or remove support locales.
+	en: {
+		label: "English",
+		lang: "en-US", // optional
+	},
+	ja: {
+		label: "日本語",
+	},
+	"zh-cn": {
+		label: "简体中文",
+		lang: "zh-CN",
+	},
+	ar: {
+		label: "العربية",
+		dir: "rtl", // optional
+	},
 };
-
-interface LocaleSetting {
-    [key: Lowercase<string>]: {
-        label: string;
-        lang?: string;
-        dir?: 'rtl' | 'ltr';
-    };
- }
 ```
 
 Please refer to the following link for information on language codes.
 
 > [lang - HTML: HyperText Markup Language | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang)
+
+### 2. Configure astro.config.mjs
+
+Set your URL in `site`.
+
+```diff
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
+import { defineConfig } from 'astro/config';
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from './src/locales';
+
+export default defineConfig({
+- site: 'https://astro-i18n-starter.pages.dev',
++ site: 'https://your-site.com',
+  i18n: {
+    defaultLocale: DEFAULT_LOCALE_SETTING,
+    locales: Object.keys(LOCALES_SETTING),
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: false,
+    },
+  },
+...
+```
+
+Please refer to the official documentation for detailed configuration options for Astro.
+
+* [Configuration Reference | Docs](https://docs.astro.build/en/reference/configuration-reference/)
+* [Internationalization (i18n) Routing | Docs](https://docs.astro.build/en/guides/internationalization/#configure-i18n-routing)
+
+note: Changing the settings of `prefixDefaultLocale` and `redirectToDefaultLocale` is not recommended. { SITE_TITLE } manages the redirect process with client-side JavaScript. If the URL does not contain a locale, it will redirect to the default locale. For example, `/setup/` will be redirected to `/en/setup/`.
+
 
 
 ## Project Structure
@@ -104,16 +95,18 @@ Follows the [Astro project structure](https://docs.astro.build/en/basics/project
 src/
 ├── assets/
 │   └── en/, ja/ ...
+├── blog/
+│   └── en/, ja/ ...
 ├── components/
 │   └── i18n/
-├── content/
-│   │  blog/
-│   └── config.ts
 ├── layouts/
 ├── pages/
-│   └── [lang]/
-│   └── en/, ja/ ...
+│   ├── [lang]/
+│   ├── en/, ja/ ...
+│   ├── 404.astro
+│   └── index.astro
 ├── styles/
+├── content.config.ts
 ├── consts.ts
 ├── i18n.ts
 └── locales.ts
