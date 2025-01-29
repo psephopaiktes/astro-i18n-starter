@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://astro-i18n-starter.pages.dev/sitemap-index.xml

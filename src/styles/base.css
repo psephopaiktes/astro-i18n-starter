@@ -1,53 +1,58 @@
-/* basic page style */
+/* basic site style */
 
 :lang(ar) {
-  * { letter-spacing: 0 !important; }
+	* {
+		letter-spacing: 0 !important;
+	}
 }
 
 :root {
-  @media (prefers-color-scheme: dark) {
-    --color-theme: #ef4d1a;
-    --color-accent: #943e0d;
-    --color-base: #342c28;
-    --color-main: #faf9f6;
-    --color-caution: #FFAA2B;
-  }
-  @media (prefers-color-scheme: light) {
-    --color-theme: #ef4d1a;
-    --color-accent: #ffcc21;
-    --color-base: #faf9f6;
-    --color-main: #342c28;
-    --color-caution: #A80A00;
-  }
+	@media (prefers-color-scheme: dark) {
+		--color-theme: #ef4d1a;
+		--color-accent: #943e0d;
+		--color-base: #342c28;
+		--color-main: #faf9f6;
+		--color-caution: #ffaa2b;
+	}
+	@media (prefers-color-scheme: light) {
+		--color-theme: #ef4d1a;
+		--color-accent: #ffcc21;
+		--color-base: #faf9f6;
+		--color-main: #342c28;
+		--color-caution: #a80a00;
+	}
 
-  --sp-l: 64px;
-  --sp-m: 32px;
-  --sp-s: 16px;
-  @media (width < 480px) {
-    --sp-l: 48px;
-    --sp-m: 16px;
-    --sp-s: 8px;
-  }
+	--sp-l: 64px;
+	--sp-m: 32px;
+	--sp-s: 16px;
+	@media (width < 480px) {
+		--sp-l: 48px;
+		--sp-m: 16px;
+		--sp-s: 8px;
+	}
 
-  --english-font: "Noto Sans", "Robot", "Avenir Next", "Avenir", "Century Gothic", "SF Pro Text", "Arial", -apple-system, BlinkMacSystemFont, sans-serif;
+	--english-font: "Noto Sans", "Robot", "Avenir Next", "Avenir",
+		"Century Gothic", "SF Pro Text", "Arial", -apple-system, BlinkMacSystemFont,
+		sans-serif;
 
-  color: var(--color-main);
-  background-color: var(--color-base);
-  accent-color: var(--color-theme);
+	color: var(--color-main);
+	background-color: var(--color-base);
+	accent-color: var(--color-theme);
 
-  background-image: radial-gradient(
-    color-mix(in srgb, var(--color-main) 10%, transparent) 1px,
-    var(--color-base) 1px
-  );
-  background-size: 16px 16px;
+	background-image: radial-gradient(
+		color-mix(in srgb, var(--color-main) 10%, transparent) 1px,
+		var(--color-base) 1px
+	);
+	background-size: 16px 16px;
 
-  line-height: 1.6;
-  font-weight: 500;
-  font-size: 18px;
-  font-family: "Noto Sans", system-ui, "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
-  @media (width < 480px) {
-    font-size: 16px;
-  }
+	line-height: 1.6;
+	font-weight: 500;
+	font-size: 18px;
+	font-family: "Noto Sans", system-ui, "SF Pro Text", -apple-system,
+		BlinkMacSystemFont, sans-serif;
+	@media (width < 480px) {
+		font-size: 16px;
+	}
 }
 
 h1,
@@ -57,42 +62,42 @@ h4,
 button,
 input,
 label {
-  line-height: 1.4;
+	line-height: 1.4;
 }
 
 p {
-  margin-block-start: 0.8em;
+	margin-block-start: 0.8em;
 }
 
 p a {
-  color: var(--color-theme);
-  text-decoration: underline;
+	color: var(--color-theme);
+	text-decoration: underline;
 }
 
 a,
 button {
-  transition: 0.2s ease-out;
-  &:hover,
-  &:active {
-    transition: 0.2s ease-out;
-  }
+	transition: 0.2s ease-out;
+	&:hover,
+	&:active {
+		transition: 0.2s ease-out;
+	}
 }
 
 svg,
 path {
-  fill: currentColor;
-  aspect-ratio: 1;
+	fill: currentColor;
+	aspect-ratio: 1;
 }
 
 [class^="material-icons"] {
-  vertical-align: middle;
-  font-size: 1.1em;
-  line-height: 1;
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  overflow: hidden;
-  &:dir(rtl).dir {
-    scale: -1 1;
-  }
+	vertical-align: middle;
+	font-size: 1.1em;
+	line-height: 1;
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	overflow: hidden;
+	&:dir(rtl).dir {
+		scale: -1 1;
+	}
 }

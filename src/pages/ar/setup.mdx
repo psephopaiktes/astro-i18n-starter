@@ -8,7 +8,6 @@ import { SITE_TITLE } from "@/consts";
 
 <PageHeadline title={frontmatter.title} />
 
-
 ## إنشاء المشروع
 
 ```sh
@@ -17,103 +16,91 @@ npm create astro@latest -- --template psephopaiktes/astro-i18n-starter
 
 ## التكوين
 
+### 1. تكوين /src/locales.ts
 
-### 1. تكوين astro.config.mjs
+أولاً، قم بتحديث ملف إعدادات اللغة.
 
-قم بتعيين `defaultLocale` و `locales` في ملف تكوين Astro.
+قم بتعيين اللغة الافتراضية في `DEFAULT_LOCALE_SETTING` وقائمة اللغات المطلوبة في `LOCALES_SETTING`. يتبع هذا [تكوين Starlight](https://starlight.astro.build/reference/configuration/#locales).
+
+```ts
+// تعيين اللغة الافتراضية لموقعك.
+export const DEFAULT_LOCALE_SETTING: string = "en";
+
+export const LOCALES_SETTING: LocaleSetting = {
+    // إضافة أو إزالة اللغات المدعومة.
+    en: {
+        label: "English",
+        lang: "en-US", // اختياري
+    },
+    ja: {
+        label: "日本語",
+    },
+    "zh-cn": {
+        label: "简体中文",
+        lang: "zh-CN",
+    },
+    ar: {
+        label: "العربية",
+        dir: "rtl", // اختياري
+    },
+};
+```
+
+يرجى الرجوع إلى الرابط التالي للحصول على معلومات حول رموز اللغات.
+
+> [lang - HTML: HyperText Markup Language | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang)
+
+### 2. تكوين astro.config.mjs
+
+قم بتعيين عنوان URL الخاص بك في `site`.
 
 ```diff
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from './src/locales';
 
-// https://astro.build/config
 export default defineConfig({
-    site: 'https://astro-i18n-starter.pages.dev',
-    integrations: [mdx(), sitemap()],
-    i18n: {
-+   defaultLocale: 'en',
-+   locales: ['en', 'ja', 'zh-cn', 'ar'],
-        routing: {
-            prefixDefaultLocale: true,
-            redirectToDefaultLocale: false,
-        },
+- site: 'https://astro-i18n-starter.pages.dev',
++ site: 'https://your-site.com',
+  i18n: {
+    defaultLocale: DEFAULT_LOCALE_SETTING,
+    locales: Object.keys(LOCALES_SETTING),
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: false,
     },
-    markdown: {
-        shikiConfig: {
-            theme: 'one-dark-pro',
-        },
-    },
-});
+  },
+...
 ```
 
 يرجى الرجوع إلى الوثائق الرسمية للحصول على خيارات التكوين المفصلة لـ Astro.
 
-> [مرجع التكوين | الوثائق](https://docs.astro.build/en/reference/configuration-reference/)
+* [مرجع التكوين | Docs](https://docs.astro.build/en/reference/configuration-reference/)
+* [التوجيه الدولي (i18n) | Docs](https://docs.astro.build/en/guides/internationalization/#configure-i18n-routing)
 
-> [التوجيه الدولي (i18n) | الوثائق](https://docs.astro.build/en/guides/internationalization/#configure-i18n-routing)
-
-لا يُنصح بتغيير إعدادات `prefixDefaultLocale` و `redirectToDefaultLocale`. { SITE_TITLE } يدير عملية إعادة التوجيه باستخدام جافا سكريبت على الجانب العميل. إذا لم يحتوي عنوان URL على لغة، فسيتم إعادة التوجيه إلى اللغة الافتراضية. على سبيل المثال، سيتم إعادة التوجيه من `/setup/` إلى `/en/setup/`.
-
-
-### 2. تكوين /src/locales.ts
-
-بالمثل، قم بتحديث ملف التكوين لـ { SITE_TITLE }.
-
-قم بتعيين اللغة الافتراضية في `DEFAULT_LOCALE_SETTING` وقائمة اللغات المرغوبة في `LOCALES_SETTING`. يتبع هذا [تكوين `locales` في Starlight](https://starlight.astro.build/reference/configuration/#locales).
-
-```ts
-export const DEFAULT_LOCALE_SETTING = "en";
-
-export const LOCALES_SETTING: LocaleSetting = {
-    "en": {
-        "label": "الإنجليزية"
-    },
-    "ja": {
-        "label": "اليابانية"
-    },
-    "zh-cn": {
-        "label": "الصينية المبسطة",
-        "lang": "zh-CN"
-    },
-    "ar": {
-        "label": "العربية",
-        "dir": "rtl"
-    },
-};
-
-interface LocaleSetting {
-    [key: Lowercase<string>]: {
-        label: string;
-        lang?: string;
-        dir?: 'rtl' | 'ltr';
-    };
- }
-```
-
-يرجى الرجوع إلى الرابط التالي للحصول على معلومات حول رموز اللغة.
-
-> [lang - HTML: لغة ترميز النص الفائق | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang)
-
+ملاحظة: لا يُنصح بتغيير إعدادات `prefixDefaultLocale` و `redirectToDefaultLocale`. { SITE_TITLE } يدير عملية إعادة التوجيه باستخدام JavaScript من جانب العميل. إذا لم يحتوي عنوان URL على لغة، فسيتم إعادة التوجيه إلى اللغة الافتراضية. على سبيل المثال، سيتم إعادة توجيه `/setup/` إلى `/en/setup/`.
 
 ## هيكل المشروع
 
-اتبع [هيكل المشروع Astro](https://docs.astro.build/en/basics/project-structure/).
+يتبع [هيكل مشروع Astro](https://docs.astro.build/en/basics/project-structure/).
 
 ```text
 src/
 ├── assets/
 │   └── en/, ja/ ...
+├── blog/
+│   └── en/, ja/ ...
 ├── components/
 │   └── i18n/
-├── content/
-│   │  blog/
-│   └── config.ts
 ├── layouts/
 ├── pages/
-│   └── [lang]/
-│   └── en/, ja/ ...
+│   ├── [lang]/
+│   ├── en/, ja/ ...
+│   ├── 404.astro
+│   └── index.astro
 ├── styles/
+├── content.config.ts
 ├── consts.ts
 ├── i18n.ts
 └── locales.ts
@@ -121,17 +108,17 @@ src/
 
 ### src/components/i18n
 
-المجلد لمكونات واجهة المستخدم المستخدمة في مواقع الويب متعددة اللغات.
+دليل لمكونات واجهة المستخدم المستخدمة في المواقع متعددة اللغات.
 
 ### src/pages
 
-- يقوم الملفات في `src/pages/[lang]/` بإنشاء ملفات HTML لكل لغة بشكل ديناميكي من ملف `.astro` واحد.
-- يمكنك إنشاء ملفات HTML لكل لغة من المجلدات مثل `src/pages/en/`، `src/pages/ja/`، إلخ.
+- الملفات تحت `src/pages/[lang]/` تولد ملفات HTML لكل لغة ديناميكيًا من ملف `.astro` واحد.
+- يمكنك أيضًا توليد ملفات HTML لكل لغة من مجلدات مثل `src/pages/en/`, `src/pages/ja/`, إلخ.
 
 ### src/consts.ts
 
-ملف للبيانات الثابتة التي يمكن استيرادها واستخدامها داخل المشروع. يمكن حذفه أيضًا إذا لم يكن مطلوبًا.
+ملف للبيانات الثابتة التي يمكن استيرادها واستخدامها داخل المشروع. يمكن أيضًا حذفه إذا لم يكن مطلوبًا.
 
 ### src/i18n.ts
 
-ملف يحتوي على تعريفات الوظائف المستخدمة في { SITE_TITLE }. عمومًا، لا يوجد حاجة لتحرير هذا الملف.
+ملف يحتوي على تعريفات الدوال المستخدمة في { SITE_TITLE }. لا يوجد عادةً حاجة لتحرير هذا الملف.
