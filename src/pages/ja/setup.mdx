@@ -85,6 +85,8 @@ Astro の詳細な設定オプションについては公式ドキュメント�
 
 注: `prefixDefaultLocale` と `redirectToDefaultLocale` の設定を変更することは推奨されません。{ SITE_TITLE } ではクライアントサイドのJavascriptでリダイレクトを管理しており、URLにlocaleが含まれていない場合はデフォルトのlocaleにリダイレクトします。例えば、`/setup/` は `/en/setup/` にリダイレクトされます。
 
+また、URLにサブディレクトリを含めたい場合は[baseパスの設定](https://docs.astro.build/reference/configuration-reference/#base)と、各種リンクに`import.meta.env.BASE_URL`の利用が必要です。
+
 
 
 ## ディレクトリ構造

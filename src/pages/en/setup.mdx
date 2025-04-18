@@ -85,6 +85,7 @@ Please refer to the official documentation for detailed configuration options fo
 
 note: Changing the settings of `prefixDefaultLocale` and `redirectToDefaultLocale` is not recommended. { SITE_TITLE } manages the redirect process with client-side JavaScript. If the URL does not contain a locale, it will redirect to the default locale. For example, `/setup/` will be redirected to `/en/setup/`.
 
+In addition, if you want to include a subdirectory in your URL, you'll need to [configure the base path](https://docs.astro.build/reference/configuration-reference/#base) and use `import.meta.env.BASE_URL` in your various links.
 
 
 ## Project Structure

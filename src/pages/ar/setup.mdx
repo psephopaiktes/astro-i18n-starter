@@ -81,6 +81,8 @@ export default defineConfig({
 
 ملاحظة: لا يُنصح بتغيير إعدادات `prefixDefaultLocale` و `redirectToDefaultLocale`. { SITE_TITLE } يدير عملية إعادة التوجيه باستخدام JavaScript من جانب العميل. إذا لم يحتوي عنوان URL على لغة، فسيتم إعادة التوجيه إلى اللغة الافتراضية. على سبيل المثال، سيتم إعادة توجيه `/setup/` إلى `/en/setup/`.
 
+أيضًا، إذا كنت ترغب في تضمين دليل فرعي في عنوان URL الخاص بك، فستحتاج إلى [إعداد المسار الأساسي (base path)](https://docs.astro.build/reference/configuration-reference/#base) واستخدام `import.meta.env.BASE_URL` في روابطك المختلفة.
+
 ## هيكل المشروع
 
 يتبع [هيكل مشروع Astro](https://docs.astro.build/en/basics/project-structure/).

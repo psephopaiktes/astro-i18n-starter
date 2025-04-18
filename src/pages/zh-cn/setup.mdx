@@ -85,6 +85,7 @@ export default defineConfig({
 
 注意：不建议更改 `prefixDefaultLocale` 和 `redirectToDefaultLocale` 的设置。{ SITE_TITLE } 使用客户端 JavaScript 管理重定向过程。如果 URL 不包含语言，将重定向到默认语言。例如，`/setup/` 将重定向到 `/en/setup/`。
 
+此外，如果您想在URL中包含子目录，则需要[设置base路径](https://docs.astro.build/reference/configuration-reference/#base)，并在各种链接中使用`import.meta.env.BASE_URL`。
 
 
 ## 项目结构

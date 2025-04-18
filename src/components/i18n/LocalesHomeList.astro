@@ -11,6 +11,7 @@ import { LOCALES } from "@/i18n";
         href={`/${lang}/`}
         onclick={`localStorage.selectedLang = "${lang}"`}
         dir={LOCALES[lang].dir || null}
+        lang={lang}
       >
         {label}
       </a>
