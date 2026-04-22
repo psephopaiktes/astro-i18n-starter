@@ -73,10 +73,15 @@ type LocalePath = {
 
 
 /**
- * Helper to get locale parms for Astro's `getStaticPaths` function
- * @returns - The list of locale params
- * @see https://docs.astro.build/en/guides/routing/#dynamic-routes
+ * Generates getStaticPaths params for all locales, using the filename as subPath if not dynamic.
+ *
+ * @param url import.meta.url (required)
+ * @returns Array for Astro's getStaticPaths
  */
-export const localeParams = Object.keys(LOCALES).map((lang) => ({
-  params: { lang },
-}));
+export function getLocaleParams(url: string): Array<{ params: Record<string, string> }> {
+  const fileName = url.split("/").pop()?.split(".")[0];
+  const subPath = fileName && !fileName.startsWith("[") ? fileName : undefined;
+  return Object.keys(LOCALES).map((lang) =>
+    subPath ? { params: { lang, [subPath]: subPath } } : { params: { lang } }
+  );
+}

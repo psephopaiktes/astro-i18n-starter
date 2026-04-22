@@ -1,7 +1,7 @@
 {
 	"name": "astro-i18n-starter",
 	"description": "A starter for Astro with i18n support",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"private": false,
 	"license": "MIT",
 	"homepage": "https://astro-i18n-starter.pages.dev/",
@@ -16,11 +16,11 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/check": "^0.9.5",
-		"@astrojs/mdx": "^4.3.11",
-		"@astrojs/rss": "^4.0.13",
-		"@astrojs/sitemap": "^3.6.0",
-		"astro": "^5.15.9",
-		"typescript": "^5.9.3"
+		"@astrojs/check": "^0.9.8",
+		"@astrojs/mdx": "^5.0.3",
+		"@astrojs/rss": "^4.0.18",
+		"@astrojs/sitemap": "^3.7.2",
+		"astro": "6.1.8",
+		"typescript": "^6.0.3"
 	}
 }

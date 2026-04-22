@@ -1,5 +1,5 @@
 ---
-import { LOCALES, useTranslations, type Lang } from "@/i18n";
+import { getLocaleParams, useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/Base.astro";
 const t = useTranslations(Astro.currentLocale as Lang);
 import { getRelativeLocaleUrl } from "astro:i18n";
@@ -12,10 +12,7 @@ import { Image } from "astro:assets";
 
 const locale = Astro.currentLocale as Lang;
 
-export const getStaticPaths = () =>
-  Object.keys(LOCALES).map((lang) => ({
-    params: { lang },
-  }));
+export const getStaticPaths = () => getLocaleParams(import.meta.url);
 ---
 
 <Layout>
